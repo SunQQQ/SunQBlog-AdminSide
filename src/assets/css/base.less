@@ -1,0 +1,42 @@
+//背景色
+@back_color: #f8f8fa;
+//前景色
+@fore_color: #ffffff;
+
+@FontColorWhite:#fff;
+
+//灰色字体颜色
+@FontColorGray: #4d4d4d;
+
+//边框颜色
+@BorderColor:#e9e9e9;
+@ThemeColor:#01aaed;
+
+//兼容浏览器的flex
+.myflex(@y){
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+
+  -webkit-box-align: @y;
+  -webkit-align-items: @y;
+  align-items: @y;
+}
+
+html{
+  background-color: #f2f2f2;
+  color: #666;
+}
+body{
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+.RightContent{
+  margin: 10px;
+  padding: 10px 0px 10px 230px;
+  background-color: @fore_color;
+}
+.PageContainer{
+  padding: 0;
+}
