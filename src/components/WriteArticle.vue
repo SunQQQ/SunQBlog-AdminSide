@@ -25,6 +25,7 @@
           <div class="ArticleTitle">
             <input placeholder="文章缩略图" @change="SetArticleCover" type="file" multiple="multiple" ref='selectfile'>
           </div>
+          <img :src="ArticleCover" v-show="ArticleCover" style="width: 150px;height: 100px">
           <div class="WriteSubmit">
             <el-button type="primary" @click="SubmitArticle()">确认</el-button>
           </div>
@@ -161,6 +162,7 @@
             That.Summary = data[0].Summary;
             That.CreateDate = data[0].CreateDate;
             That.ArticleTag = data[0].ArticleTag;
+            That.ArticleCover = data[0].ArticleCover;
           }
         });
       }else{
