@@ -119,7 +119,7 @@
         PicData.append('Content',this.$refs.selectfile.files[0]);
         axios.post('/api/UploadImg', PicData
         ).then(function (response) {
-          That.ArticleCover = response.data.data[0];
+          That.ArticleCover = response.data.data[0];//头图图片预览
         }).catch(function (error) {
         });
       },
