@@ -19,6 +19,9 @@
           <div class="ArticleTitle">
             <input placeholder="文章简介" v-model="Summary">
           </div>
+          <div class="ArticleTitle CommentNum">
+            <input placeholder="评论数" v-model="CommentNum">
+          </div>
         </div>
 
         <div class="SimpleFlex">
@@ -61,7 +64,8 @@
         Summary:'',
         ArticleTagOptions: [],
         ArticleTag: '',
-        ArticleCover:''
+        ArticleCover:'',
+        CommentNum:0
       }
     },
     methods:{
@@ -81,7 +85,8 @@
                 Content: this.Content,
                 CreateDate:this.CreateDate,
                 ArticleTag:this.ArticleTag,
-                ArticleCover:this.ArticleCover
+                ArticleCover:this.ArticleCover,
+                CommentNum:this.CommentNum
               },
               Success:function (data) {
                 That.$router.push({name:'Article'});
@@ -163,6 +168,7 @@
             That.CreateDate = data[0].CreateDate;
             That.ArticleTag = data[0].ArticleTag;
             That.ArticleCover = data[0].ArticleCover;
+            That.CommentNum = data[0].CommentNum;
           }
         });
       }else{
@@ -187,6 +193,14 @@
   .ArticleTitle {
     flex: 1;
     margin-right: 10px;
+  }
+
+  .CommentNum{
+    width: 150px;
+    flex: none;
+  }
+  .CommentNum input{
+    width: 100%;
   }
 
   .ArticleTitle input {
