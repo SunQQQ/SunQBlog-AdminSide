@@ -52,7 +52,7 @@
       return {
         MessageLeaveList: [],
         MessageLeaveTotal:0,
-        PagiSize:10,
+        PagiSize:15,
         dialogFormVisible: false,
         form: {
           MessageLeaveName: '',
@@ -92,7 +92,7 @@
           RequestData: {
             PagnationData: {
               Skip:0,
-              Limit:11
+              Limit:16
             }
           },
           Success:function (data) {
