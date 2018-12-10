@@ -37,6 +37,11 @@
         <i class="el-icon-share"></i>
         <span slot="title">友链管理</span>
       </el-menu-item>
+
+      <el-menu-item index="6"  @click="ChangeHighLight('MessageLeave')">
+        <i class="el-icon-star-off"></i>
+        <span slot="title">留言管理</span>
+      </el-menu-item>
     </el-menu>
   </div>
 </template>

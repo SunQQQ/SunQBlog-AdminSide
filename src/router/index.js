@@ -9,6 +9,7 @@ import LoginPage from '@/components/LoginPage'
 import TimeLine from '@/components/TimeLine'
 import Heartfelt from '@/components/Heartfelt'
 import FriendUrlIndex from '@/components/FriendUrlIndex'
+import MessageLeave from '@/components/MessageLeave'
 
 Vue.use(Router)
 
@@ -58,6 +59,11 @@ export default new Router({
       path:'/FriendUrlIndex',
       name:'FriendUrlIndex',
       component:FriendUrlIndex
-    }
+    },
+    {
+      path:'/MessageLeave',
+      name:'MessageLeave',
+      component:MessageLeave
+    },
   ]
 })
