@@ -27,7 +27,7 @@
         <el-table-column prop="ArticleCommentText" label="评论内容"></el-table-column>
         <el-table-column fixed="right" label="操作" width="130">
           <template slot-scope="scope">
-            <el-button @click="DeleteComment(scope.row._id)" type="text" size="small">删除</el-button>
+            <el-button @click="DeleteComment(scope.row._id,scope.row.ArticleId)" type="text" size="small">删除</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -92,17 +92,37 @@
           }
         });
       },
-      // 删除评论
-      DeleteComment:function (Id) {
+      /**
+       * 删除评论
+       * @param CommentId 该条评论的id
+       * @param ArticleId 文章id
+       * @constructor
+       */
+      DeleteComment:function (CommentId,ArticleId) {
         var That = this;
 
         That.SQAjax({
           Url:'/api/CommentDelete/backend',
           RequestData:{
-            _id:Id
+            _id:CommentId
           },
           Success:function (data) {
             That.GetData();
+
+            That.UpdateArticleCommentNum(ArticleId,'delete');
+          }
+        });
+      },
+      // 传入文章id，给对应文章评论数减1
+      UpdateArticleCommentNum: function (id,type) {
+        this.SQAjax({
+          Url: '/api/ArticleCommentNumUpdate/backend',
+          RequestData: {
+            _id: id,
+            type: type
+          },
+          Success: function (data) {
+
           }
         });
       },
