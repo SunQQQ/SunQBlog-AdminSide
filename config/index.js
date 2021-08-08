@@ -6,13 +6,12 @@ const path = require('path')
 
 module.exports = {
   dev: {
-
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
       '/api': {
-        target: 'http://localhost:8888', //源地址    服务器地址
+        target: 'http://39.104.22.73:8888', //代理地址，这里是真正访问的地址。使用本地接口服务时请用localhost，使用服务器数据库时请使用对应的ip
         changeOrigin: true, //改变源
         pathRewrite: {
           '^/api': '' //路径重写

@@ -10,6 +10,7 @@ import TimeLine from '@/components/TimeLine'
 import Heartfelt from '@/components/Heartfelt'
 import FriendUrlIndex from '@/components/FriendUrlIndex'
 import MessageLeave from '@/components/MessageLeave'
+import Comment from '@/components/Comment'
 
 Vue.use(Router)
 
@@ -19,51 +20,46 @@ export default new Router({
       path: '/',
       name: 'Article',
       component: Article
-    },
-    {
+    }, {
       path: '/ArticleDetail',
       name: 'ArticleDetail',
       component: ArticleDetail
-    },
-    {
+    }, {
       path:'/WriteArticle',
       name:'WriteArticle',
       component:WriteArticle
-    },
-    {
+    }, {
       path:'/TagIndex',
       name:'TagIndex',
       component:TagIndex
-    },
-    {
+    }, {
       path:'/TopBar',
       name:'TopBar',
       component:TopBar
-    },
-    {
+    }, {
       path:'/LoginPage',
       name:'LoginPage',
       component:LoginPage
-    },
-    {
+    }, {
       path:'/TimeLine',
       name:'TimeLine',
       component:TimeLine
-    },
-    {
+    }, {
       path:'/Heartfelt',
       name:'Heartfelt',
       component:Heartfelt
-    },
-    {
+    }, {
       path:'/FriendUrlIndex',
       name:'FriendUrlIndex',
       component:FriendUrlIndex
-    },
-    {
+    }, {
       path:'/MessageLeave',
       name:'MessageLeave',
       component:MessageLeave
+    },{
+      path:'/Comment',
+      name:'Comment',
+      component:Comment
     },
   ]
 })

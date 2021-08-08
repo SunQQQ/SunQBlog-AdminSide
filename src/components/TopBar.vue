@@ -42,6 +42,11 @@
         <i class="el-icon-star-off"></i>
         <span slot="title">留言管理</span>
       </el-menu-item>
+
+      <el-menu-item index="7"  @click="ChangeHighLight('Comment')">
+        <i class="el-icon-view"></i>
+        <span slot="title">评论管理</span>
+      </el-menu-item>
     </el-menu>
   </div>
 </template>
