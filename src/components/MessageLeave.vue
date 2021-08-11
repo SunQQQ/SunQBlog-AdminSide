@@ -36,8 +36,7 @@
                          :page-size=PagiSize
                          @current-change="ChangeCurPage"
                          @next-click="NextPage"
-                         @prev-click="NextPage"
-          >
+                         @prev-click="NextPage">
           </el-pagination>
         </div>
       </div>
@@ -59,7 +58,8 @@
           MessageText: '',
           delivery: false
         },
-        formLabelWidth: '120px'
+        formLabelWidth: '120px',
+        MyCurPage: 0
       }
     },
     methods: {
@@ -71,7 +71,7 @@
             Url:'/api/MessageLeaveEdit/backend',
             RequestData:this.form,
             Success:function () {
-              That.GetData();
+              That.SkipTo(That.MyCurPage);
             }
           });
 
@@ -118,9 +118,11 @@
       // 翻页方法
       ChangeCurPage:function(CurPage){
         this.SkipTo(CurPage);
+        this.MyCurPage = CurPage;
       },
       NextPage:function (CurPage) {
         this.SkipTo(CurPage);
+        this.MyCurPage = CurPage;
       },
       SkipTo:function (CurPage) {
         var That = this;
@@ -147,7 +149,7 @@
             _id:Id
           },
           Success:function () {
-            That.GetData();
+            That.SkipTo(That.MyCurPage);
           }
         });
       },

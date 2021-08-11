@@ -23,8 +23,7 @@
                        :page-size=PagiSize
                        @current-change="ChangeCurPage"
                        @next-click="NextPage"
-                       @prev-click="NextPage"
-        >
+                       @prev-click="NextPage">
         </el-pagination>
       </div>
     </div>
@@ -39,7 +38,8 @@
           ArticleList:[],
 
           ArticleTotal:0,
-          PagiSize:10
+          PagiSize:10,
+          MyCurPage: 0
         }
       },
       methods:{
@@ -59,8 +59,8 @@
             Url:'/api/ArticleDelete/backend',
             RequestData:{_id:Id},
             Success:function (data) {
-              That.GetData(That);
               That.$message('删除成功');
+              That.GetData();
             }
           });
         },
@@ -96,9 +96,11 @@
         // 翻页方法
         ChangeCurPage:function(CurPage){
           this.SkipTo(CurPage);
+          this.MyCurPage = CurPage;
         },
         NextPage:function (CurPage) {
           this.SkipTo(CurPage);
+          this.MyCurPage = CurPage;
         },
         SkipTo:function (CurPage) {
           var That = this;

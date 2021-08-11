@@ -46,8 +46,7 @@
                          :page-size=PagiSize
                          @current-change="ChangeCurPage"
                          @next-click="NextPage"
-                         @prev-click="NextPage"
-          >
+                         @prev-click="NextPage">
           </el-pagination>
         </div>
       </div>
@@ -70,8 +69,9 @@
         },
         formLabelWidth: '120px',
 
-        FriendUrlTotal:0,
-        PagiSize:10
+        FriendUrlTotal: 0,
+        PagiSize: 10,
+        MyCurPage: 0
       }
     },
     methods: {
@@ -92,7 +92,7 @@
               if(That.form._id){
                 delete That.form._id;
               }
-              That.GetData();
+              That.SkipTo(That.MyCurPage);
             }
           });
 
@@ -142,7 +142,7 @@
             _id:Id
           },
           Success:function (data) {
-            That.GetData();
+            That.SkipTo(That.MyCurPage);
           }
         });
       },
@@ -154,9 +154,11 @@
       // 翻页方法
       ChangeCurPage:function(CurPage){
         this.SkipTo(CurPage);
+        this.MyCurPage = CurPage;
       },
       NextPage:function (CurPage) {
         this.SkipTo(CurPage);
+        this.MyCurPage = CurPage;
       },
       SkipTo:function (CurPage) {
         var That = this;

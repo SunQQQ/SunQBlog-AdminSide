@@ -60,7 +60,10 @@
           ArticleCommentText:''
         },
         CommentTotal: 0,
-        PageSize: 10
+        PageSize: 10,
+        
+        // 当前分页
+        MyCurPage: 0
       }
     },
     methods: {
@@ -107,7 +110,7 @@
             _id:CommentId
           },
           Success:function (data) {
-            That.GetData();
+            That.SkipTo(That.MyCurPage);
 
             That.UpdateArticleCommentNum(ArticleId,'delete');
           }
@@ -129,9 +132,11 @@
       // 翻页方法
       ChangeCurPage:function(CurPage){
         this.SkipTo(CurPage);
+        this.MyCurPage = CurPage;
       },
       NextPage: function(CurPage){
         this.SkipTo(CurPage);
+        this.MyCurPage = CurPage;
       },
       SkipTo:function (CurPage) {
         var That = this;
