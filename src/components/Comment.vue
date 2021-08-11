@@ -63,7 +63,7 @@
         PageSize: 10,
         
         // 当前分页
-        MyCurPage: 0
+        MyCurPage: 1
       }
     },
     methods: {

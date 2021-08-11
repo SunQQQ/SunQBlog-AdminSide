@@ -71,7 +71,7 @@
 
         FriendUrlTotal: 0,
         PagiSize: 10,
-        MyCurPage: 0
+        MyCurPage: 1
       }
     },
     methods: {
@@ -142,6 +142,7 @@
             _id:Id
           },
           Success:function (data) {
+            That.$message('删除成功');
             That.SkipTo(That.MyCurPage);
           }
         });

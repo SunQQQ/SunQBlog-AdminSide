@@ -59,7 +59,7 @@
           delivery: false
         },
         formLabelWidth: '120px',
-        MyCurPage: 0
+        MyCurPage: 1
       }
     },
     methods: {
