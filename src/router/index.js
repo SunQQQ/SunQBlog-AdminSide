@@ -11,6 +11,7 @@ import Heartfelt from '@/components/Heartfelt'
 import FriendUrlIndex from '@/components/FriendUrlIndex'
 import MessageLeave from '@/components/MessageLeave'
 import Comment from '@/components/Comment'
+import SnakeScores from '@/components/SnakeScores'
 
 Vue.use(Router)
 
@@ -60,6 +61,10 @@ export default new Router({
       path:'/Comment',
       name:'Comment',
       component:Comment
-    },
+    },{
+      path:'/SnakeScores',
+      name:'SnakeScores',
+      component:SnakeScores
+    }
   ]
 })

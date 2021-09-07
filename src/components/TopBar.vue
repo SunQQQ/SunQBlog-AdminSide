@@ -47,6 +47,11 @@
         <i class="el-icon-view"></i>
         <span slot="title">评论管理</span>
       </el-menu-item>
+
+      <el-menu-item index="8"  @click="ChangeHighLight('SnakeScores')">
+        <i class="el-icon-view"></i>
+        <span slot="title">贪吃蛇榜单</span>
+      </el-menu-item>
     </el-menu>
   </div>
 </template>
