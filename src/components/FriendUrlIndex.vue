@@ -18,6 +18,9 @@
             <el-form-item label="个人描述" :label-width="formLabelWidth">
               <el-input v-model="form.FriendUrlDescript"></el-input>
             </el-form-item>
+            <el-form-item label="优先级" :label-width="formLabelWidth">
+              <el-input v-model="form.order"></el-input>
+            </el-form-item>
           </el-form>
           <div slot="footer" class="dialog-footer">
             <el-button @click="OnDialogCancel()">取 消</el-button>
@@ -31,6 +34,7 @@
           <el-table-column prop="FriendUrlAdress" label="友链地址"></el-table-column>
           <el-table-column prop="FriendUrlIcoUrl" label="图标地址"></el-table-column>
           <el-table-column prop="FriendUrlDescript" label="个人描述"></el-table-column>
+          <el-table-column prop="order" label="优先级（从0开始）"></el-table-column>
           <el-table-column fixed="right" label="操作" width="130">
             <template slot-scope="scope">
               <el-button @click="EditFriendUrl(scope.row)" type="text" size="small">编辑</el-button>
