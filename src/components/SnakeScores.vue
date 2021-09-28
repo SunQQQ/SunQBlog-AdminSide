@@ -5,9 +5,10 @@
 
         <!--表格操作栏-->
         <el-table :data="MessageLeaveList" style="width: 100%">
-          <el-table-column prop="MessageLeaveName" label="留言者"></el-table-column>
-          <el-table-column prop="MessageText" label="留言内容"></el-table-column>
-          <el-table-column prop="MessageLeaveDate" label="创建时间"></el-table-column>
+          <el-table-column prop="userName" label="用户名"></el-table-column>
+          <el-table-column prop="score" label="成绩"></el-table-column>
+          <el-table-column prop="gameTime" label="时长"></el-table-column>
+          <el-table-column prop="createTime" label="创建时间"></el-table-column>
           <el-table-column fixed="right" label="操作" width="130">
             <template slot-scope="scope">
               <el-button @click="EditMessageLeave(scope.row)" type="text" size="small">编辑</el-button>
@@ -53,7 +54,7 @@
       GetData:function () {
         var That = this;
         this.SQAjax({
-          Url:'/api/MessageRead/backend',
+          Url:'/snake/scoreReadByDate/foreend',
           RequestData: {
             PagnationData: {
               Skip:0,
@@ -62,19 +63,19 @@
           },
           Success:function (data) {
             if (data.length > 10) {
-              data.pop();
+              // data.pop();
 
               That.SQAjax({
-                Url: '/api/getmessagenum',
+                Url: '/snake/ScoreRead/foreend',
                 Success: function (data) {
-                  That.MessageLeaveTotal = data;
+                  That.MessageLeaveTotal = data.num;
                 }
               });
             }
-
-            data.forEach(function (Item,I) {
-              Item.MessageLeaveDate = Item.MessageLeaveDate.slice(0,10);
-            });
+            //
+            // data.forEach(function (Item,I) {
+            //   Item.MessageLeaveDate = Item.MessageLeaveDate.slice(0,10);
+            // });
 
             That.MessageLeaveList = data;
           }
@@ -92,7 +93,7 @@
       SkipTo:function (CurPage) {
         var That = this;
         That.SQAjax({
-          Url:'/api/MessageRead/backend',
+          Url:'/snake/scoreReadByDate/foreend',
           RequestData: {
             PagnationData: {
               Skip:(CurPage-1) * 10,
