@@ -11,7 +11,6 @@
           <el-table-column prop="createTime" label="创建时间"></el-table-column>
           <el-table-column fixed="right" label="操作" width="130">
             <template slot-scope="scope">
-              <el-button @click="EditMessageLeave(scope.row)" type="text" size="small">编辑</el-button>
               <el-button @click="DeleteTag(scope.row._id)" type="text" size="small">删除</el-button>
             </template>
           </el-table-column>
@@ -81,15 +80,17 @@
           }
         });
       },
-      // 翻页方法
+      // 跳转到选中页
       ChangeCurPage:function(CurPage){
         this.SkipTo(CurPage);
         this.MyCurPage = CurPage;
       },
+      // 点击下一页
       NextPage:function (CurPage) {
         this.SkipTo(CurPage);
         this.MyCurPage = CurPage;
       },
+      // 跳转分页的具体方法
       SkipTo:function (CurPage) {
         var That = this;
         That.SQAjax({
@@ -102,6 +103,20 @@
           },
           Success:function (data) {
             That.MessageLeaveList = data;
+          }
+        });
+      },
+      /*删除标签*/
+      DeleteTag:function (Id) {
+        var That = this;
+
+        That.SQAjax({
+          Url:'/snake/scoreDelete/foreend',
+          RequestData:{
+            _id:Id
+          },
+          Success:function () {
+            That.SkipTo(That.MyCurPage);
           }
         });
       },

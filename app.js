@@ -15,15 +15,16 @@ let server = http.createServer((req, res) => {
   let pathname = url.parse(req.url).pathname,
     UrlType = pathname.split('/'),    //辨别请求是不是ajax，本应用ajax请求都有aqi标记，具体使用时需要根据情况修改此处
     ext = path.parse(pathname).ext,
+    post = '',
+    newPathName,
     mimeType = mime.getType(ext);
 
   if (UrlType[1] == 'api' || UrlType[1] == 'snake') {
     //我的前端请求接口url需要代理，url会添加api，需要将url替换并转发;如果为snake请求另外一个端口号
-    let post = '',ip;
     if(UrlType[1] == 'api'){
-      ip = 'http://39.104.22.73:8888';
+      newPathName = pathname.replace(/\/api/, 'http://39.104.22.73:8888');
     }else {
-      ip = 'http://39.104.22.73:8081';
+      newPathName = pathname.replace(/\/snake/, 'http://39.104.22.73:8081');
     }
     req.on('data', function (chunk) {
       post += chunk;
@@ -31,7 +32,7 @@ let server = http.createServer((req, res) => {
 
     req.on('end', function () {
       axios.post(
-        pathname.replace(/\/api/, ip),
+        newPathName,
         JSON.parse(post)
       ).then(function (response) {
         res.end(JSON.stringify(response.data));
