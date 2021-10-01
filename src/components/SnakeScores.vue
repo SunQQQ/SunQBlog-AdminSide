@@ -61,20 +61,14 @@
             }
           },
           Success:function (data) {
-            if (data.length > 15) {
-              // data.pop();
-
-              That.SQAjax({
-                Url: '/snake/ScoreRead/foreend',
-                Success: function (data) {
+            That.SQAjax({
+              Url: '/snake/ScoreRead/foreend',
+              Success: function (data) {
+                if(data.num > 15){
                   That.MessageLeaveTotal = data.num;
                 }
-              });
-            }
-            //
-            // data.forEach(function (Item,I) {
-            //   Item.MessageLeaveDate = Item.MessageLeaveDate.slice(0,10);
-            // });
+              }
+            });
 
             That.MessageLeaveList = data;
           }
