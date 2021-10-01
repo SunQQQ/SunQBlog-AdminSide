@@ -57,11 +57,11 @@
           RequestData: {
             PagnationData: {
               Skip:0,
-              Limit:16
+              Limit:15
             }
           },
           Success:function (data) {
-            if (data.length > 10) {
+            if (data.length > 15) {
               // data.pop();
 
               That.SQAjax({
@@ -97,8 +97,8 @@
           Url:'/snake/scoreReadByDate/foreend',
           RequestData: {
             PagnationData: {
-              Skip:(CurPage-1) * 10,
-              Limit:10
+              Skip:(CurPage-1) * 15,
+              Limit:15
             }
           },
           Success:function (data) {
