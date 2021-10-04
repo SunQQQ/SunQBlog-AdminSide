@@ -20,7 +20,11 @@
         <!--表格操作栏-->
         <el-table :data="MessageLeaveList" style="width: 100%">
           <el-table-column prop="MessageLeaveName" label="留言者"></el-table-column>
-          <el-table-column prop="MessageText" label="留言内容"></el-table-column>
+
+          <el-table-column label="留言内容">
+            <template slot-scope="scope"><div v-html="scope.row.MessageText"></div></template>
+          </el-table-column>
+
           <el-table-column prop="MessageLeaveDate" label="创建时间"></el-table-column>
           <el-table-column fixed="right" label="操作" width="130">
             <template slot-scope="scope">

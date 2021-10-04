@@ -24,7 +24,11 @@
       <el-table :data="CommentList" style="width: 100%">
         <el-table-column prop="ArticleCommentDate" label="评论时间"></el-table-column>
         <el-table-column prop="ArticleCommentNickName" label="评论人"></el-table-column>
-        <el-table-column prop="ArticleCommentText" label="评论内容"></el-table-column>
+        <el-table-column label="评论内容">
+          <template slot-scope="scope">
+            <div v-html="scope.row.ArticleCommentText"></div>
+          </template>
+        </el-table-column>
         <el-table-column fixed="right" label="操作" width="130">
           <template slot-scope="scope">
             <el-button @click="DeleteComment(scope.row._id,scope.row.ArticleId)" type="text" size="small">删除</el-button>
