@@ -2,9 +2,15 @@
   <div>
     <div class="RightContent">
       <div class="ArticleList">
+        <el-button type="primary" @click="mulDelete()">批量删除</el-button>
+
 
         <!--表格操作栏-->
-        <el-table :data="MessageLeaveList" style="width: 100%">
+        <el-table :data="MessageLeaveList" style="width: 100%" ref="multipleTable">
+          <el-table-column
+            type="selection"
+            width="55">
+          </el-table-column>
           <el-table-column prop="userName" label="用户名"></el-table-column>
           <el-table-column prop="score" label="成绩"></el-table-column>
           <el-table-column prop="gameTime" label="时长"></el-table-column>
@@ -45,7 +51,8 @@
           delivery: false
         },
         formLabelWidth: '120px',
-        MyCurPage: 1
+        MyCurPage: 1,
+        multipleSelection: [], // table批量删除选中值
       }
     },
     methods: {
@@ -100,7 +107,7 @@
           }
         });
       },
-      /*删除标签*/
+      // 删除标签
       DeleteTag:function (Id) {
         var That = this;
 
@@ -114,6 +121,27 @@
           }
         });
       },
+
+      // 批量删除
+      mulDelete:function () {
+        var that = this;
+
+        // 整理选中项的id数组
+        that.$refs.multipleTable.selection.forEach(item =>  {
+          that.multipleSelection.push(item._id);
+        });
+
+        that.SQAjax({
+          Url:'/snake/scoreMulDelete/foreend',
+          RequestData:{
+            idArray: that.multipleSelection
+          },
+          Success:function () {
+            that.$message('批量删除成功');
+            that.SkipTo(that.MyCurPage);
+          }
+        });
+      }
     },
     mounted: function () {
       this.GetData();
