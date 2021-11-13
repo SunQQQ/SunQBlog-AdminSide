@@ -4,11 +4,14 @@
       <div class="ArticleList">
         <el-dialog title="管理分类" :visible.sync="dialogFormVisible">
           <el-form :model="form">
-            <el-form-item label="分类名称" :label-width="formLabelWidth">
+            <el-form-item label="留言者" :label-width="formLabelWidth">
               <el-input v-model="form.MessageLeaveName"></el-input>
             </el-form-item>
-            <el-form-item label="分类顺序" :label-width="formLabelWidth">
+            <el-form-item label="留言内容" :label-width="formLabelWidth">
               <el-input v-model="form.MessageText"></el-input>
+            </el-form-item>
+            <el-form-item label="头像编号(0-4)" :label-width="formLabelWidth">
+              <el-input v-model="form.iconNo"></el-input>
             </el-form-item>
           </el-form>
           <div slot="footer" class="dialog-footer">
@@ -20,11 +23,8 @@
         <!--表格操作栏-->
         <el-table :data="MessageLeaveList" style="width: 100%">
           <el-table-column prop="MessageLeaveName" label="留言者"></el-table-column>
-
-          <el-table-column label="留言内容">
-            <template slot-scope="scope"><div v-html="scope.row.MessageText"></div></template>
-          </el-table-column>
-
+          <el-table-column prop="MessageText" label="留言内容"></el-table-column>
+          <el-table-column prop="iconNo" label="头像"></el-table-column>
           <el-table-column prop="MessageLeaveDate" label="创建时间"></el-table-column>
           <el-table-column fixed="right" label="操作" width="130">
             <template slot-scope="scope">
@@ -162,6 +162,7 @@
         this.form.MessageLeaveName = Row.MessageLeaveName;
         this.form.MessageText = Row.MessageText;
         this.form._id = Row._id;
+        this.form.iconNo = Row.iconNo;
         this.dialogFormVisible = true;
       },
     },
