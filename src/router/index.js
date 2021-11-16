@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import index from '@/components/index'
 import Article from '@/components/Article'
 import ArticleDetail from '@/components/ArticleDetail'
 import WriteArticle from '@/components/WriteArticle'
@@ -19,8 +20,8 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'Article',
-      component: Article
+      name: 'index',
+      component: index
     }, {
       path: '/ArticleDetail',
       name: 'ArticleDetail',

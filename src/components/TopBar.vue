@@ -13,6 +13,10 @@
     <div style="height: 61px"></div>
 
     <el-menu :default-active="MenuHighLight" class="LeftBar" background-color="#545c64" text-color="#fff" active-text-color="#ffd04b">
+      <el-menu-item index="0" @click="ChangeHighLight('index')">
+        <i class="el-icon-document"></i>
+        <span slot="title">概览</span>
+      </el-menu-item>
       <el-menu-item index="1" @click="ChangeHighLight('Article')">
         <i class="el-icon-document"></i>
         <span slot="title">文章管理</span>
