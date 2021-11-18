@@ -23,6 +23,10 @@ export default new Router({
       name: 'index',
       component: index
     }, {
+      path: '/Article',
+      name: 'Article',
+      component: Article
+    }, {
       path: '/ArticleDetail',
       name: 'ArticleDetail',
       component: ArticleDetail
