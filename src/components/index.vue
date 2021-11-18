@@ -3,8 +3,8 @@
     <div class="ArticleList">
       <!--表格操作栏-->
       <el-table :data="blogVisitList" style="width: 100%">
-        <el-table-column prop="ip" label="IP"></el-table-column>
-        <el-table-column prop="location" label="定位"></el-table-column>
+        <el-table-column prop="ip" label="访客IP"></el-table-column>
+        <el-table-column prop="location" label="访客定位"></el-table-column>
         <el-table-column prop="time" label="访问时间"></el-table-column>
         <el-table-column fixed="right" label="操作" width="130">
           <template slot-scope="scope">
