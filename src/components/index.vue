@@ -8,7 +8,7 @@
         <el-table-column prop="time" label="访问时间"></el-table-column>
         <el-table-column fixed="right" label="操作" width="130">
           <template slot-scope="scope">
-            <el-button type="text" size="small">删除</el-button>
+            <el-button type="text" size="small" @click="Delete(scope.row._id)">删除</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -34,7 +34,21 @@ export default {
           That.blogVisitList = data;
         }
       });
-    }
+    },
+    Delete:function (Id) {
+      var That = this;
+
+      That.SQAjax({
+        Url:'/api/visitDelete/backend',
+        RequestData:{
+          _id:Id
+        },
+        Success:function (data) {
+          That.$message('删除成功');
+          That.getBlogVisitList();
+        }
+      });
+    },
   },
   mounted:function () {
     this.getBlogVisitList();
