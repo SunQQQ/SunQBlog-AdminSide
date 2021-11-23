@@ -6,6 +6,7 @@
         <el-table-column prop="ip" label="访客IP"></el-table-column>
         <el-table-column prop="location" label="访客定位"></el-table-column>
         <el-table-column prop="time" label="访问时间"></el-table-column>
+        <el-table-column prop="browser" label="浏览器"></el-table-column>
         <el-table-column fixed="right" label="操作" width="130">
           <template slot-scope="scope">
             <el-button type="text" size="small" @click="Delete(scope.row._id)">删除</el-button>
