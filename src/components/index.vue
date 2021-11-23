@@ -35,6 +35,17 @@ export default {
           That.blogVisitList = data;
         }
       });
+
+      this.SQAjax({
+        Url: '/api/visitCount/foreend',
+        RequestData:{
+          endTime:'2021/11/23',
+          dayNum:3
+        },
+        Success: function (data) {
+          console.log('近三天内访客',data);
+        }
+      });
     },
     Delete:function (Id) {
       var That = this;
