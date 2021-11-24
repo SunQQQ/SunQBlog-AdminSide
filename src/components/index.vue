@@ -1,6 +1,8 @@
 <template>
   <div class="RightContent">
     <div class="ArticleList">
+      <div id="lineChart" class="lineChart"></div>
+      <div id="mapChart" class="lineChart"></div>
       <!--表格操作栏-->
       <el-table :data="blogVisitList" style="width: 100%">
         <el-table-column prop="ip" label="访客IP"></el-table-column>
@@ -20,9 +22,26 @@
 <script>
 export default {
   name: "index",
-  data:function (){
+  data: function () {
     return {
-      blogVisitList:[]
+      blogVisitList: [],
+      lineChartOption: {
+        title: {text: '数据趋势'},
+        tooltip: {
+          trigger: 'axis'
+        },
+        legend:{
+          type:'plain'
+        },
+        xAxis: {data: []},
+        yAxis: {},
+        series: [{
+          name: '博客访问量(人/天)', type: 'line', data: [],
+          itemStyle: {normal: {label: {show: true}}}
+        }]
+      },
+      mapChartOption:{
+      }
     }
   },
   methods: {
@@ -35,42 +54,57 @@ export default {
           That.blogVisitList = data;
         }
       });
-
+    },
+    setLineChart: function () {
+      var that = this;
+      let lineChart = this.$echarts.init(document.getElementById('lineChart'));
       this.SQAjax({
         Url: '/api/visitCount/foreend',
-        RequestData:{
-          endTime:'2021/11/23',
-          dayNum:3
+        RequestData: {
+          endTime: '2021/11/24',
+          dayNum: 7
         },
         Success: function (data) {
-          console.log('近三天内访客',data);
+          let dates = [], readings = [];
+          data.forEach(function (item) {
+            dates.push(item.time);
+            readings.push(item.reading);
+          });
+          that.lineChartOption.xAxis.data = dates.reverse();
+          that.lineChartOption.series[0].data = readings.reverse();
+          lineChart.setOption(that.lineChartOption);
         }
       });
     },
-    Delete:function (Id) {
+    Delete: function (Id) {
       var That = this;
 
       That.SQAjax({
-        Url:'/api/visitDelete/backend',
-        RequestData:{
-          _id:Id
+        Url: '/api/visitDelete/backend',
+        RequestData: {
+          _id: Id
         },
-        Success:function (data) {
+        Success: function (data) {
           That.$message('删除成功');
           That.getBlogVisitList();
         }
       });
     },
   },
-  mounted:function () {
+  mounted: function () {
     this.getBlogVisitList();
-    this.bus.$emit('Topbar',{
-      MenuHighLight:'0'
+    this.setLineChart();
+
+    this.bus.$emit('Topbar', {
+      MenuHighLight: '0'
     });
   }
 }
 </script>
 
 <style scoped>
-
+.lineChart {
+  width: 100%;
+  height: 400px;
+}
 </style>

@@ -7,10 +7,12 @@ import App from './App'
 import router from './router'
 import './assets/css/base.less'
 import CommonFunction from './util/util'
+import * as echarts from 'echarts'
 
 Vue.config.productionTip = false
 Vue.use(CommonFunction);
 Vue.prototype.bus = new Vue;
+Vue.prototype.$echarts = echarts;
 
 // 注册ElementUI
 Vue.use(ElementUI);
