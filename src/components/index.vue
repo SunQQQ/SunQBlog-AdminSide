@@ -2,10 +2,10 @@
   <div class="RightContent">
     <div class="ArticleList">
       <div id="lineChart" class="lineChart"></div>
-      <div id="mapChart" class="lineChart"></div>
+      <!--<div id="mapChart" class="lineChart"></div>-->
       <!--表格操作栏-->
       <el-table :data="blogVisitList" style="width: 100%">
-        <el-table-column prop="ip" label="访客IP"></el-table-column>
+        <el-table-column prop="fromUrl" label="来源URL"></el-table-column>
         <el-table-column prop="location" label="访客定位"></el-table-column>
         <el-table-column prop="time" label="访问时间"></el-table-column>
         <el-table-column prop="browser" label="浏览器"></el-table-column>
@@ -61,12 +61,12 @@ export default {
       this.SQAjax({
         Url: '/api/visitCount/foreend',
         RequestData: {
-          endTime: '2021/11/24',
+          endTime: this.getSQTime().split(' ')[0],
           dayNum: 7
         },
         Success: function (data) {
           let dates = [], readings = [];
-          data.forEach(function (item) {
+          data.dateCountList.forEach(function (item) {
             dates.push(item.time);
             readings.push(item.reading);
           });

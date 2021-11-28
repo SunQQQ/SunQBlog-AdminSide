@@ -40,6 +40,27 @@ CommonFunction.install = function (Vue) {
     }).catch(function (error) {
     });
   }
+
+  /**
+   * 获取当前时间
+   * @returns {string:2021/11/18 16:45:39}
+   */
+  Vue.prototype.getSQTime = function (){
+    let dateObject = new Date(),
+      year = dateObject.getFullYear(),
+      month = dateObject.getMonth() + 1,
+      day = dateObject.getDate(),
+      hour = dateObject.getHours(),
+      min = dateObject.getMinutes(),
+      second = dateObject.getSeconds(),
+      result = '';
+
+    if(min<10) min = '0' + min;
+    if(second<10) second = '0' + second;
+
+    result = ''+ year +'/'+month+'/'+ day +' '+ hour +':'+ min +':' + second;
+    return result;
+  };
 }
 
 export default CommonFunction
