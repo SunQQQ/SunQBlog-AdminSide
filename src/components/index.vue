@@ -61,7 +61,7 @@ export default {
       this.SQAjax({
         Url: '/api/visitCount/foreend',
         RequestData: {
-          endTime: this.getSQTime().split(' ')[0],
+          endTime: this.getSQTime().split('/')[0],
           dayNum: 7
         },
         Success: function (data) {

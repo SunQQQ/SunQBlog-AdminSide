@@ -19,6 +19,9 @@
           <div class="ArticleTitle">
             <input placeholder="文章简介" v-model="Summary">
           </div>
+          <div class="ArticleTitle">
+            <input placeholder="文章简介" v-model="ArticleCover">
+          </div>
           <div class="ArticleTitle CommentNum">
             <input placeholder="评论数" v-model="CommentNum">
           </div>
