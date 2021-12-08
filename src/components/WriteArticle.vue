@@ -6,10 +6,12 @@
           <div class="ArticleTitle">
             <input placeholder="文章标题" v-model="Title">
           </div>
+          <div class="ArticleTitle">
+            <input placeholder="优先级" v-model="order">
+          </div>
           <div>
             <el-date-picker v-model="CreateDate" format="yyyy 年 MM 月 dd 日" value-format="yyyy-MM-dd" type="date" placeholder="创建日期"></el-date-picker>
           </div>
-
           <el-select v-model="ArticleTag" placeholder="选择文章标签">
             <el-option v-for="item in ArticleTagOptions" :key="item.value" :label="item.TagName" :value="item.TagName"></el-option>
           </el-select>
@@ -62,6 +64,7 @@
     data: function () {
       return {
         Title:'',
+        order:'', // 优先级，试验田类的文章需要本字段来排序
         Content:'',
         CreateDate:new Date(),
         Summary:'',
@@ -84,12 +87,13 @@
               RequestData:{
                 _id:this.$route.params.ID,
                 Title: this.Title,
+                order:this.order,
                 Summary:this.Summary,
                 Content: this.Content,
                 CreateDate:this.CreateDate,
                 ArticleTag:this.ArticleTag,
                 ArticleCover:this.ArticleCover,
-                CommentNum:this.CommentNum
+                CommentNum:this.CommentNum,
               },
               Success:function (data) {
                 That.$router.push({name:'Article'});
@@ -105,6 +109,7 @@
               Url:'/api/AddArticle/backend',
               RequestData:{
                 Title: this.Title,
+                order: this.order,
                 Summary:this.Summary,
                 Content: this.Content,
                 CreateDate:this.CreateDate,
@@ -166,6 +171,7 @@
           RequestData:{_id:this.$route.params.ID},
           Success:function (data) {
             That.Title = data[0].Title;
+            That.order = data[0].order;
             That.Content = data[0].Content;
             That.Summary = data[0].Summary;
             That.CreateDate = data[0].CreateDate;
