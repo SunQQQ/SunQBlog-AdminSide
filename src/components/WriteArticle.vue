@@ -7,7 +7,7 @@
             <input placeholder="文章标题" v-model="Title">
           </div>
           <div class="ArticleTitle">
-            <input placeholder="优先级" v-model="order">
+            <input placeholder="优先级(试验田使用)" v-model="order">
           </div>
           <div>
             <el-date-picker v-model="CreateDate" format="yyyy 年 MM 月 dd 日" value-format="yyyy-MM-dd" type="date" placeholder="创建日期"></el-date-picker>

@@ -7,6 +7,7 @@
         <el-table-column prop="Title" label="标题"></el-table-column>
         <el-table-column prop="Summary" label="简介"></el-table-column>
         <el-table-column prop="ArticleTag" label="分类标签"></el-table-column>
+        <el-table-column prop="order" label="优先级"></el-table-column>
         <el-table-column prop="CommentNum" label="评论数"></el-table-column>
         <el-table-column prop="CreateDate" label="创建时间"></el-table-column>
         <el-table-column fixed="right" label="操作" width="130">
