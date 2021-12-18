@@ -25,7 +25,7 @@
       var that = this;
 
       this.SQAjax({
-        Url:'/api/ArticleReadOne/backend',
+        Url:'/api/ArticleReadOne/foreend',
         RequestData:{
           _id:this.$route.params.ID
         },

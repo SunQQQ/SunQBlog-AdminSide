@@ -50,18 +50,27 @@ export default {
       var That = this;
       That.SQAjax({
         Url: '/api/visitRead/foreend',
+        RequestData: {
+          PagnationData: {
+            Skip: 0,
+            Limit: 10
+          }
+        },
         Success: function (data) {
-          That.blogVisitList = data;
+          That.blogVisitList = data.list;
         }
       });
     },
     setLineChart: function () {
       var that = this;
       let lineChart = this.$echarts.init(document.getElementById('lineChart'));
+
+      console.log(this.getSQTime().split('/')[0]);
+
       this.SQAjax({
         Url: '/api/visitCount/foreend',
         RequestData: {
-          endTime: this.getSQTime().split('/')[0],
+          endTime: this.getSQTime().split(' ')[0],
           dayNum: 7
         },
         Success: function (data) {

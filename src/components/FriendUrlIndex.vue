@@ -113,7 +113,7 @@ export default {
     GetData: function () {
       var That = this;
       That.SQAjax({
-        Url: '/api/FriendUrlRead/backend',
+        Url: '/api/FriendUrlRead/foreend',
         RequestData: {
           PagnationData: {
             Skip: 0,
@@ -168,7 +168,7 @@ export default {
     SkipTo: function (CurPage) {
       var That = this;
       That.SQAjax({
-        Url: '/api/FriendUrlRead/backend',
+        Url: '/api/FriendUrlRead/foreend',
         RequestData: {
           PagnationData: {
             Skip: (CurPage - 1) * 10,

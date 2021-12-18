@@ -75,7 +75,7 @@
       GetData: function () {
         var That = this;
         That.SQAjax({
-          Url:'/api/CommentRead/backend',
+          Url:'/api/CommentRead/foreend',
           RequestData: {
             PagnationData: {
               Skip:0,
@@ -145,7 +145,7 @@
       SkipTo:function (CurPage) {
         var That = this;
         That.SQAjax({
-          Url:'/api/CommentRead/backend',
+          Url:'/api/CommentRead/foreend',
           RequestData: {
             PagnationData: {
               Skip:(CurPage-1) * 10,

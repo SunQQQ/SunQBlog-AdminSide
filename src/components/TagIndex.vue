@@ -91,7 +91,7 @@
       /*渲染标签列表*/
       GetData: function (That) {
         That.SQAjax({
-          Url:'/api/TagRead/backend',
+          Url:'/api/TagRead/foreend',
           Success:function (data) {
             That.TagList = data;
           }

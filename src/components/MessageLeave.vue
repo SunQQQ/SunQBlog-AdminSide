@@ -92,7 +92,7 @@
       GetData:function () {
         var That = this;
         this.SQAjax({
-          Url:'/api/MessageRead/backend',
+          Url:'/api/MessageRead/foreend',
           RequestData: {
             PagnationData: {
               Skip:0,
@@ -131,7 +131,7 @@
       SkipTo:function (CurPage) {
         var That = this;
         That.SQAjax({
-          Url:'/api/MessageRead/backend',
+          Url:'/api/MessageRead/foreend',
           RequestData: {
             PagnationData: {
               Skip:(CurPage-1) * 10,

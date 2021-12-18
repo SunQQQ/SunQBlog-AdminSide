@@ -80,7 +80,7 @@
       GetTimeLineList:function () {
         var That = this;
         That.SQAjax({
-          Url:'/api/TimeLineRead/backend',
+          Url:'/api/TimeLineRead/foreend',
           Success:function (data) {
             data.forEach(function (Item,I) {
               Item.CreateDate = Item.CreateDate.slice(0,10);

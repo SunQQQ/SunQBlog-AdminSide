@@ -96,7 +96,7 @@
       GetHeartfeltList:function () {
         var That = this;
         That.SQAjax({
-          Url:'/api/HeartfeltRead/backend',
+          Url:'/api/HeartfeltRead/foreend',
           Success:function (data) {
             data.forEach(function (Item,I) {
               Item.CreateDate = Item.CreateDate.slice(0,10);

@@ -158,7 +158,7 @@
       //判断是否传参,是为修改文章、否为新增文章。初始化这个页面
 
       That.SQAjax({
-        Url:'/api/TagRead/backend',
+        Url:'/api/TagRead/foreend',
         RequestData:{},
         Success:function (data) {
           That.ArticleTagOptions = data;
@@ -167,7 +167,7 @@
 
       if(this.$route.params.ID){
         That.SQAjax({
-          Url:'/api/ArticleReadOne/backend',
+          Url:'/api/ArticleReadOne/foreend',
           RequestData:{_id:this.$route.params.ID},
           Success:function (data) {
             That.Title = data[0].Title;

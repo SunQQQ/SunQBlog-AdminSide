@@ -112,7 +112,7 @@
         var That = this;
 
         That.SQAjax({
-          Url:'/snake/scoreDelete/foreend',
+          Url:'/snake/scoreDelete/backend',
           RequestData:{
             _id:Id
           },
@@ -132,7 +132,7 @@
         });
 
         that.SQAjax({
-          Url:'/snake/scoreMulDelete/foreend',
+          Url:'/snake/scoreMulDelete/backend',
           RequestData:{
             idArray: that.multipleSelection
           },

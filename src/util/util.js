@@ -34,7 +34,12 @@ CommonFunction.install = function (Vue) {
         that.$router.push({
           name:'LoginPage',
         });
-      }else {
+      }else if(response.data.status == '1'){
+        that.$message({
+          message: response.data.data.message,
+          type: 'success'
+        });
+      } else {
         that.$message.error(response.data.data.message);
       }
     }).catch(function (error) {
