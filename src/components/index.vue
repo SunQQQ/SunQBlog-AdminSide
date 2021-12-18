@@ -1,10 +1,12 @@
 <template>
   <div class="RightContent">
     <div class="ArticleList">
+      <div class="partTitle">本周博客访问量趋势图</div>
       <div id="lineChart" class="lineChart"></div>
       <!--<div id="mapChart" class="lineChart"></div>-->
       <!--表格操作栏-->
-      <el-table :data="blogVisitList" style="width: 100%">
+      <div class="partTitle">博客访问数据明细</div>
+      <el-table :data="blogVisitList" border style="width: 100%;" :header-cell-style="{background:'#eef1f6'}">
         <el-table-column prop="fromUrl" label="来源URL"></el-table-column>
         <el-table-column prop="location" label="访客定位"></el-table-column>
         <el-table-column prop="time" label="访问时间"></el-table-column>
@@ -15,6 +17,15 @@
           </template>
         </el-table-column>
       </el-table>
+      <div v-if="listTotal>12">
+        <el-pagination layout="prev, pager, next,total"
+                       :total=listTotal
+                       :page-size=pageSize
+                       @current-change="ChangeCurPage"
+                       @next-click="NextPage"
+                       @prev-click="NextPage">
+        </el-pagination>
+      </div>
     </div>
   </div>
 </template>
@@ -24,9 +35,9 @@ export default {
   name: "index",
   data: function () {
     return {
-      blogVisitList: [],
+      // 折线图数据
       lineChartOption: {
-        title: {text: '数据趋势'},
+        title: {text: ''},
         tooltip: {
           trigger: 'axis'
         },
@@ -40,8 +51,17 @@ export default {
           itemStyle: {normal: {label: {show: true}}}
         }]
       },
+      // 地图数据
       mapChartOption:{
-      }
+      },
+      // 访客列表数据
+      blogVisitList: [],
+      // 访客数据总数
+      listTotal: 0,
+      // 一页数据条数
+      pageSize:12,
+      // 当前页
+      MyCurPage:1,
     }
   },
   methods: {
@@ -53,19 +73,23 @@ export default {
         RequestData: {
           PagnationData: {
             Skip: 0,
-            Limit: 10
+            Limit: That.pageSize
           }
         },
         Success: function (data) {
+          data.list.forEach(function (item) {
+            if(!item.fromUrl) item.fromUrl = '获取失败';
+          });
+
           That.blogVisitList = data.list;
+          That.listTotal = data.totalNum;
         }
       });
     },
+    // 设置线性图
     setLineChart: function () {
       var that = this;
       let lineChart = this.$echarts.init(document.getElementById('lineChart'));
-
-      console.log(this.getSQTime().split('/')[0]);
 
       this.SQAjax({
         Url: '/api/visitCount/foreend',
@@ -85,6 +109,7 @@ export default {
         }
       });
     },
+    // 删除访问记录
     Delete: function (Id) {
       var That = this;
 
@@ -99,6 +124,36 @@ export default {
         }
       });
     },
+    // 翻页方法
+    ChangeCurPage:function(CurPage){
+      this.SkipTo(CurPage);
+      this.MyCurPage = CurPage;
+    },
+    NextPage:function (CurPage) {
+      this.SkipTo(CurPage);
+      this.MyCurPage = CurPage;
+    },
+    // 翻到某一页
+    SkipTo:function (CurPage) {
+      var That = this;
+
+      That.SQAjax({
+        Url: '/api/visitRead/foreend',
+        RequestData: {
+          PagnationData: {
+            Skip: (CurPage-1) * That.pageSize,
+            Limit: That.pageSize
+          }
+        },
+        Success: function (data) {
+          data.list.forEach(function (item) {
+            if(!item.fromUrl) item.fromUrl = '获取失败';
+          });
+
+          That.blogVisitList = data.list;
+        }
+      });
+    }
   },
   mounted: function () {
     this.getBlogVisitList();
@@ -116,4 +171,10 @@ export default {
   width: 100%;
   height: 400px;
 }
+  .partTitle{
+    padding: 1rem 0 1rem 0;
+    color: rgb(18, 18, 18);
+    font-weight: 500;
+    font-size: 15px;
+  }
 </style>
