@@ -4,7 +4,7 @@
       <div class="Logo">Sunq's Blog Admin</div>
       <div class="TopBarRight">
         <div class="PersonCenter">
-          <div class="PersonCenterName" @click="OpenUserCenter()">孙权  <i class="el-icon-caret-bottom"></i></div>
+          <div class="PersonCenterName" @click="OpenUserCenter()">{{userName}}  <i class="el-icon-caret-bottom"></i></div>
           <div class="PersonCenterItem" v-if="ShowExit == 1" @click="Exit()">退出</div>
         </div>
       </div>
@@ -68,7 +68,8 @@
         // 个人中心显隐
         ShowExit:-1,
         // 菜单高亮参数
-        MenuHighLight:'0'
+        MenuHighLight:'0',
+        userName:'加载中'
       }
     },
     // 这个参数是父子组件间传值
@@ -94,6 +95,7 @@
       this.bus.$on('Topbar',function (data) {
         That.MenuHighLight = data.MenuHighLight;
       });
+      That.userName = window.localStorage.getItem("SQBlogUser");
     }
   }
 </script>

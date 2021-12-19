@@ -46,6 +46,7 @@
               type: 'success'
             });
             window.localStorage.setItem("SQBlog",JSON.stringify(response.data.data));
+            window.localStorage.setItem("SQBlogUser",That.form.CnName);
             That.$router.push({name:'Article'});
           }else if(response.data.status == '1'){
             That.$message.error('账号或密码错误');
