@@ -1,7 +1,7 @@
 <template>
     <div class="LoginContent">
       <el-form ref="form" :model="form" label-width="80px">
-        <div style="text-align: center"><h2>登 录</h2></div>
+        <div style="text-align: center"><h2>sunq's blog 管理后台</h2></div>
         <el-form-item label="账号">
           <el-input v-model="form.CnName"></el-input>
         </el-form-item>
@@ -25,8 +25,8 @@
     data:function () {
       return{
         form:{
-          CnName : '',
-          PassWord:''
+          CnName : '游客',
+          PassWord:'亲，github求个赞'
         }
       }
     },
