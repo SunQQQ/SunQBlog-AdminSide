@@ -91,11 +91,21 @@
     },
     mounted:function () {
       var That = this;
-      // 这个参数是平级组件间传值
+
+      // 切换路由后，各组件会修改菜单高亮。这个参数是平级组件间传值
       this.bus.$on('Topbar',function (data) {
         That.MenuHighLight = data.MenuHighLight;
       });
-      That.userName = window.localStorage.getItem("SQBlogUser");
+
+      // 初始化菜单时，从localstorage中获取用户名
+      if(window.localStorage.getItem("SQBlogUser")){
+        That.userName = window.localStorage.getItem("SQBlogUser");
+      }
+
+      // 注册修改用户名方法，登录成功时登录组件会通过这个方法修改用户名
+      this.bus.$on('changeUser',function (user) {
+        That.userName = user;
+      });
     }
   }
 </script>

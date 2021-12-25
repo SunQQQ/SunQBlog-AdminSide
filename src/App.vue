@@ -17,8 +17,9 @@
       }
     },
     mounted: function () {
-      /*如果有token则加载首页，如果没有则加载登录页*/
+      // 如果有token则加载首页，如果没有则加载登录页
       var UserData = window.localStorage.getItem("SQBlog");
+
       if (!UserData) {
         this.$router.push({
           name: 'LoginPage',
