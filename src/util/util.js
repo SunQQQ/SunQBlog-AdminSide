@@ -28,18 +28,13 @@ CommonFunction.install = function (Vue) {
         Para['Success'](response.data.data);
       }else if(response.data.status == '1'){
         that.$message({
-          message: '令牌超时或失效，需重新登录',
+          message: response.data.data.message,
           type: 'success'
         });
         that.$router.push({
           name:'LoginPage',
         });
-      }else if(response.data.status == '1'){
-        that.$message({
-          message: response.data.data.message,
-          type: 'success'
-        });
-      } else {
+      }else {
         that.$message.error(response.data.data.message);
       }
     }).catch(function (error) {
