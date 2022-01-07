@@ -9,7 +9,8 @@
       <el-table :data="blogVisitList" border style="width: 100%;" :header-cell-style="{background:'#eef1f6'}">
 <!--        <el-table-column prop="fromUrl" label="来源URL"></el-table-column>-->
         <el-table-column prop="clientIp" label="访客ip"></el-table-column>
-        <el-table-column prop="operateType" label="操作内容"></el-table-column>
+        <el-table-column prop="operateType" label="操作类型"></el-table-column>
+        <el-table-column prop="operateContent" label="操作内容"></el-table-column>
         <el-table-column prop="location" label="访客定位"></el-table-column>
         <el-table-column prop="browser" label="浏览器"></el-table-column>
         <el-table-column prop="time" label="访问时间"></el-table-column>
