@@ -164,12 +164,13 @@
   }
 
   .PersonCenterItem{
-    width: 9rem;
+    width: 8rem;
     height: 50px;
     line-height: 50px;
     border:1px solid @BorderColor;
     background-color: white;
     box-shadow: 0 2px 12px 0 #0000001a;
+    cursor:pointer;
   }
 
 </style>
