@@ -106,6 +106,13 @@
       this.bus.$on('changeUser',function (user) {
         That.userName = user;
       });
+
+      // 点击用户名以外区域关闭用户名弹窗
+      document.addEventListener('click',function(e){
+        if(!document.getElementsByClassName('PersonCenterName')[0].contains(e.target)){
+          That.ShowExit = -1;
+        }
+      });
     }
   }
 </script>
@@ -161,6 +168,8 @@
     height: 50px;
     line-height: 50px;
     border:1px solid @BorderColor;
+    background-color: white;
+    box-shadow: 0 2px 12px 0 #0000001a;
   }
 
 </style>
