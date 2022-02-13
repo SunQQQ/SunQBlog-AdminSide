@@ -3,6 +3,9 @@
     <div class="TopBar">
       <div class="Logo">Sunq's Blog Admin</div>
       <div class="TopBarRight">
+        <div class="home-link">
+          用户端
+        </div>
         <div class="PersonCenter">
           <div class="PersonCenterName" @click="OpenUserCenter()">{{userName}}  <i class="el-icon-caret-bottom"></i></div>
           <div class="PersonCenterItem" v-if="ShowExit == 1" @click="Exit()">退出</div>
@@ -143,6 +146,16 @@
     padding-right: 40px;
     border-bottom: 1px solid #ebeef5;
     background-color: hsla(0,0%,100%,.9);
+    display: flex;
+    align-items: center;
+  }
+
+  .home-link{
+    text-align: left;
+    flex: 1;
+    margin-left: 20px;
+    font-weight: 500;
+    font-size: 15px;
   }
 
   .LeftBar{
