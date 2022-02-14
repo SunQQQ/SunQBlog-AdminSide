@@ -8,6 +8,7 @@ import router from './router'
 import './assets/css/base.less'
 import CommonFunction from './util/util'
 import * as echarts from 'echarts'
+import '../static/iconfont/iconfont.css';
 
 Vue.config.productionTip = false
 Vue.use(CommonFunction);

@@ -3,9 +3,11 @@
     <div class="TopBar">
       <div class="Logo">Sunq's Blog Admin</div>
       <div class="TopBarRight">
-        <div class="home-link">
-          用户端
-        </div>
+        
+        <a class="home-link" href="http://39.104.22.73:67" target="_blank">
+          <i class="iconfont icon-shouye"></i> 用户端
+        </a>
+       
         <div class="PersonCenter">
           <div class="PersonCenterName" @click="OpenUserCenter()">{{userName}}  <i class="el-icon-caret-bottom"></i></div>
           <div class="PersonCenterItem" v-if="ShowExit == 1" @click="Exit()">退出</div>
@@ -17,46 +19,46 @@
 
     <el-menu :default-active="MenuHighLight" class="LeftBar" background-color="#545c64" text-color="#fff" active-text-color="#ffd04b">
       <el-menu-item index="0" @click="ChangeHighLight('index')">
-        <i class="el-icon-document"></i>
+        <i class="iconfont icon-shujutongji"></i>
         <span slot="title">访问数据</span>
       </el-menu-item>
       <el-menu-item index="1" @click="ChangeHighLight('Article')">
-        <i class="el-icon-document"></i>
+        <i class="iconfont icon-16"></i>
         <span slot="title">文章管理</span>
       </el-menu-item>
 
       <el-menu-item index="2"  @click="ChangeHighLight('TagIndex')">
-        <i class="el-icon-star-off"></i>
+        <i class="iconfont icon-biaoqian_o"></i>
         <span slot="title">分类管理</span>
       </el-menu-item>
 
       <el-menu-item index="3"  @click="ChangeHighLight('TimeLine')">
-        <i class="el-icon-date"></i>
+        <i class="iconfont icon-fuhao-shijianzhou"></i>
         <span slot="title">时间轴管理</span>
       </el-menu-item>
 
       <el-menu-item index="4"  @click="ChangeHighLight('Heartfelt')">
-        <i class="el-icon-view"></i>
+        <i class="iconfont icon-heart"></i>
         <span slot="title">心声管理</span>
       </el-menu-item>
 
       <el-menu-item index="5"  @click="ChangeHighLight('FriendUrlIndex')">
-        <i class="el-icon-share"></i>
+        <i class="iconfont icon-lianjie"></i>
         <span slot="title">友链管理</span>
       </el-menu-item>
 
       <el-menu-item index="6"  @click="ChangeHighLight('MessageLeave')">
-        <i class="el-icon-star-off"></i>
+        <i class="iconfont icon-liuyan"></i>
         <span slot="title">留言管理</span>
       </el-menu-item>
 
       <el-menu-item index="7"  @click="ChangeHighLight('Comment')">
-        <i class="el-icon-view"></i>
+        <i class="iconfont icon-pinglun"></i>
         <span slot="title">评论管理</span>
       </el-menu-item>
 
       <el-menu-item index="8"  @click="ChangeHighLight('SnakeScores')">
-        <i class="el-icon-view"></i>
+        <i class="iconfont icon-she"></i>
         <span slot="title">贪吃蛇榜单</span>
       </el-menu-item>
     </el-menu>
@@ -156,6 +158,9 @@
     margin-left: 20px;
     font-weight: 500;
     font-size: 15px;
+    cursor: pointer;
+    color: #666;
+    text-decoration: none;
   }
 
   .LeftBar{
