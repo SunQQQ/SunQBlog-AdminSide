@@ -18,7 +18,7 @@
 
     <div style="height: 61px"></div>
 
-    <el-menu :default-active="MenuHighLight" class="LeftBar" background-color="#545c64" text-color="#fff" active-text-color="#409EFF">
+    <el-menu :default-active="MenuHighLight" class="LeftBar" background-color="#545c64" text-color="#fff" active-text-color="#87c3ff">
       <el-menu-item index="0" @click="ChangeHighLight('index')">
         <i class="iconfont icon-shujutongji"></i>
         <span slot="title">访问数据</span>
