@@ -4,10 +4,11 @@
       <div class="Logo">Sunq's Blog Admin</div>
       <div class="TopBarRight">
         
-        <a class="home-link" href="http://39.104.22.73:67" target="_blank">
-          <i class="iconfont icon-shouye"></i> 用户端
-        </a>
-       
+        <div class="home-link">
+          <a href="http://39.104.22.73:67" target="_blank">
+            <i class="iconfont icon-shouye"></i> 用户端
+          </a>
+        </div>
         <div class="PersonCenter">
           <div class="PersonCenterName" @click="OpenUserCenter()">{{userName}}  <i class="el-icon-caret-bottom"></i></div>
           <div class="PersonCenterItem" v-if="ShowExit == 1" @click="Exit()">退出</div>
@@ -17,7 +18,7 @@
 
     <div style="height: 61px"></div>
 
-    <el-menu :default-active="MenuHighLight" class="LeftBar" background-color="#545c64" text-color="#fff" active-text-color="#ffd04b">
+    <el-menu :default-active="MenuHighLight" class="LeftBar" background-color="#545c64" text-color="#fff" active-text-color="#409EFF">
       <el-menu-item index="0" @click="ChangeHighLight('index')">
         <i class="iconfont icon-shujutongji"></i>
         <span slot="title">访问数据</span>
@@ -149,7 +150,6 @@
     border-bottom: 1px solid #ebeef5;
     background-color: hsla(0,0%,100%,.9);
     display: flex;
-    align-items: center;
   }
 
   .home-link{
@@ -158,6 +158,9 @@
     margin-left: 20px;
     font-weight: 500;
     font-size: 15px;
+  }
+
+  .home-link a{
     cursor: pointer;
     color: #666;
     text-decoration: none;
