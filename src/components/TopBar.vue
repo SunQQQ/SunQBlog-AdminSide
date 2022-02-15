@@ -171,6 +171,10 @@
     text-decoration: none;
   }
 
+  .home-link a:hover{
+    color: #409EFF;
+  }
+
   .LeftBar{
     width: 220px;
     position: fixed;
