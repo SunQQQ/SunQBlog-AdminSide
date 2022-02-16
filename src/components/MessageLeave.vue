@@ -28,8 +28,8 @@
           <el-table-column prop="MessageLeaveDate" label="创建时间"></el-table-column>
           <el-table-column fixed="right" label="操作" width="130">
             <template slot-scope="scope">
-              <el-button @click="EditMessageLeave(scope.row)" type="text" size="small">编辑</el-button>
-              <el-button @click="DeleteTag(scope.row._id)" type="text" size="small">删除</el-button>
+              <el-button @click="EditMessageLeave(scope.row)" type="text" size="small" class="warning-color">编辑</el-button>
+              <el-button @click="DeleteTag(scope.row._id)" type="text" size="small" class="danger-color">删除</el-button>
             </template>
           </el-table-column>
         </el-table>
