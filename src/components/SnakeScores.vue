@@ -111,15 +111,19 @@
       DeleteTag:function (Id) {
         var That = this;
 
-        That.SQAjax({
-          Url:'/snake/scoreDelete/backend',
-          RequestData:{
-            _id:Id
-          },
-          Success:function () {
-            That.SkipTo(That.MyCurPage);
-          }
-        });
+        if(window.localStorage.getItem("SQBlogUser") == 'sunq'){
+          That.SQAjax({
+            Url:'/snake/scoreDelete/backend',
+            RequestData:{
+              _id:Id
+            },
+            Success:function () {
+              That.SkipTo(That.MyCurPage);
+            }
+          });
+        }else{
+          That.$message.error('权限不足，无法操作数据');
+        }
       },
 
       // 批量删除
