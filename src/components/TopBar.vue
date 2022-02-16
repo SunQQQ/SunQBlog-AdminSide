@@ -5,12 +5,17 @@
       <div class="TopBarRight">
         <div class="home-link">
           <a href="http://39.104.22.73:67" target="_blank">
-            <i class="iconfont icon-shouye"></i> 用户端
+            <i class="iconfont icon-shouye"></i> 用户端入口
           </a>
         </div>
         <div class="home-link">
           <a href="https://github.com/SunQQQ/SunQBlog-AdminSide" target="_blank">
-            <i class="iconfont icon-github"></i> 源码
+            <i class="iconfont icon-github"></i> 管理端源码
+          </a>
+        </div>
+        <div class="home-link">
+          <a href="http://39.104.22.73:70" target="_blank">
+            <i class="iconfont icon-github"></i> 贪吃蛇入口
           </a>
         </div>
         <div class="placeHolder"></div>
