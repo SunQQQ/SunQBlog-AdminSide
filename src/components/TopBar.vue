@@ -15,7 +15,7 @@
         </div>
         <div class="home-link">
           <a href="http://39.104.22.73:70" target="_blank">
-            <i class="iconfont icon-github"></i> 贪吃蛇入口
+            <i class="iconfont icon-she"></i> 贪吃蛇入口
           </a>
         </div>
         <div class="placeHolder"></div>
@@ -164,7 +164,7 @@
 
   .home-link{
     text-align: left;
-    width: 70px;
+    width: 100px;
     margin-left: 20px;
     font-weight: 500;
     font-size: 15px;

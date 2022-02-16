@@ -2,7 +2,7 @@
   <div>
     <div class="RightContent">
       <div class="ArticleList">
-        <el-button type="primary" @click="mulDelete()">批量删除</el-button>
+        <el-button @click="mulDelete()" type="primary" plain>批量删除</el-button>
 
 
         <!--表格操作栏-->
@@ -135,16 +135,20 @@
           that.multipleSelection.push(item._id);
         });
 
-        that.SQAjax({
-          Url:'/snake/scoreMulDelete/backend',
-          RequestData:{
-            idArray: that.multipleSelection
-          },
-          Success:function () {
-            that.$message('批量删除成功');
-            that.SkipTo(that.MyCurPage);
-          }
-        });
+        if(window.localStorage.getItem("SQBlogUser") == 'sunq'){
+          that.SQAjax({
+            Url:'/snake/scoreMulDelete/backend',
+            RequestData:{
+              idArray: that.multipleSelection
+            },
+            Success:function () {
+              that.$message('批量删除成功');
+              that.SkipTo(that.MyCurPage);
+            }
+          });
+        }else{
+          that.$message.error('权限不足，无法操作数据');
+        }
       }
     },
     mounted: function () {
