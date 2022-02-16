@@ -4,6 +4,7 @@
       <div class="ArticleList">
         <div style="margin-bottom:10px">
           <el-button @click="mulDelete()" type="primary" plain>批量删除</el-button>
+          <el-button @click="jumpPage()" type="success" plain>游戏源码</el-button>
         </div>
 
         <!--表格操作栏-->
@@ -150,6 +151,9 @@
         }else{
           that.$message.error('权限不足，无法操作数据');
         }
+      },
+      jumpPage:function(){
+        window.open('https://github.com/SunQQQ/snake');
       }
     },
     mounted: function () {
