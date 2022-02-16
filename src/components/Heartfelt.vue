@@ -2,8 +2,10 @@
   <div>
     <div class="RightContent">
       <div class="ArticleList">
-        <el-button type="primary" @click="OpenCreateDialog()">新增心声</el-button>
-
+        <div style="margin-bottom:10px">
+          <el-button type="primary" @click="OpenCreateDialog()" plain>新增心声</el-button>
+        </div>
+        
         <el-dialog title="新增心声" :visible.sync="dialogFormVisible">
           <el-form :model="form">
             <el-form-item label="心声内容" :label-width="formLabelWidth">
@@ -23,7 +25,7 @@
         </el-dialog>
 
         <!--表格操作栏-->
-        <el-table :data="TimeLineList" style="width: 100%">
+        <el-table :data="TimeLineList" style="width: 100%" border :header-cell-style="{background:'#f7f7f7'}">
           <el-table-column prop="HeartfeltContent" label="心声内容"></el-table-column>
           <el-table-column prop="HeartfeltWriter" label="心声作者"></el-table-column>
           <el-table-column prop="CreateDate" label="创建时间"></el-table-column>

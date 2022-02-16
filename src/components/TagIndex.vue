@@ -2,7 +2,9 @@
   <div>
     <div class="RightContent">
       <div class="ArticleList">
-        <el-button type="primary" @click="OnOpenDialog()">新增标签</el-button>
+        <div style="margin-bottom:10px">
+          <el-button type="primary" @click="OnOpenDialog()" plain>新增标签</el-button>
+        </div>
 
         <el-dialog title="管理分类" :visible.sync="dialogFormVisible">
           <el-form :model="form">
@@ -20,7 +22,7 @@
         </el-dialog>
 
         <!--表格操作栏-->
-        <el-table :data="TagList" style="width: 100%">
+        <el-table :data="TagList" style="width: 100%" border :header-cell-style="{background:'#f7f7f7'}">
           <el-table-column prop="TagName" label="标题名称"></el-table-column>
           <el-table-column prop="TagNo" label="排序"></el-table-column>
           <el-table-column fixed="right" label="操作" width="130">

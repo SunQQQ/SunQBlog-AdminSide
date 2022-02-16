@@ -4,8 +4,7 @@
 <template>
   <div>
     <div class="RightContent">
-      <el-button type="primary" @click="">批量删除</el-button>
-
+      <!-- <el-button type="primary" >批量删除</el-button> -->
       <el-dialog title="管理友链" :visible.sync="dialogFormVisible">
         <el-form :model="form">
           <el-form-item label="评论时间" :label-width="formLabelWidth">
@@ -21,7 +20,7 @@
       </el-dialog>
 
       <!--表格操作栏-->
-      <el-table :data="CommentList" style="width: 100%">
+      <el-table :data="CommentList" style="width: 100%" border :header-cell-style="{background:'#f7f7f7'}">
         <el-table-column prop="ArticleCommentDate" label="评论时间"></el-table-column>
         <el-table-column prop="ArticleCommentNickName" label="评论人"></el-table-column>
         <el-table-column label="评论内容">

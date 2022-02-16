@@ -2,11 +2,12 @@
   <div>
     <div class="RightContent">
       <div class="ArticleList">
-        <el-button @click="mulDelete()" type="primary" plain>批量删除</el-button>
-
+        <div style="margin-bottom:10px">
+          <el-button @click="mulDelete()" type="primary" plain>批量删除</el-button>
+        </div>
 
         <!--表格操作栏-->
-        <el-table :data="MessageLeaveList" style="width: 100%" ref="multipleTable">
+        <el-table :data="MessageLeaveList" style="width: 100%" ref="multipleTable" border :header-cell-style="{background:'#f7f7f7'}">
           <el-table-column
             type="selection"
             width="55">

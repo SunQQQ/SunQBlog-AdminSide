@@ -21,7 +21,7 @@
         </el-dialog>
 
         <!--表格操作栏-->
-        <el-table :data="MessageLeaveList" style="width: 100%">
+        <el-table :data="MessageLeaveList" style="width: 100%" border :header-cell-style="{background:'#f7f7f7'}">
           <el-table-column prop="MessageLeaveName" label="留言者"></el-table-column>
           <el-table-column prop="MessageText" label="留言内容"></el-table-column>
           <el-table-column prop="iconNo" label="头像"></el-table-column>

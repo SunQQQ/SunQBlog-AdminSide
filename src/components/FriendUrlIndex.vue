@@ -2,7 +2,9 @@
   <div>
     <div class="RightContent">
       <div class="ArticleList">
-        <el-button type="primary" @click="OnOpenDialog()">新增友链</el-button>
+        <div style="margin-bottom:10px">
+          <el-button type="primary" @click="OnOpenDialog()" plain>新增友链</el-button>
+        </div>
 
         <el-dialog title="管理友链" :visible.sync="dialogFormVisible">
           <el-form :model="form">
@@ -29,7 +31,7 @@
         </el-dialog>
 
         <!--表格操作栏-->
-        <el-table :data="FriendUrlList" style="width: 100%">
+        <el-table :data="FriendUrlList" style="width: 100%" border :header-cell-style="{background:'#f7f7f7'}">
           <el-table-column prop="FriendUrlNickName" label="友链名称"></el-table-column>
           <el-table-column prop="FriendUrlAdress" label="友链地址"></el-table-column>
           <el-table-column prop="FriendUrlIcoUrl" label="图标地址" width="300" :show-overflow-tooltip="true"></el-table-column>
