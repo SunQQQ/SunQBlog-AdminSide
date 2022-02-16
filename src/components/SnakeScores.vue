@@ -2,11 +2,13 @@
   <div>
     <div class="RightContent">
       <div class="ArticleList">
-        <el-button type="primary" @click="mulDelete()">批量删除</el-button>
-
+        <div style="margin-bottom:10px">
+          <el-button @click="mulDelete()" type="primary" plain>批量删除</el-button>
+          <el-button @click="jumpPage()" type="success" plain>游戏源码</el-button>
+        </div>
 
         <!--表格操作栏-->
-        <el-table :data="MessageLeaveList" style="width: 100%" ref="multipleTable">
+        <el-table :data="MessageLeaveList" style="width: 100%" ref="multipleTable" border :header-cell-style="{background:'#f7f7f7'}">
           <el-table-column
             type="selection"
             width="55">
@@ -111,15 +113,19 @@
       DeleteTag:function (Id) {
         var That = this;
 
-        That.SQAjax({
-          Url:'/snake/scoreDelete/backend',
-          RequestData:{
-            _id:Id
-          },
-          Success:function () {
-            That.SkipTo(That.MyCurPage);
-          }
-        });
+        if(window.localStorage.getItem("SQBlogUser") == 'sunq'){
+          That.SQAjax({
+            Url:'/snake/scoreDelete/backend',
+            RequestData:{
+              _id:Id
+            },
+            Success:function () {
+              That.SkipTo(That.MyCurPage);
+            }
+          });
+        }else{
+          That.$message.error('权限不足，无法操作数据');
+        }
       },
 
       // 批量删除
@@ -131,16 +137,23 @@
           that.multipleSelection.push(item._id);
         });
 
-        that.SQAjax({
-          Url:'/snake/scoreMulDelete/backend',
-          RequestData:{
-            idArray: that.multipleSelection
-          },
-          Success:function () {
-            that.$message('批量删除成功');
-            that.SkipTo(that.MyCurPage);
-          }
-        });
+        if(window.localStorage.getItem("SQBlogUser") == 'sunq'){
+          that.SQAjax({
+            Url:'/snake/scoreMulDelete/backend',
+            RequestData:{
+              idArray: that.multipleSelection
+            },
+            Success:function () {
+              that.$message('批量删除成功');
+              that.SkipTo(that.MyCurPage);
+            }
+          });
+        }else{
+          that.$message.error('权限不足，无法操作数据');
+        }
+      },
+      jumpPage:function(){
+        window.open('https://github.com/SunQQQ/snake');
       }
     },
     mounted: function () {

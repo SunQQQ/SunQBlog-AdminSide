@@ -1,9 +1,11 @@
 <template>
   <div>
     <div class="RightContent">
-      <el-button type="primary" @click="WriteArticle()">写文章</el-button>
+      <div style="margin-bottom:10px">
+        <el-button type="primary" @click="WriteArticle()" plain>创建文章</el-button>
+      </div>
 
-      <el-table :data="ArticleList" style="width: 100%">
+      <el-table border :data="ArticleList" style="width: 100%" :header-cell-style="{background:'#f7f7f7'}">
         <el-table-column prop="Title" label="标题"></el-table-column>
         <el-table-column prop="Summary" label="简介"></el-table-column>
         <el-table-column prop="ArticleTag" label="分类标签"></el-table-column>

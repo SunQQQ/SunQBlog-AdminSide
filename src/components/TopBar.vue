@@ -3,12 +3,22 @@
     <div class="TopBar">
       <div class="Logo">Sunq's Blog Admin</div>
       <div class="TopBarRight">
-        
         <div class="home-link">
           <a href="http://39.104.22.73:67" target="_blank">
-            <i class="iconfont icon-shouye"></i> 用户端
+            <i class="iconfont icon-shouye"></i> 用户端入口
           </a>
         </div>
+        <div class="home-link">
+          <a href="https://github.com/SunQQQ/SunQBlog-AdminSide" target="_blank">
+            <i class="iconfont icon-github"></i> 管理端源码
+          </a>
+        </div>
+        <div class="home-link">
+          <a href="http://39.104.22.73:70" target="_blank">
+            <i class="iconfont icon-she"></i> 贪吃蛇入口
+          </a>
+        </div>
+        <div class="placeHolder"></div>
         <div class="PersonCenter">
           <div class="PersonCenterName" @click="OpenUserCenter()">{{userName}}  <i class="el-icon-caret-bottom"></i></div>
           <div class="PersonCenterItem" v-if="ShowExit == 1" @click="Exit()">退出</div>
@@ -154,7 +164,7 @@
 
   .home-link{
     text-align: left;
-    flex: 1;
+    width: 100px;
     margin-left: 20px;
     font-weight: 500;
     font-size: 15px;
@@ -164,6 +174,10 @@
     cursor: pointer;
     color: #666;
     text-decoration: none;
+  }
+
+  .home-link a:hover{
+    color: #409EFF;
   }
 
   .LeftBar{
@@ -180,6 +194,9 @@
     text-align: center;
   }
 
+  .placeHolder{
+    flex: 1;
+  }
   .PersonCenterName{
     cursor:pointer;
   }

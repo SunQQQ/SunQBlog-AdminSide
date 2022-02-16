@@ -21,9 +21,19 @@ app.get('/*', (req, res) => {
 
 app.post('/*', (req, res) => {
   let pathName = req.params[0],
-    paramType = pathName.split('/')[0];
+    paramType = pathName.split('/')[0],
+    url = '';
+
+  if(paramType == 'api'){
+    url = 'http://39.104.22.73:8888' + pathName.replace('api','')
+  }else if(paramType == 'snake'){
+    url = 'http://39.104.22.73:8081' + pathName.replace('snake','')
+  }else{
+    url = 'http://39.104.22.73:8888' + pathName.replace('api','')
+  }
+   
   axios.post(
-    'http://39.104.22.73:8888' + pathName.replace('api',''),
+    url,
     req.body
   ).then(function (response) {
     res.end(JSON.stringify(response.data));

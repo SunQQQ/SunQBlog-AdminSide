@@ -2,7 +2,9 @@
   <div>
     <div class="RightContent">
       <div class="ArticleList">
-        <el-button type="primary" @click="OpenCreateDialog()">新增时间轴</el-button>
+        <div style="margin-bottom:10px">
+          <el-button type="primary" @click="OpenCreateDialog()" plain>新增时间轴</el-button>
+        </div>
 
         <el-dialog title="新增时间轴" :visible.sync="dialogFormVisible">
           <el-form :model="form">
@@ -20,7 +22,7 @@
         </el-dialog>
 
         <!--表格操作栏-->
-        <el-table :data="TimeLineList" style="width: 100%">
+        <el-table :data="TimeLineList" style="width: 100%" border :header-cell-style="{background:'#f7f7f7'}">
           <el-table-column prop="TextContent" label="标签内容"></el-table-column>
           <el-table-column prop="CreateDate" label="创建时间"></el-table-column>
           <el-table-column fixed="right" label="操作" width="130">
