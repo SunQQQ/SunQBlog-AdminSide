@@ -52,14 +52,20 @@
           series: [
             {
               name: '博客访问量(人/天)', type: 'line', data: [],
-              itemStyle: {normal: {label: {show: true}}}
+              itemStyle: {
+                normal: {
+                  color:'#E6A23C',
+                  label: {show: true},
+                  lineStyle:{color:'#E6A23C'}
+                }
+                }
             },{
               name: '博客访问ip数(个/天)', type: 'line', data: [],
               itemStyle: {
                 normal: {
-                  color: '#F72C5B',
+                  color: '#67C23A',
                   label: {show: true},
-                  lineStyle: {color: '#F72C5B'}
+                  lineStyle: {color: '#67C23A'}
                 }
               }
             }
