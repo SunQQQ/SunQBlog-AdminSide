@@ -8,13 +8,18 @@
       <div class="partTitle">博客访问数据明细</div>
       <el-table :data="blogVisitList" border style="width: 100%;" :header-cell-style="{background:'#eef1f6'}">
         <!--        <el-table-column prop="fromUrl" label="来源URL"></el-table-column>-->
-        <el-table-column prop="clientIp" label="访客ip"></el-table-column>
-        <el-table-column prop="operateType" label="操作类型"></el-table-column>
-        <el-table-column prop="operateContent" label="操作内容"></el-table-column>
-        <el-table-column prop="location" label="访客定位"></el-table-column>
-        <el-table-column prop="browser" label="浏览器"></el-table-column>
+        <el-table-column prop="clientIp" label="访客ip" width="130"></el-table-column>
+        <el-table-column prop="operateType" label="操作类型" width="130"></el-table-column>
+        <el-table-column prop="operateContent" label="操作内容" width="130"></el-table-column>
+        <el-table-column prop="location" label="访客定位" width="130"></el-table-column>
+        <el-table-column prop="fromUrl" label="访客来源"></el-table-column>
+        <el-table-column prop="browser" label="浏览器">
+          <template slot-scope="scope">
+              <div v-html="scope.row.browser"></div>
+          </template>
+        </el-table-column>
         <el-table-column prop="time" label="访问时间"></el-table-column>
-        <el-table-column fixed="right" label="操作" width="130">
+        <el-table-column fixed="right" label="操作" width="50">
           <template slot-scope="scope">
             <el-button type="text" size="small" @click="Delete(scope.row._id)" class="danger-color">删除</el-button>
           </template>
@@ -97,7 +102,11 @@
           },
           Success: function (data) {
             data.list.forEach(function (item) {
-              if (!item.fromUrl) item.fromUrl = '获取失败';
+              if (!item.fromUrl){
+                item.fromUrl = '获取失败';
+              }else{                
+                item.fromUrl = item.fromUrl.split('/')[2];                
+              }
             });
 
             That.blogVisitList = data.list;
@@ -167,8 +176,12 @@
             }
           },
           Success: function (data) {
-            data.list.forEach(function (item) {
-              if (!item.fromUrl) item.fromUrl = '获取失败';
+            data.list.forEach(function (item,i) {
+              if (!item.fromUrl){
+                item.fromUrl = '获取失败';
+              }else{                
+                item.fromUrl = item.fromUrl.split('/')[2];                
+              }
             });
 
             That.blogVisitList = data.list;
