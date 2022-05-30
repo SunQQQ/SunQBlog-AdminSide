@@ -2,6 +2,7 @@
  * author:sunquan
  * 2021/09/27
  * 本文件实现一个静态服务器，对于文件类请求直接响应展示，对于Ajax类请求转发并响应对应数据；
+ * 未使用express框架，不能识别压缩后的文件。故弃用，目前使用serve.js
  */
 
 let http = require('http');

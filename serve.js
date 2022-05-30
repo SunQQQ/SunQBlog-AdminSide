@@ -6,7 +6,7 @@ const http = require('http');
 var bodyParser = require("body-parser");
 
 var app = express();
-app.use(compression());
+app.use(compression()); // 识别压缩后的文件，提高初始化速度
 app.use(bodyParser.json());
 
 http.createServer(app).listen(68);
