@@ -10,6 +10,9 @@
             <el-form-item label="留言内容" :label-width="formLabelWidth">
               <el-input v-model="form.MessageText"></el-input>
             </el-form-item>
+            <el-form-item label="城市" :label-width="formLabelWidth">
+              <el-input v-model="form.LocationCityName"></el-input>
+            </el-form-item>
             <el-form-item label="头像编号(0-4)" :label-width="formLabelWidth">
               <el-input v-model="form.iconNo"></el-input>
             </el-form-item>
@@ -28,6 +31,7 @@
               <div v-html="scope.row.MessageText"></div>
             </template>
           </el-table-column>
+          <el-table-column prop="LocationCityName" label="城市"></el-table-column>
           <el-table-column prop="iconNo" label="头像"></el-table-column>
           <el-table-column prop="MessageLeaveDate" label="创建时间"></el-table-column>
           <el-table-column fixed="right" label="操作" width="130">
@@ -64,7 +68,8 @@
         form: {
           MessageLeaveName: '',
           MessageText: '',
-          delivery: false
+          delivery: false,
+          LocationCityName: ''
         },
         formLabelWidth: '120px',
         MyCurPage: 1
@@ -165,6 +170,7 @@
       EditMessageLeave:function (Row) {
         this.form.MessageLeaveName = Row.MessageLeaveName;
         this.form.MessageText = Row.MessageText;
+        this.form.LocationCityName = Row.LocationCityName;
         this.form._id = Row._id;
         this.form.iconNo = Row.iconNo;
         this.dialogFormVisible = true;
