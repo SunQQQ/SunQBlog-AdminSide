@@ -21,13 +21,14 @@
 
       <!--表格操作栏-->
       <el-table :data="CommentList" style="width: 100%" border :header-cell-style="{background:'#f7f7f7'}">
-        <el-table-column prop="ArticleCommentDate" label="评论时间"></el-table-column>
+        <el-table-column prop="ArticleName" label="评论文章"></el-table-column>
         <el-table-column prop="ArticleCommentNickName" label="评论人"></el-table-column>
         <el-table-column label="评论内容">
           <template slot-scope="scope">
             <div v-html="scope.row.ArticleCommentText"></div>
           </template>
         </el-table-column>
+        <el-table-column prop="ArticleCommentDate" label="评论时间"></el-table-column>
         <el-table-column fixed="right" label="操作" width="130">
           <template slot-scope="scope">
             <el-button @click="DeleteComment(scope.row._id,scope.row.ArticleId)" type="text" size="small" class="danger-color">删除</el-button>
@@ -89,7 +90,6 @@
                 Url:'/api/getCommentNum',
                 Success: function (data) {
                   That.CommentTotal = data;
-                  console.log(data);
                 }
               });
             }
