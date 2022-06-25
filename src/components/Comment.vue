@@ -93,6 +93,9 @@
                 }
               });
             }
+            data.forEach(element => {
+              element.ArticleCommentDate = new Date(element.ArticleCommentDate).toLocaleString();
+            });      
 
             That.CommentList = data;
           }
