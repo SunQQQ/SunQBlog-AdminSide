@@ -21,7 +21,7 @@
         </el-table-column>
       </el-table>
       <div v-if="ArticleTotal>10">
-        <el-pagination layout="prev, pager, next,total"
+        <el-pagination layout="prev, pager, next"
                        :total=ArticleTotal
                        :page-size=PagiSize
                        @current-change="ChangeCurPage"

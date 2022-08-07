@@ -25,7 +25,7 @@
         </el-table>
 
         <div v-if="MessageLeaveTotal>10">
-          <el-pagination layout="prev, pager, next,total"
+          <el-pagination layout="prev, pager, next"
                          :total=MessageLeaveTotal
                          :page-size=PagiSize
                          @current-change="ChangeCurPage"

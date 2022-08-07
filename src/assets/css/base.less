@@ -30,14 +30,26 @@ html{
 body{
   padding: 0;
   margin: 0;
-  width: 100%;
+  // width: 100%;
   // user-select: none; // 此语句可设置网页文本无法选中
 }
-.RightContent{
-  margin: 10px;
-  padding: 10px 0px 10px 230px;
-  background-color: @fore_color;
+
+@media only screen and (min-device-width:768px){
+  .RightContent{
+    margin: 10px;
+    padding: 10px 0px 10px 230px;
+    background-color: @fore_color;
+  }
 }
+
+@media only screen and (max-device-width:768px){
+  .RightContent{
+    margin: 10px;
+    padding: 10px 0px;
+    background-color: @fore_color;
+  }
+}
+
 .PageContainer{
   padding: 0;
 }

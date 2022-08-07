@@ -26,9 +26,10 @@
       </div>
     </div>
 
-    <div style="height: 61px"></div>
+    <div style="height: 61px;"></div>
 
-    <el-menu :default-active="MenuHighLight" class="LeftBar" background-color="#545c64" text-color="#fff" active-text-color="#87c3ff">
+    <el-menu :default-active="MenuHighLight" class="LeftBar"
+     background-color="#545c64" text-color="#fff" active-text-color="#87c3ff">
       <el-menu-item index="0" @click="ChangeHighLight('index')">
         <i class="iconfont icon-shujutongji"></i>
         <span slot="title">访问数据</span>
@@ -135,33 +136,6 @@
 
 <style scoped lang="less">
   @import "../assets/css/base.less";
-  .TopBar{
-    .myflex('middle');
-    height: 61px;
-    line-height: 61px;
-    position: fixed;
-    left: 0;
-    top: 0;
-    width: 100%;
-    z-index: 1000;
-  }
-
-  .Logo {
-    background-color: rgb(84, 92, 100);
-    width: 220px;
-    color: white;
-    text-align: center;
-  }
-
-  .TopBarRight{
-    flex: 1;
-    text-align: right;
-    padding-right: 40px;
-    border-bottom: 1px solid #ebeef5;
-    background-color: hsla(0,0%,100%,.9);
-    display: flex;
-  }
-
   .home-link{
     text-align: left;
     width: 100px;
@@ -180,11 +154,69 @@
     color: #409EFF;
   }
 
-  .LeftBar{
-    width: 220px;
-    position: fixed;
-    bottom: 0;
-    top: 61px;
+  // PC端
+  @media only screen and (min-device-width : 768px) {
+    .LeftBar{
+      width: 220px;
+      position: fixed;
+      bottom: 0;
+      top: 61px;
+    }
+    .TopBar{
+      .myflex('middle');
+      height: 61px;
+      line-height: 61px;
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+    }
+    .Logo {
+      background-color: rgb(84, 92, 100);
+      width: 220px;
+      color: white;
+      text-align: center;
+    }
+    .TopBarRight{
+      flex: 1;
+      text-align: right;
+      padding-right: 40px;
+      border-bottom: 1px solid #ebeef5;
+      background-color: hsla(0,0%,100%,.9);
+      display: flex;
+    }
+  }
+
+  // 移动端
+  @media only screen and (max-device-width : 768px) {
+    .LeftBar{
+      width: 100%;
+      position: fixed;
+      top: 61px;
+      z-index: 1000;
+    }
+    .TopBar{
+      .myflex('middle');
+      height: 61px;
+      line-height: 61px;
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      background-color: @fore_color;
+      border-bottom: 1px solid @BorderColor;
+    }
+    .Logo {
+      // width: 220px;
+      color: @FontColorGray;
+      text-align: center;
+      padding: 0 .5rem;
+    }
+    .TopBarRight{
+      display: none;
+    }
   }
 
   .PersonCenter{

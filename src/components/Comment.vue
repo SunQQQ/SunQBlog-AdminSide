@@ -45,7 +45,7 @@
 
         <!--分页器-->
         <div v-if="CommentTotal>10">
-          <el-pagination layout="prev, pager, next,total"
+          <el-pagination layout="prev, pager, next"
                        :total=CommentTotal
                        :page-size=PageSize
                        @current-change="ChangeCurPage"

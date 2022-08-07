@@ -47,7 +47,7 @@
 
         <!--分页器-->
         <div v-if="FriendUrlTotal>10">
-          <el-pagination layout="prev, pager, next,total"
+          <el-pagination layout="prev, pager, next"
                          :total=FriendUrlTotal
                          :page-size=PagiSize
                          @current-change="ChangeCurPage"
