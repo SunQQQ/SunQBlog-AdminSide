@@ -72,7 +72,7 @@
           ArticleCommentNickName:'',
           ArticleCommentText:''
         },
-        formLabelWidth: '120px',
+        formLabelWidth: '80px',
         CommentTotal: 0,
         PageSize: 10,
         

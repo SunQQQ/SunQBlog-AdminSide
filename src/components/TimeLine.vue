@@ -44,7 +44,7 @@
       return {
         TimeLineList:'',
         dialogFormVisible:false,
-        formLabelWidth: '120px',
+        formLabelWidth: '80px',
         form:{
           TextContent:'',
           CreateDate:new Date()

@@ -52,7 +52,7 @@
           MessageText: '',
           delivery: false
         },
-        formLabelWidth: '120px',
+        formLabelWidth: '80px',
         MyCurPage: 1,
         multipleSelection: [], // table批量删除选中值
       }

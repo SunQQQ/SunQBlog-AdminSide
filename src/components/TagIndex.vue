@@ -52,7 +52,7 @@
           resource: '',
           desc: ''
         },
-        formLabelWidth: '120px'
+        formLabelWidth: '80px'
       }
     },
     methods: {

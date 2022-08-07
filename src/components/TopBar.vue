@@ -246,7 +246,7 @@ export default {
     width: 100%;
     position: fixed;
     top: 61px;
-    z-index: 1000;
+    z-index: 10000;
   }
   .TopBar {
     .myflex("middle");

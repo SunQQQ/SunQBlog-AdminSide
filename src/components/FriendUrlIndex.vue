@@ -73,7 +73,7 @@ export default {
         FriendUrlIcoUrl: '',
         FriendUrlDescript: ''
       },
-      formLabelWidth: '120px',
+      formLabelWidth: '80px',
 
       FriendUrlTotal: 0,
       PagiSize: 10,

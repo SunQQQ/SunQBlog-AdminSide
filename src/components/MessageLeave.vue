@@ -71,7 +71,7 @@
           delivery: false,
           LocationCityName: ''
         },
-        formLabelWidth: '120px',
+        formLabelWidth: '80px',
         MyCurPage: 1
       }
     },
