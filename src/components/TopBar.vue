@@ -112,6 +112,14 @@
         <i class="iconfont icon-she"></i>
         <span slot="title">贪吃蛇榜单</span>
       </el-menu-item>
+
+      <div class="mobileExit">
+      <el-menu-item index="9" @click="Exit()">
+        <i class="iconfont icon-heart"></i>
+        <span slot="title">切换账号</span>
+      </el-menu-item>
+      </div>
+      
     </el-menu>
   </div>
 </template>
@@ -145,6 +153,7 @@ export default {
       localStorage.clear();
       this.ShowExit = -1;
       this.$router.push({ name: "LoginPage" });
+      this.menuStatus = window.screen.width>768 ? this.menuStatus : !this.menuStatus;
     },
     OpenMenu: function(){
       this.menuStatus = window.screen.width>768 ? this.menuStatus : !this.menuStatus;
@@ -238,6 +247,10 @@ export default {
   .MenuTopBarIcon{
     display: none;
   }
+
+  .mobileExit{
+    display: none;
+  }
 }
 
 // 移动端
@@ -279,6 +292,10 @@ export default {
 
     display: flex;
     align-items: center;
+  }
+
+  .mobileExit{
+    display: block;
   }
 }
 
