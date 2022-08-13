@@ -1,6 +1,6 @@
 <template>
   <div class="LoginContent">
-    <el-form ref="form" :model="form" label-width="80px">
+    <el-form ref="form" :model="form" label-width="60px">
       <div style="text-align: center"><h2>sunq's blog 管理后台</h2></div>
       <el-form-item label="账号">
         <el-input v-model="form.CnName"></el-input>
@@ -80,8 +80,16 @@ export default {
 <style scoped lang="less">
 @import "../assets/css/base.less";
 
-.LoginContent {
-  width: 600px;
-  margin: 12rem auto 0;
+@media only screen and (max-device-width: 768px) {
+  .LoginContent {
+    padding: 0 20px;
+    margin: 12rem auto 0;
+  }
+}
+@media only screen and (min-device-width: 768px) {
+  .LoginContent {
+    width: 600px;
+    margin: 12rem auto 0;
+  }
 }
 </style>

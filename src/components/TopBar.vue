@@ -147,7 +147,7 @@ export default {
       this.$router.push({ name: "LoginPage" });
     },
     OpenMenu: function(){
-      this.menuStatus = !this.menuStatus;
+      this.menuStatus = window.screen.width>768 ? this.menuStatus : !this.menuStatus;
     }
   },
   mounted: function () {
@@ -247,6 +247,7 @@ export default {
     position: fixed;
     top: 61px;
     z-index: 10000;
+    border-top: 1px solid @BorderColor;
   }
   .TopBar {
     .myflex("middle");
