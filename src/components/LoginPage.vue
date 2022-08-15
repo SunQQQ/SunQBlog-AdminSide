@@ -25,8 +25,8 @@ export default {
   data: function () {
     return {
       form: {
-        CnName: '游客',
-        PassWord: '亲，github求个赞'
+        CnName: '大佬你好',
+        PassWord: 'github求个赞'
       }
     }
   },

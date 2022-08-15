@@ -113,11 +113,21 @@
         <span slot="title">贪吃蛇榜单</span>
       </el-menu-item>
 
-      <div class="mobileExit">
-      <el-menu-item index="9" @click="Exit()">
-        <i class="iconfont icon-heart"></i>
-        <span slot="title">切换账号</span>
+      <el-menu-item index="9" @click="switchPage('gitHub')">
+        <i class="iconfont icon-she"></i>
+        <span slot="title">源码入口</span>
       </el-menu-item>
+
+      <el-menu-item index="10" @click="switchPage('userClient')">
+        <i class="iconfont icon-she"></i>
+        <span slot="title">用户端入口</span>
+      </el-menu-item>
+
+      <div class="mobileExit">
+        <el-menu-item index="11" @click="Exit()">
+          <i class="iconfont icon-heart"></i>
+          <span slot="title">切换账号</span>
+        </el-menu-item>
       </div>
       
     </el-menu>
@@ -155,8 +165,17 @@ export default {
       this.$router.push({ name: "LoginPage" });
       this.menuStatus = window.screen.width>768 ? this.menuStatus : !this.menuStatus;
     },
+    // 展示或隐藏菜单
     OpenMenu: function(){
       this.menuStatus = window.screen.width>768 ? this.menuStatus : !this.menuStatus;
+    },
+    // 打开新的页面
+    switchPage: function(page){
+      if(page == 'userClient'){
+        window.open("http://39.104.22.73:67");
+      }else if(page == 'gitHub'){
+        window.open("https://github.com/SunQQQ/SunQBlog-AdminSide");
+      }
     }
   },
   mounted: function () {
