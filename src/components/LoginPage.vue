@@ -26,7 +26,7 @@ export default {
     return {
       form: {
         CnName: '大佬你好',
-        PassWord: 'github求个赞'
+        PassWord: 'Github求个赞'
       }
     }
   },
