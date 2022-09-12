@@ -23,7 +23,7 @@ import { Loading } from 'element-ui'
 
 export default {
   name: "LoginPage",
-  data: function () {
+  data: () => {
     return {
       form: {
         CnName: '大佬你好',
@@ -87,7 +87,22 @@ export default {
         }
       }).catch(function (error) {
       });
+    },
+    // 监听enter键
+    enterKey: function(){
+      let that = this;
+      const code = event.keyCode ? event.keyCode : (event.which ? event.which : event.charCode);
+      
+      if(code == 13) that.OnLogin();
     }
+  },
+  // 生命周期不能使用箭头函数
+  mounted: function(){
+    document.addEventListener('keyup',this.enterKey);
+  },
+  // 本组件销毁时注意移除监听，否则其他页面点击enter也会登陆
+  destroyed: function(){
+    document.removeEventListener('keyup', this.enterKey);
   }
 }
 </script>
