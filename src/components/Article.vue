@@ -62,7 +62,11 @@
             Url:'/api/ArticleDelete/backend',
             RequestData:{_id:Id},
             Success:function (data) {
-              That.$message('删除成功');
+              That.$message({
+                message: '删除成功',
+                type: 'success',
+                duration: 900
+              });
               That.SkipTo(That.MyCurPage);
             }
           });

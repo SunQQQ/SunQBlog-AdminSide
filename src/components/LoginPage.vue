@@ -44,7 +44,8 @@ export default {
         if (response.data.status == '0') {
           That.$message({
             message: '登录成功',
-            type: 'success'
+            type: 'success',
+            duration: 800
           });
           window.localStorage.setItem("SQBlog", JSON.stringify(response.data.data));
           window.localStorage.setItem("SQBlogUser", That.form.CnName);

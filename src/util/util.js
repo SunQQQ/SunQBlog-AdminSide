@@ -35,7 +35,11 @@ CommonFunction.install = function (Vue) {
           name: 'LoginPage',
         });
       } else {
-        that.$message.error(response.data.data.message);
+        that.$message({
+          message: response.data.data.message,
+          type: 'error',
+          duration: 900
+        });
       }
     }).catch(function (error) {
     });
