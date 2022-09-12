@@ -33,14 +33,14 @@
           <div class="ArticleTitle">
             <input placeholder="文章缩略图" @change="SetArticleCover" type="file" multiple="multiple" ref='selectfile'>
           </div>
-          <img :src="ArticleCover" v-show="ArticleCover" style="width: 150px;height: 100px">
+          <img :src="ArticleCover" v-show="ArticleCover" style="width: 70px;height: 40px">
           <div class="WriteSubmit">
             <el-button type="primary" @click="SubmitArticle()">确认</el-button>
           </div>
         </div>
 
         <div class="ArticleDetail" id="ArticleDetail">
-          <mavon-editor v-model="Content" :isHljs = "true" @imgAdd="$imgAdd" ref=md></mavon-editor>
+          <mavon-editor v-model="Content" :isHljs = "true" @imgAdd="$imgAdd" ref=md :style="{height: editorHeight}"></mavon-editor>
         </div>
       </div>
     </div>
@@ -71,7 +71,8 @@
         ArticleTagOptions: [],
         ArticleTag: '',
         ArticleCover:'',
-        CommentNum:0
+        CommentNum:0,
+        editorHeight: 0
       }
     },
     methods:{
@@ -183,6 +184,9 @@
       }else{
 
       }
+
+      // 根据分辨率，动态设置编辑器高度
+      That.editorHeight = window.screen.height - 375 + 'px';
     },
     components:{
       TopBar:TopBar
@@ -221,7 +225,6 @@
   .ArticleDetail {
     margin-top: 1rem;
     width: 100%;
-    height: 800px;
   }
 
   .ArticleDetail textarea {
@@ -230,7 +233,7 @@
   }
   .WriteSubmit{
     text-align: right;
-    margin-top: 1rem;
+    margin-left: 10px;
   }
   .editortoolbar{
     border: 1px solid #ccc;
