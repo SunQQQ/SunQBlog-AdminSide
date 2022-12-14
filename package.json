@@ -19,7 +19,7 @@
     "highlight.js": "^9.13.1",
     "less": "^3.8.1",
     "less-loader": "^4.1.0",
-    "mavon-editor": "^2.6.17",
+    "mavon-editor": "^2.8.2",
     "mime": "^2.5.2",
     "module": "^1.2.5",
     "mongodb": "^3.0.10",
