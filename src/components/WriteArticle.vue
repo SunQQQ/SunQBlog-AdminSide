@@ -1,41 +1,52 @@
 <template>
   <div>
-    <div class="RightContent">
+    <div class="RightContent" style="margin-bottom:0;margin-right: 0;">
       <div class="WriteArticleContent">
         <div class="SimpleFlex">
           <div class="ArticleTitle">
-            <input placeholder="文章标题" v-model="Title">
+            <span>文章标题：</span>
+            <input placeholder="请输入标题" v-model="Title">
           </div>
           <div class="ArticleTitle">
-            <input placeholder="优先级(试验田使用)" v-model="order">
+            <span>优先级别：</span>
+            <input placeholder="(试验田使用)" v-model="order">
           </div>
-          <div>
-            <el-date-picker v-model="CreateDate" format="yyyy 年 MM 月 dd 日" value-format="yyyy-MM-dd" type="date" placeholder="创建日期"></el-date-picker>
+          <div class="ArticleTitle">
+            <span>创建日期：</span>
+            <el-date-picker style="flex:1" v-model="CreateDate" format="yyyy 年 MM 月 dd 日" value-format="yyyy-MM-dd" type="date" placeholder="创建日期"></el-date-picker>
           </div>
-          <el-select v-model="ArticleTag" placeholder="选择文章标签">
-            <el-option v-for="item in ArticleTagOptions" :key="item.value" :label="item.TagName" :value="item.TagName"></el-option>
-          </el-select>
+          
         </div>
 
         <div class="SimpleFlex">
           <div class="ArticleTitle">
-            <input placeholder="文章简介" v-model="Summary">
+            文章简介：
+            <input placeholder="请输入文章简介" v-model="Summary">
           </div>
           <div class="ArticleTitle">
-            <input placeholder="文章简介" v-model="ArticleCover">
+            封面地址：
+            <input placeholder="封面地址可不填" v-model="ArticleCover">
           </div>
-          <div class="ArticleTitle CommentNum">
-            <input placeholder="评论数" v-model="CommentNum">
+          <div class="ArticleTitle">
+            文章标签：
+            <el-select v-model="ArticleTag" placeholder="选择文章标签" style="flex:1">
+              <el-option v-for="item in ArticleTagOptions" :key="item.value" :label="item.TagName" :value="item.TagName"></el-option>
+            </el-select>
           </div>
         </div>
 
         <div class="SimpleFlex">
           <div class="ArticleTitle">
-            <input placeholder="文章缩略图" @change="SetArticleCover" type="file" multiple="multiple" ref='selectfile'>
+            评论数量：
+            <input placeholder="评论数量可不写" v-model="CommentNum">
           </div>
-          <img :src="ArticleCover" v-show="ArticleCover" style="width: 70px;height: 40px">
-          <div class="WriteSubmit">
-            <el-button type="primary" @click="SubmitArticle()">确认</el-button>
+          <div class="ArticleTitle">
+            文章封面：
+            <input @change="SetArticleCover" type="file" multiple="multiple" ref='selectfile' style="flex:1">
+            <img :src="ArticleCover" v-show="ArticleCover" style="width: 70px;height: 40px"/>
+          </div>
+          <div class="ArticleTitle" style="justify-content: end;">
+            <el-button type="primary" @click="SubmitArticle()">提交</el-button>
           </div>
         </div>
 
@@ -186,7 +197,8 @@
       }
 
       // 根据分辨率，动态设置编辑器高度
-      That.editorHeight = window.screen.height - 375 + 'px';
+      // That.editorHeight = window.screen.height - 318 + 'px';
+      That.editorHeight = window.innerHeight - 261 + 'px';
     },
     components:{
       TopBar:TopBar
@@ -196,16 +208,19 @@
 
 <style scoped>
   .SimpleFlex{
-    margin-top: 1rem;
+    margin-top: 10px;
     display: flex;
     vertical-align: middle;
+    justify-content: space-around;
   }
 
   .WriteArticleContent{
   }
   .ArticleTitle {
-    flex: 1;
+    width: 30%;
     margin-right: 10px;
+    display: flex;
+    align-items: center;
   }
 
   .CommentNum{
@@ -217,14 +232,15 @@
   }
 
   .ArticleTitle input {
-    width: 100%;
-    height: 40px;
-    line-height: 40px;
+    flex: 1;
+    height: 34px;
+    line-height: 34px;
+    border: 1px solid #dcdfe6;
   }
 
   .ArticleDetail {
-    margin-top: 1rem;
-    width: 100%;
+    margin-top: 20px;
+    margin-right: 20px;
   }
 
   .ArticleDetail textarea {
