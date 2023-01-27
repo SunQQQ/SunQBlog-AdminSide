@@ -236,6 +236,11 @@
     height: 34px;
     line-height: 34px;
     border: 1px solid #dcdfe6;
+    outline: none;
+  }
+
+  .ArticleTitle input::placeholder{
+    color: #dcdfe6;
   }
 
   .ArticleDetail {
