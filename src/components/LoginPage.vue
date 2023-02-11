@@ -7,7 +7,7 @@
         <el-input v-model="form.CnName"></el-input>
       </el-form-item>
       <el-form-item label="密码">
-        <el-input v-model="form.PassWord"></el-input>
+        <el-input v-model="form.PassWord" type="password"></el-input>
       </el-form-item>
       <div style="text-align: center">
         <el-button type="primary" @click="OnLogin()">登录</el-button>
