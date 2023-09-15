@@ -17,10 +17,10 @@
       }
     },
     mounted: function () {
-      // SQAjax方法体内，会取本地token，如果没有直接路由到登录页；如果有token，携带token请求传入的Url地址。
+      // SQAjax方法体内，会取本地token，如果没有直接路由到登录页；如果有token，路由会打开首页。
       // 且如果返回失败会路由到登录页，如果返回成功不做操作，路由还是正常展示首页不变
       this.SQAjax({
-        Url:'/api/checkToken',
+        Url:'/api/checkToken', // 此接口非真实接口，只为校验token
         Success:function (data) {}
       });
     },
@@ -46,6 +46,13 @@
 </script>
 
 <style>
-
+  .el-loading-mask{
+    width: 100px;
+    height: 100px;
+    margin: 250px auto 0;
+  }
+  .el-loading-spinner i, .el-loading-spinner .el-loading-text{
+    color:white
+  }
 </style>
 

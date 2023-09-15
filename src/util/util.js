@@ -10,11 +10,18 @@ CommonFunction.install = function (Vue) {
 
   Vue.prototype.SQAjax = function (Para) {
     var that = this;
-    /*let AjaxLoading = Loading.service({ fullscreen: false });*/
+    let AjaxLoading = Loading.service({ 
+      background: 'rgba(0,0,0,0.5)',
+      lock: true,
+      text: '加载中',
+      spinner: 'el-icon-loading',
+      fullscreen: true
+     });
 
     var Token = localStorage.getItem('SQBlog') ? JSON.parse(localStorage.getItem('SQBlog')).Token : '';
 
     if (!Token) {
+      AjaxLoading.close(); // 中断代码前，注意关闭loading
       this.$router.push({ name: 'LoginPage' });
       return false;
     }
@@ -22,11 +29,11 @@ CommonFunction.install = function (Vue) {
     var PostData = Object.assign({}, Para['RequestData'], { Token: Token });
 
     axios.post(Para['Url'], PostData).then(function (response) {
-      // AjaxLoading.close();
+      AjaxLoading.close();
 
       if (response.data.status == '0') {
         Para['Success'](response.data.data);
-      } else if (response.data.status == '1') {
+      } else if (response.data.status == '1') { 
         that.$message({
           message: response.data.data.message,
           type: 'success'
@@ -34,14 +41,20 @@ CommonFunction.install = function (Vue) {
         that.$router.push({
           name: 'LoginPage',
         });
-      } else {
+      } else { // 返参异常的场景处理
         that.$message({
           message: response.data.data.message,
           type: 'error',
           duration: 900
         });
       }
-    }).catch(function (error) {
+    }).catch(function (error) { // 接口不通的场景处理
+      AjaxLoading.close();
+      that.$message({
+        message: "接口不通",
+        type: 'error',
+        duration: 900
+      });
     });
   }
 
