@@ -36,8 +36,8 @@ export default {
       var That = this;
       var AjaxLoading = Loading.service({ fullscreen: true });
       axios.post('/api/UserReadOne', {
-        CnName: this.form.CnName,
-        PassWord: this.form.PassWord,
+        CnName: this.form.CnName.replace(/\s/g,""),
+        PassWord: this.form.PassWord.replace(/\s/g,""),
         UserType: 'Admin'
       }).then(function (response) {
         AjaxLoading.close();
