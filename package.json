@@ -16,7 +16,7 @@
     "dns": "^0.2.2",
     "echarts": "^5.2.2",
     "element-ui": "^2.4.5",
-    "highlight.js": "^9.13.1",
+    "highlight.js": "^10.4.1",
     "less": "^3.8.1",
     "less-loader": "^4.1.0",
     "mavon-editor": "^2.6.17",
