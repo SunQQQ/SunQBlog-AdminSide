@@ -26,8 +26,8 @@ export default {
   data: () => {
     return {
       form: {
-        CnName: '大佬你好',
-        PassWord: 'Github求个赞'
+        CnName: 'sunq',
+        PassWord: '1qaz!QAZ'
       }
     }
   },
@@ -36,12 +36,11 @@ export default {
       var That = this;
       var AjaxLoading = Loading.service({ fullscreen: true });
       axios.post('/api/login', {
-        CnName: this.form.CnName.replace(/\s/g,""),
-        PassWord: this.form.PassWord.replace(/\s/g,""),
-        UserType: 'Admin'
+        username: this.form.CnName.replace(/\s/g,""),
+        password: this.form.PassWord.replace(/\s/g,"")
       }).then(function (response) {
         AjaxLoading.close();
-        if (response.data.status == '0') {
+        if (response.data.status == 200) {
           That.$message({
             message: '登录成功',
             type: 'success',
