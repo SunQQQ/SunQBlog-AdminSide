@@ -12,7 +12,8 @@ module.exports = {
     proxyTable: {
       '/api': {
         //代理地址，这里是真正访问的地址。使用本地接口服务时请用localhost，使用服务器数据库时请使用对应的ip
-        target: 'http://39.104.22.73:8888', //代理地址，这里是真正访问的地址。使用本地接口服务时请用localhost，使用服务器数据库时请使用对应的ip
+        target: 'http://localhost:8080', //代理地址，这里是真正访问的地址。使用本地接口服务时请用localhost，使用服务器数据库时请使用对应的ip
+        // target: 'http://39.104.22.73:8888', //代理地址，这里是真正访问的地址。使用本地接口服务时请用localhost，使用服务器数据库时请使用对应的ip
         changeOrigin: true, //改变源
         pathRewrite: {
           '^/api': '' //路径重写

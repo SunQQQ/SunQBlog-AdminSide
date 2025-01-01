@@ -35,7 +35,7 @@ export default {
     OnLogin: function () {
       var That = this;
       var AjaxLoading = Loading.service({ fullscreen: true });
-      axios.post('/api/UserReadOne', {
+      axios.post('/api/login', {
         CnName: this.form.CnName.replace(/\s/g,""),
         PassWord: this.form.PassWord.replace(/\s/g,""),
         UserType: 'Admin'
