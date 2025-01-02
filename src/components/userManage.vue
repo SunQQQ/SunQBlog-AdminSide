@@ -2,20 +2,23 @@
   <div>
     <div class="RightContent">
       <div class="ArticleList">
-        <div style="margin-bottom:10px">
+        <div style="margin-bottom:10px" v-show="userRole == 'master'">
           <el-button type="primary" @click="OpenCreateDialog()" plain>创建账号</el-button>
         </div>
         
         <el-dialog title="创建账号" :visible.sync="dialogFormVisible">
           <el-form :model="form">
-            <el-form-item label="心声内容" :label-width="formLabelWidth">
-              <el-input v-model="form.HeartfeltContent"></el-input>
+            <el-form-item label="账号名称" :label-width="formLabelWidth">
+              <el-input v-model="form.username"></el-input>
             </el-form-item>
-            <el-form-item label="作者" :label-width="formLabelWidth">
-              <el-input v-model="form.HeartfeltWriter"></el-input>
+            <el-form-item label="密码" :label-width="formLabelWidth">
+              <el-input v-model="form.password"></el-input>
             </el-form-item>
-            <el-form-item label="创建时间" :label-width="formLabelWidth">
-              <el-date-picker v-model="form.CreateDate" format="yyyy 年 MM 月 dd 日" value-format="yyyy-MM-dd" type="date" placeholder="创建日期"></el-date-picker>
+            <el-form-item label="角色" :label-width="formLabelWidth">
+              <el-input v-model="form.role"></el-input>
+            </el-form-item>
+            <el-form-item label="邮箱" :label-width="formLabelWidth">
+              <el-input v-model="form.email"></el-input>
             </el-form-item>
           </el-form>
           <div slot="footer" class="dialog-footer">
@@ -32,8 +35,8 @@
           <el-table-column prop="email" label="邮箱"></el-table-column>
           <el-table-column fixed="right" label="操作" width="130">
             <template slot-scope="scope">
-              <el-button @click="UpdateHeartfelt(scope.row._id,scope.row.HeartfeltContent,scope.row.HeartfeltWriter,scope.row.CreateDate,)" type="text" size="small" class="warning-color">编辑</el-button>
-              <el-button @click="DeleteHeartfelt(scope.row._id)" type="text" size="small" class="danger-color">删除</el-button>
+              <el-button @click="UpdateHeartfelt(scope.row._id,scope.row.username,scope.row.role,scope.row.email,)" type="text" size="small" class="warning-color">编辑</el-button>
+              <el-button @click="DeleteHeartfelt(scope.row.name)" type="text" size="small" class="danger-color">删除</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -51,19 +54,21 @@
         dialogFormVisible:false,
         formLabelWidth: '80px',
         form:{
-          HeartfeltContent:'',
-          HeartfeltWriter:'',
-          CreateDate:new Date()
+          username:'',
+          password: '',
+          role:'',
+          email: ''
         },
+        userRole: JSON.parse(window.localStorage.getItem("userInfo")).role
       }
     },
     methods:{
       // 打开新增弹框
       OpenCreateDialog:function(){
         this.form._id = '';
-        this.form.HeartfeltContent = '';
-        this.form.HeartfeltWriter = '';
-        this.form.CreateDate = '';
+        this.form.username = '';
+        this.form.role = '';
+        this.form.email = '';
 
         this.dialogFormVisible = true;
       },
@@ -75,9 +80,9 @@
       PostHeartfelt:function(){
         var That = this;
 
-        if(this.form.HeartfeltContent && this.form.CreateDate){
+        if(this.form.username && this.form.password && this.form.role){
           this.SQAjax({
-            Url:'/api/HeartfeltEditor/backend',
+            Url:'/api/register',
             RequestData:this.form,
             Success:function () {
               That.GetHeartfeltList();
@@ -86,12 +91,12 @@
           });
         }
       },
-      //修改心声
-      UpdateHeartfelt:function(Id,HeartfeltContent,HeartfeltWriter,CreateDate){
+      //修改账号
+      UpdateHeartfelt:function(Id,username,role,email){
         this.form._id = Id;
-        this.form.HeartfeltContent = HeartfeltContent;
-        this.form.HeartfeltWriter = HeartfeltWriter;
-        this.form.CreateDate = CreateDate;
+        this.form.username = username;
+        this.form.role = role;
+        this.form.email = email;
 
         this.dialogFormVisible = true;
       },
@@ -101,25 +106,25 @@
         That.SQAjax({
           Url:'/api/userList',
           RequestData:{
-            role: JSON.parse(window.localStorage.getItem("userInfo")).role,
+            role: this.userRole,
             username: JSON.parse(window.localStorage.getItem("userInfo")).name 
           },
           Success:function (data) {
             data.forEach(function (Item,I) {
-              Item.CreateDate = Item.CreateAt ? Item.CreateAt.slice(0,10) : "";
+              Item.createdAt = Item.createdAt ? Item.createdAt.slice(0,10) : "";
             });
             That.userList = data;
           }
         });
       },
-      // 删除心声
-      DeleteHeartfelt:function (Id) {
+      // 删除账号
+      DeleteHeartfelt:function (name) {
         var That = this;
 
         That.SQAjax({
-          Url:'/api/HeartfeltDelete/backend',
+          Url:'/api/deleteByUser',
           RequestData:{
-            _id:Id
+            username:name
           },
           Success:function (data) {
             That.GetHeartfeltList();
