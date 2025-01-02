@@ -13,6 +13,7 @@ import FriendUrlIndex from '@/components/FriendUrlIndex'
 import MessageLeave from '@/components/MessageLeave'
 import Comment from '@/components/Comment'
 import SnakeScores from '@/components/SnakeScores'
+import userManage from '@/components/userManage'
 
 Vue.use(Router)
 
@@ -70,6 +71,11 @@ export default new Router({
       path:'/SnakeScores',
       name:'SnakeScores',
       component:SnakeScores
+    },
+    {
+      path:'/userManage',
+      name:'userManage',
+      component:userManage
     }
   ]
 })

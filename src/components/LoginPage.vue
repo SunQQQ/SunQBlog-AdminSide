@@ -40,26 +40,26 @@ export default {
         password: this.form.PassWord.replace(/\s/g,"")
       }).then(function (response) {
         AjaxLoading.close();
-        if (response.data.status == 200) {
+        if (response.data.statusCode == 200) {
           That.$message({
             message: '登录成功',
             type: 'success',
             duration: 800
           });
-          window.localStorage.setItem("SQBlog", JSON.stringify(response.data.data));
-          window.localStorage.setItem("SQBlogUser", That.form.CnName);
-          That.$router.push({ name: 'Article' });
+          window.localStorage.setItem("userInfo", JSON.stringify(response.data.data));
+          // window.localStorage.setItem("SQBlogUser", That.form.CnName);
+          That.$router.push({ name: 'userManage' });
 
           // 记录日志
-          That.createLog({
-            moduleType: 'button',
-            operateType: '登录后台',
-            operateContent: '成功'
-          });
+          // That.createLog({
+          //   moduleType: 'button',
+          //   operateType: '登录后台',
+          //   operateContent: '成功'
+          // });
 
           // 登录成功后，调用菜单组件注册的方法，修改菜单组件的用户名
           That.bus.$emit('changeUser', That.form.CnName);
-        } else if (response.data.status == '1') {
+        } else if (response.data.statusCode == '1') {
           That.$message.error('账号或密码错误');
 
           // 记录日志
@@ -79,7 +79,7 @@ export default {
         PassWord: this.form.PassWord,
         UserType: 'Admin'
       }).then(function (response) {
-        if (response.data.status == '200') {
+        if (response.data.statusCode == '200') {
           That.$message({
             message: '注册成功',
             type: 'success'

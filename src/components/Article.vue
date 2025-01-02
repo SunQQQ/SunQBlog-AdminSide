@@ -127,10 +127,10 @@
       },
 
       mounted:function () {
-        this.GetData(this);
-        this.bus.$emit('Topbar',{
-          MenuHighLight:'1'
-        });
+        // this.GetData(this);
+        // this.bus.$emit('Topbar',{
+        //   MenuHighLight:'1'
+        // });
       }
     }
 </script>

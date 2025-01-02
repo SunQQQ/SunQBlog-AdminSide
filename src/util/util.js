@@ -20,18 +20,18 @@ CommonFunction.install = function (Vue) {
 
     var Token = localStorage.getItem('SQBlog') ? JSON.parse(localStorage.getItem('SQBlog')).Token : '';
 
-    if (!Token) {
-      AjaxLoading.close(); // 中断代码前，注意关闭loading
-      this.$router.push({ name: 'LoginPage' });
-      return false;
-    }
+    // if (!Token) {
+    //   AjaxLoading.close(); // 中断代码前，注意关闭loading
+    //   this.$router.push({ name: 'LoginPage' });
+    //   return false;
+    // }
 
     var PostData = Object.assign({}, Para['RequestData'], { Token: Token });
 
     axios.post(Para['Url'], PostData).then(function (response) {
       AjaxLoading.close();
 
-      if (response.data.status == '0') {
+      if (response.data.statusCode == 200) {
         Para['Success'](response.data.data);
       } else if (response.data.status == '1') { 
         that.$message({
@@ -291,6 +291,8 @@ CommonFunction.install = function (Vue) {
 
     console.log('進入記錄日志方法');
   };
+
+  
 }
 
 export default CommonFunction

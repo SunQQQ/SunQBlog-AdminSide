@@ -69,6 +69,10 @@
       active-text-color="#87c3ff"
       v-if="menuStatus"
     >
+      <el-menu-item index="9" @click="ChangeHighLight('userManage')">
+        <i class="iconfont icon-shujutongji"></i>
+        <span slot="title">账号管理</span>
+      </el-menu-item>
       <el-menu-item index="0" @click="ChangeHighLight('index')">
         <i class="iconfont icon-shujutongji"></i>
         <span slot="title">访问数据</span>
