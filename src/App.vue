@@ -19,10 +19,10 @@
     mounted: function () {
       // SQAjax方法体内，会取本地token，如果没有直接路由到登录页；如果有token，路由会打开首页。
       // 且如果返回失败会路由到登录页，如果返回成功不做操作，路由还是正常展示首页不变
-      this.SQAjax({
-        Url:'/api/checkToken', // 此接口非真实接口，只为校验token
-        Success:function (data) {}
-      });
+      // this.SQAjax({
+      //   Url:'/api/checkToken', // 此接口非真实接口，只为校验token
+      //   Success:function (data) {}
+      // });
     },
     /*监听每次路由变化，如果是登录页则隐藏导航栏*/
     watch:{

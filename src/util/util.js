@@ -26,21 +26,20 @@ CommonFunction.install = function (Vue) {
       return false;
     }
 
-    var PostData = Object.assign({}, Para['RequestData'], { Token: Token });
+    // 设置请求头
+    var config = {
+      headers: {
+          'Authorization': Token // 将 Token 放入 Authorization Header 中
+      }
+    };
 
-    axios.post(Para['Url'], PostData).then(function (response) {
+    var PostData = Object.assign({}, Para['RequestData']);
+
+    axios.post(Para['Url'], PostData,config).then(function (response) {
       AjaxLoading.close();
 
       if (response.data.statusCode == 200) {
         Para['Success'](response.data.data);
-      } else if (response.data.status == '1') { 
-        that.$message({
-          message: response.data.data.message,
-          type: 'success'
-        });
-        that.$router.push({
-          name: 'LoginPage',
-        });
       } else { // 返参异常的场景处理
         that.$message({
           message: response.data.data.message,
@@ -50,11 +49,38 @@ CommonFunction.install = function (Vue) {
       }
     }).catch(function (error) { // 接口不通的场景处理
       AjaxLoading.close();
-      that.$message({
-        message: "接口不通",
-        type: 'error',
-        duration: 900
-      });
+      if (error.response) {
+        // 服务器返回了非 2xx 状态码
+        if (error.response.status == 401) {
+          that.$message({
+            message: error.response.data.message, // 修正此处
+            type: 'error'
+          });
+          that.$router.push({
+            name: 'LoginPage',
+          });
+        } else {
+          that.$message({
+            message: `服务错误: ${error.response.data.message}`,
+            type: 'error',
+            duration: 900
+          });
+        }
+      } else if (error.request) {
+        // 请求已发出但没有收到响应
+        that.$message({
+          message: "服务器无响应",
+          type: 'error',
+          duration: 900
+        });
+      } else {
+        // 其他错误
+        that.$message({
+          message: `请求错误: ${error.message}`,
+          type: 'error',
+          duration: 900
+        });
+      }
     });
   }
 
