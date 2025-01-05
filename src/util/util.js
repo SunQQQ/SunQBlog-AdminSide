@@ -18,13 +18,13 @@ CommonFunction.install = function (Vue) {
       fullscreen: true
      });
 
-    var Token = localStorage.getItem('SQBlog') ? JSON.parse(localStorage.getItem('SQBlog')).Token : '';
+    var Token = localStorage.getItem('sqBlogToken') ? localStorage.getItem('sqBlogToken') : '';
 
-    // if (!Token) {
-    //   AjaxLoading.close(); // 中断代码前，注意关闭loading
-    //   this.$router.push({ name: 'LoginPage' });
-    //   return false;
-    // }
+    if (!Token) {
+      AjaxLoading.close(); // 中断代码前，注意关闭loading
+      this.$router.push({ name: 'LoginPage' });
+      return false;
+    }
 
     var PostData = Object.assign({}, Para['RequestData'], { Token: Token });
 

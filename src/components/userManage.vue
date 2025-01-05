@@ -59,7 +59,7 @@
           role:'',
           email: ''
         },
-        userRole: JSON.parse(window.localStorage.getItem("userInfo")).role
+        userRole: JSON.parse(window.localStorage.getItem("sqBlogUserInfo")).role
       }
     },
     methods:{
@@ -107,7 +107,7 @@
           Url:'/api/userList',
           RequestData:{
             role: this.userRole,
-            username: JSON.parse(window.localStorage.getItem("userInfo")).name 
+            username: JSON.parse(window.localStorage.getItem("sqBlogUserInfo")).name 
           },
           Success:function (data) {
             data.forEach(function (Item,I) {

@@ -46,8 +46,10 @@ export default {
             type: 'success',
             duration: 800
           });
-          window.localStorage.setItem("userInfo", JSON.stringify(response.data.data));
-          // window.localStorage.setItem("SQBlogUser", That.form.CnName);
+          if(response.data.data.userInfo){
+            window.localStorage.setItem("sqBlogUserInfo", JSON.stringify(response.data.data.userInfo));
+            window.localStorage.setItem("sqBlogToken", response.data.data.token);
+          }
           That.$router.push({ name: 'userManage' });
 
           // 记录日志
