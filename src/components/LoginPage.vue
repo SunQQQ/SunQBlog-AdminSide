@@ -61,15 +61,15 @@ export default {
 
           // 登录成功后，调用菜单组件注册的方法，修改菜单组件的用户名
           That.bus.$emit('changeUser', That.form.CnName);
-        } else if (response.data.statusCode == '1') {
-          That.$message.error('账号或密码错误');
+        } else {
+          That.$message.error(response.data.message);
 
           // 记录日志
-          That.createLog({
-            moduleType: 'button',
-            operateType: '登录后台',
-            operateContent: '失败'
-          });
+          // That.createLog({
+          //   moduleType: 'button',
+          //   operateType: '登录后台',
+          //   operateContent: '失败'
+          // });
         }
       }).catch(function (error) {
       });
