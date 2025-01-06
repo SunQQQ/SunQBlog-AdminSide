@@ -61,7 +61,7 @@ CommonFunction.install = function (Vue) {
           });
         } else {
           that.$message({
-            message: `服务错误: ${error.response.data.message}`,
+            message: `服务错误: ${error.response.data.error}`,
             type: 'error',
             duration: 900
           });
