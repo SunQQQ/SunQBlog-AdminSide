@@ -9,13 +9,13 @@
         <el-dialog title="新增心声" :visible.sync="dialogFormVisible">
           <el-form :model="form">
             <el-form-item label="心声内容" :label-width="formLabelWidth">
-              <el-input v-model="form.HeartfeltContent"></el-input>
+              <el-input v-model="form.content"></el-input>
             </el-form-item>
             <el-form-item label="作者" :label-width="formLabelWidth">
-              <el-input v-model="form.HeartfeltWriter"></el-input>
+              <el-input v-model="form.writer"></el-input>
             </el-form-item>
             <el-form-item label="创建时间" :label-width="formLabelWidth">
-              <el-date-picker v-model="form.CreateDate" format="yyyy 年 MM 月 dd 日" value-format="yyyy-MM-dd" type="date" placeholder="创建日期"></el-date-picker>
+              <el-date-picker v-model="form.create_time" format="yyyy 年 MM 月 dd 日" value-format="yyyy-MM-dd" type="date" placeholder="创建日期"></el-date-picker>
             </el-form-item>
           </el-form>
           <div slot="footer" class="dialog-footer">
@@ -26,12 +26,12 @@
 
         <!--表格操作栏-->
         <el-table :data="TimeLineList" style="width: 100%" border :header-cell-style="{background:'#f7f7f7'}">
-          <el-table-column prop="HeartfeltContent" label="心声内容"></el-table-column>
-          <el-table-column prop="HeartfeltWriter" label="心声作者"></el-table-column>
-          <el-table-column prop="CreateDate" label="创建时间"></el-table-column>
+          <el-table-column prop="content" label="心声内容"></el-table-column>
+          <el-table-column prop="writer" label="心声作者"></el-table-column>
+          <el-table-column prop="create_time" label="创建时间"></el-table-column>
           <el-table-column fixed="right" label="操作" width="130">
             <template slot-scope="scope">
-              <el-button @click="UpdateHeartfelt(scope.row._id,scope.row.HeartfeltContent,scope.row.HeartfeltWriter,scope.row.CreateDate,)" type="text" size="small" class="warning-color">编辑</el-button>
+              <el-button @click="UpdateHeartfelt(scope.row._id,scope.row.content,scope.row.writer,scope.row.create_time,)" type="text" size="small" class="warning-color">编辑</el-button>
               <el-button @click="DeleteHeartfelt(scope.row._id)" type="text" size="small" class="danger-color">删除</el-button>
             </template>
           </el-table-column>
@@ -50,9 +50,9 @@
         dialogFormVisible:false,
         formLabelWidth: '80px',
         form:{
-          HeartfeltContent:'',
-          HeartfeltWriter:'',
-          CreateDate:new Date()
+          content:'',
+          writer:'',
+          create_time:new Date()
         },
       }
     },
@@ -60,9 +60,9 @@
       // 打开新增弹框
       OpenCreateDialog:function(){
         this.form._id = '';
-        this.form.HeartfeltContent = '';
-        this.form.HeartfeltWriter = '';
-        this.form.CreateDate = '';
+        this.form.content = '';
+        this.form.writer = '';
+        this.form.create_time = '';
 
         this.dialogFormVisible = true;
       },
@@ -74,7 +74,7 @@
       PostHeartfelt:function(){
         var That = this;
 
-        if(this.form.HeartfeltContent && this.form.CreateDate){
+        if(this.form.content && this.form.create_time){
           this.SQAjax({
             Url:'/api/HeartfeltEditor/backend',
             RequestData:this.form,
@@ -86,11 +86,11 @@
         }
       },
       //修改心声
-      UpdateHeartfelt:function(Id,HeartfeltContent,HeartfeltWriter,CreateDate){
+      UpdateHeartfelt:function(Id,content,writer,create_time){
         this.form._id = Id;
-        this.form.HeartfeltContent = HeartfeltContent;
-        this.form.HeartfeltWriter = HeartfeltWriter;
-        this.form.CreateDate = CreateDate;
+        this.form.content = content;
+        this.form.writer = writer;
+        this.form.create_time = create_time;
 
         this.dialogFormVisible = true;
       },
@@ -98,10 +98,10 @@
       GetHeartfeltList:function () {
         var That = this;
         That.SQAjax({
-          Url:'/api/HeartfeltRead/foreend',
+          Url:'/api/heartfeltList',
           Success:function (data) {
             data.forEach(function (Item,I) {
-              Item.CreateDate = Item.CreateDate.slice(0,10);
+              Item.create_time = Item.create_time.slice(0,10);
             });
             That.TimeLineList = data;
           }
