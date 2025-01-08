@@ -14,8 +14,8 @@
             <el-form-item label="作者" :label-width="formLabelWidth">
               <el-input v-model="form.writer"></el-input>
             </el-form-item>
-            <el-form-item label="创建时间" :label-width="formLabelWidth">
-              <el-date-picker v-model="form.create_time" format="yyyy 年 MM 月 dd 日" value-format="yyyy-MM-dd" type="date" placeholder="创建日期"></el-date-picker>
+            <el-form-item label="创建人" :label-width="formLabelWidth">
+              <el-input v-model="form.creater"></el-input>
             </el-form-item>
           </el-form>
           <div slot="footer" class="dialog-footer">
@@ -27,7 +27,8 @@
         <!--表格操作栏-->
         <el-table :data="TimeLineList" style="width: 100%" border :header-cell-style="{background:'#f7f7f7'}">
           <el-table-column prop="content" label="心声内容"></el-table-column>
-          <el-table-column prop="writer" label="心声作者"></el-table-column>
+          <el-table-column prop="writer" label="作者"></el-table-column>
+          <el-table-column prop="creater" label="创建人"></el-table-column>
           <el-table-column prop="create_time" label="创建时间"></el-table-column>
           <el-table-column fixed="right" label="操作" width="130">
             <template slot-scope="scope">
@@ -52,17 +53,16 @@
         form:{
           content:'',
           writer:'',
-          create_time:new Date()
+          creater: ''
         },
       }
     },
     methods:{
       // 打开新增弹框
       OpenCreateDialog:function(){
-        this.form._id = '';
         this.form.content = '';
         this.form.writer = '';
-        this.form.create_time = '';
+        this.form.creater = '';
 
         this.dialogFormVisible = true;
       },
@@ -74,9 +74,9 @@
       PostHeartfelt:function(){
         var That = this;
 
-        if(this.form.content && this.form.create_time){
+        if(this.form.content){
           this.SQAjax({
-            Url:'/api/HeartfeltEditor/backend',
+            Url:'/api/createHeartfelt',
             RequestData:this.form,
             Success:function () {
               That.GetHeartfeltList();
