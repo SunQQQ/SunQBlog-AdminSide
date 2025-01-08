@@ -32,8 +32,8 @@
           <el-table-column prop="create_time" label="创建时间"></el-table-column>
           <el-table-column fixed="right" label="操作" width="130">
             <template slot-scope="scope">
-              <el-button @click="UpdateHeartfelt(scope.row._id,scope.row.content,scope.row.writer,scope.row.create_time,)" type="text" size="small" class="warning-color">编辑</el-button>
-              <el-button @click="DeleteHeartfelt(scope.row._id)" type="text" size="small" class="danger-color">删除</el-button>
+              <el-button @click="UpdateHeartfelt(scope.row.id,scope.row.content,scope.row.writer,scope.row.create_time,)" type="text" size="small" class="warning-color">编辑</el-button>
+              <el-button @click="DeleteHeartfelt(scope.row.id)" type="text" size="small" class="danger-color">删除</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -112,9 +112,9 @@
         var That = this;
 
         That.SQAjax({
-          Url:'/api/HeartfeltDelete/backend',
+          Url:'/api/deleteHeartFelt',
           RequestData:{
-            _id:Id
+            id:Id
           },
           Success:function (data) {
             That.GetHeartfeltList();
