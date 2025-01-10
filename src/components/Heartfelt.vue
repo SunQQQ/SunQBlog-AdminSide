@@ -14,9 +14,6 @@
             <el-form-item label="作者" :label-width="formLabelWidth">
               <el-input v-model="form.writer"></el-input>
             </el-form-item>
-            <el-form-item label="创建人" :label-width="formLabelWidth">
-              <el-input v-model="form.creater"></el-input>
-            </el-form-item>
           </el-form>
           <div slot="footer" class="dialog-footer">
             <el-button @click="CloseCreateDialog()">取 消</el-button>
@@ -32,7 +29,7 @@
           <el-table-column prop="create_time" label="创建时间"></el-table-column>
           <el-table-column fixed="right" label="操作" width="130">
             <template slot-scope="scope">
-              <el-button @click="UpdateHeartfelt(scope.row.id, scope.row.content, scope.row.writer, scope.row.creater)"
+              <el-button @click="UpdateHeartfelt(scope.row.id, scope.row.content, scope.row.writer)"
                 type="text" size="small" class="warning-color">编辑</el-button>
               <el-button @click="DeleteHeartfelt(scope.row.id)" type="text" size="small"
                 class="danger-color">删除</el-button>
@@ -55,8 +52,7 @@ export default {
       form: {
         id: "",
         content: '',
-        writer: '',
-        creater: ''
+        writer: ''
       },
     }
   },
@@ -66,7 +62,6 @@ export default {
       this.form.id = '';
       this.form.content = '';
       this.form.writer = '';
-      this.form.creater = '';
 
       this.dialogFormVisible = true;
     },
@@ -101,11 +96,10 @@ export default {
       }
     },
     //修改心声
-    UpdateHeartfelt: function (Id, content, writer, creater) {
+    UpdateHeartfelt: function (Id, content, writer) {
       this.form.id = Id;
       this.form.content = content;
       this.form.writer = writer;
-      this.form.creater = creater;
 
       this.dialogFormVisible = true;
     },
