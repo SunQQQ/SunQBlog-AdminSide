@@ -120,10 +120,6 @@
         var That = this;
         That.SQAjax({
           Url:'/api/userList',
-          RequestData:{
-            role: this.userRole,
-            username: JSON.parse(window.localStorage.getItem("sqBlogUserInfo")).name 
-          },
           Success:function (data) {
             data.forEach(function (Item,I) {
               Item.createdAt = Item.createdAt ? Item.createdAt.slice(0,10) : "";
