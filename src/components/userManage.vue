@@ -2,7 +2,7 @@
   <div>
     <div class="RightContent">
       <div class="ArticleList">
-        <div style="margin-bottom:10px" v-show="userRole == 'master'">
+        <div style="margin-bottom:10px" v-if="userRole == 'master'">
           <el-button type="primary" @click="OpenCreateDialog()" plain>创建账号</el-button>
         </div>
 
@@ -80,7 +80,7 @@ export default {
     OpenCreateDialog: function () {
       this.form.id = '';
       this.form.username = '';
-      this.form.password = password;
+      this.form.password = '';
       this.form.role = '';
       this.form.email = '';
 
