@@ -25,7 +25,7 @@
         <el-table :data="TimeLineList" style="width: 100%" border :header-cell-style="{ background: '#f7f7f7' }">
           <el-table-column prop="content" label="心声内容"></el-table-column>
           <el-table-column prop="writer" label="心声作者"></el-table-column>
-          <!-- <el-table-column prop="creater" label="创建人"></el-table-column> -->
+          <el-table-column prop="creater" label="创建人" v-if="role == 'master'"></el-table-column>
           <el-table-column prop="create_time" label="创建时间"></el-table-column>
           <el-table-column fixed="right" label="操作" width="130">
             <template slot-scope="scope">
@@ -54,6 +54,7 @@ export default {
         content: '',
         writer: ''
       },
+      role: JSON.parse(window.localStorage.getItem("sqBlogUserInfo")).role
     }
   },
   methods: {
