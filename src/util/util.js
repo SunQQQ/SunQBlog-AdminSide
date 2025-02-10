@@ -42,7 +42,7 @@ CommonFunction.install = function (Vue) {
         Para['Success'](response.data.data);
       } else { // 返参异常的场景处理
         that.$message({
-          message: response.data.data.message,
+          message: response.data.message,
           type: 'error',
           duration: 900
         });
