@@ -101,7 +101,8 @@
       GetData:function () {
         var That = this;
         this.SQAjax({
-          Url:'/api/MessageRead/foreend',
+          // Url:'/api/MessageRead/foreend',
+          Url:'api/leaveMessageList',
           RequestData: {
             PagnationData: {
               Skip:0,
@@ -120,9 +121,9 @@
               });
             }
 
-            data.forEach(function (Item,I) {
-              Item.MessageLeaveDate = Item.MessageLeaveDate.slice(0,10);
-            });
+            // data.forEach(function (Item,I) {
+            //   Item.MessageLeaveDate = Item.MessageLeaveDate.slice(0,10);
+            // });
 
             That.MessageLeaveList = data;
           }
