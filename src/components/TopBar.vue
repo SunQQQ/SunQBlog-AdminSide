@@ -1,6 +1,9 @@
 <template>
   <div v-if="TopbarShow == true">
-    <div class="TopBar">
+    <div class="TopBar" >
+      <div class="topbac">
+        <img src="../assets/img/topbar.png">
+      </div>
       <div class="Logo">Sunq's Blog Admin</div>
       <div class="TopBarRight">
         <div class="home-link">
@@ -9,10 +12,7 @@
           </a>
         </div>
         <div class="home-link">
-          <a
-            href="https://github.com/SunQQQ/SunQBlog-AdminSide"
-            target="_blank"
-          >
+          <a href="https://github.com/SunQQQ/SunQBlog-AdminSide" target="_blank">
             <i class="iconfont icon-github"></i> 管理端源码
           </a>
         </div>
@@ -34,41 +34,26 @@
 
       <div class="MenuTopBarIcon" @click="OpenMenu()">
         <div class="MobileMenuSwitch">
-          <span
-            :class="
-              menuStatus
-                ? 'MenuButtonFirstGoOpen'
-                : 'MenuButtonFirstGoClose'
-            "
-          ></span>
-          <span
-            :class="
-              menuStatus
-                ? 'MenuButtonSecondGoOpen'
-                : 'MenuButtonSecondGoClose'
-            "
-          ></span>
-          <span
-            :class="
-              menuStatus
-                ? 'MenuButtonThirdGoOpen'
-                : 'MenuButtonThirdGoClose'
-            "
-          ></span>
+          <span :class="menuStatus
+              ? 'MenuButtonFirstGoOpen'
+              : 'MenuButtonFirstGoClose'
+            "></span>
+          <span :class="menuStatus
+              ? 'MenuButtonSecondGoOpen'
+              : 'MenuButtonSecondGoClose'
+            "></span>
+          <span :class="menuStatus
+              ? 'MenuButtonThirdGoOpen'
+              : 'MenuButtonThirdGoClose'
+            "></span>
         </div>
       </div>
     </div>
 
     <div style="height: 61px"></div>
 
-    <el-menu
-      :default-active="MenuHighLight"
-      class="LeftBar"
-      background-color="#545c64"
-      text-color="#fff"
-      active-text-color="#87c3ff"
-      v-if="menuStatus"
-    >
+    <el-menu :default-active="MenuHighLight" class="LeftBar" background-color="#f6f8fc" text-color="#303133"
+      active-text-color="#004eef" active-background-color="#d9e1f1" v-if="menuStatus">
       <el-menu-item index="9" @click="ChangeHighLight('userManage')">
         <i class="iconfont icon-shujutongji"></i>
         <span slot="title">账号管理</span>
@@ -118,17 +103,17 @@
       </el-menu-item>
 
       <div class="mobileExit">
-      <el-menu-item index="9" @click="switchPage('gitHub')">
-        <i class="iconfont icon-github"></i>
-        <span slot="title">源码入口</span>
-      </el-menu-item>
+        <el-menu-item index="9" @click="switchPage('gitHub')">
+          <i class="iconfont icon-github"></i>
+          <span slot="title">源码入口</span>
+        </el-menu-item>
       </div>
 
       <div class="mobileExit">
-      <el-menu-item index="10" @click="switchPage('userClient')">
-        <i class="iconfont icon-shouye"></i>
-        <span slot="title">用户端入口</span>
-      </el-menu-item>
+        <el-menu-item index="10" @click="switchPage('userClient')">
+          <i class="iconfont icon-shouye"></i>
+          <span slot="title">用户端入口</span>
+        </el-menu-item>
       </div>
 
       <div class="mobileExit">
@@ -137,7 +122,7 @@
           <span slot="title">切换账号</span>
         </el-menu-item>
       </div>
-      
+
     </el-menu>
   </div>
 </template>
@@ -152,7 +137,10 @@ export default {
       // 菜单高亮参数
       MenuHighLight: "0",
       userName: "加载中",
-      menuStatus: window.screen.width>768 ? true : false // pc端时菜单初始化展示，移动端初始化时隐藏
+      topBarStyle: {
+        background: 'url("../assets/img/topbar.png") no-repeat 50%'
+      },
+      menuStatus: window.screen.width > 768 ? true : false // pc端时菜单初始化展示，移动端初始化时隐藏
     };
   },
   // 这个参数是父子组件间传值
@@ -171,17 +159,17 @@ export default {
       localStorage.clear();
       this.ShowExit = -1;
       this.$router.push({ name: "LoginPage" });
-      this.menuStatus = window.screen.width>768 ? this.menuStatus : !this.menuStatus;
+      this.menuStatus = window.screen.width > 768 ? this.menuStatus : !this.menuStatus;
     },
     // 展示或隐藏菜单
-    OpenMenu: function(){
-      this.menuStatus = window.screen.width>768 ? this.menuStatus : !this.menuStatus;
+    OpenMenu: function () {
+      this.menuStatus = window.screen.width > 768 ? this.menuStatus : !this.menuStatus;
     },
     // 打开新的页面
-    switchPage: function(page){
-      if(page == 'userClient'){
+    switchPage: function (page) {
+      if (page == 'userClient') {
         window.open("http://39.104.22.73:67");
-      }else if(page == 'gitHub'){
+      } else if (page == 'gitHub') {
         window.open("https://github.com/SunQQQ/SunQBlog-AdminSide");
       }
     }
@@ -220,6 +208,7 @@ export default {
 
 <style scoped lang="less">
 @import "../assets/css/base.less";
+
 .home-link {
   text-align: left;
   width: 100px;
@@ -230,7 +219,7 @@ export default {
 
 .home-link a {
   cursor: pointer;
-  color: #666;
+  color: white;
   text-decoration: none;
 }
 
@@ -245,7 +234,9 @@ export default {
     position: fixed;
     bottom: 0;
     top: 61px;
+    border-right: 1px solid #dadeeb !important;
   }
+
   .TopBar {
     .myflex("middle");
     height: 61px;
@@ -256,26 +247,45 @@ export default {
     width: 100%;
     z-index: 1000;
   }
+  
+  .is-active{
+    background-color: #d9e1f1!important;
+  }
+
+  .topbac{
+    position: absolute;
+    z-index: -1;
+    height: 61px;
+    width: 100%;
+  }
+
+  .topbac img{
+    width: 100%;
+    height: 100%;
+  }
+
   .Logo {
-    background-color: rgb(84, 92, 100);
+    // background-color: rgb(84, 92, 100);
     width: 220px;
     color: white;
     text-align: center;
+    font-weight: bolder;
   }
+
   .TopBarRight {
     flex: 1;
     text-align: right;
     padding-right: 40px;
-    border-bottom: 1px solid #ebeef5;
-    background-color: hsla(0, 0%, 100%, 0.9);
+    // border-bottom: 1px solid #ebeef5;
+    // background-color: hsla(0, 0%, 100%, 0.9);
     display: flex;
   }
 
-  .MenuTopBarIcon{
+  .MenuTopBarIcon {
     display: none;
   }
 
-  .mobileExit{
+  .mobileExit {
     display: none;
   }
 }
@@ -289,6 +299,7 @@ export default {
     z-index: 10000;
     border-top: 1px solid @BorderColor;
   }
+
   .TopBar {
     .myflex("middle");
     height: 61px;
@@ -301,12 +312,14 @@ export default {
     background-color: @menu_color;
     border-bottom: 1px solid @BorderColor;
   }
+
   .Logo {
     // width: 220px;
     color: @fore_color;
     text-align: center;
     padding: 0 20px;
   }
+
   .TopBarRight {
     display: none;
   }
@@ -321,7 +334,7 @@ export default {
     align-items: center;
   }
 
-  .mobileExit{
+  .mobileExit {
     display: block;
   }
 }
@@ -331,11 +344,13 @@ export default {
   width: 9rem;
   right: 0;
   text-align: center;
+  color: white;
 }
 
 .placeHolder {
   flex: 1;
 }
+
 .PersonCenterName {
   cursor: pointer;
 }
@@ -351,10 +366,10 @@ export default {
 }
 
 .MobileMenuSwitch {
-    box-sizing: border-box;
-    width: 24px;
-    height: 24px;
-    margin-left: auto;
+  box-sizing: border-box;
+  width: 24px;
+  height: 24px;
+  margin-left: auto;
 }
 
 .MobileMenuSwitch span {
@@ -373,78 +388,99 @@ export default {
   animation: MenuButtonGoOpen 0.3s linear;
   animation-fill-mode: forwards;
 }
+
 .MenuButtonFirstGoClose {
   animation: MenuButtonGoClose 0.3s linear;
   animation-fill-mode: forwards;
 }
+
 @keyframes MenuButtonGoOpen {
   0% {
-    -ms-transform: rotate(-8deg); /* IE 9 */
+    -ms-transform: rotate(-8deg);
+    /* IE 9 */
     transform: rotate(-8deg);
     -moz-transform-origin: 100% 100%;
     -webkit-transform-origin: 100% 100%;
     -o-transform-origin: 100% 100%;
   }
+
   25% {
-    -ms-transform: rotate(-16deg); /* IE 9 */
+    -ms-transform: rotate(-16deg);
+    /* IE 9 */
     transform: rotate(-16deg);
     -moz-transform-origin: 100% 100%;
     -webkit-transform-origin: 100% 100%;
     -o-transform-origin: 100% 100%;
   }
+
   50% {
-    -ms-transform: rotate(-25deg); /* IE 9 */
+    -ms-transform: rotate(-25deg);
+    /* IE 9 */
     transform: rotate(-25deg);
     -moz-transform-origin: 100% 100%;
     -webkit-transform-origin: 100% 100%;
     -o-transform-origin: 100% 100%;
   }
+
   75% {
-    -ms-transform: rotate(-34deg); /* IE 9 */
+    -ms-transform: rotate(-34deg);
+    /* IE 9 */
     transform: rotate(-34deg);
     -moz-transform-origin: 100% 100%;
     -webkit-transform-origin: 100% 100%;
     -o-transform-origin: 100% 100%;
   }
+
   100% {
-    -ms-transform: rotate(-43deg); /* IE 9 */
+    -ms-transform: rotate(-43deg);
+    /* IE 9 */
     transform: rotate(-43deg);
     -moz-transform-origin: 100% 100%;
     -webkit-transform-origin: 100% 100%;
     -o-transform-origin: 100% 100%;
   }
 }
+
 @keyframes MenuButtonGoClose {
   0% {
-    -ms-transform: rotate(-43deg); /* IE 9 */
+    -ms-transform: rotate(-43deg);
+    /* IE 9 */
     transform: rotate(-43deg);
     -moz-transform-origin: 100% 100%;
     -webkit-transform-origin: 100% 100%;
     -o-transform-origin: 100% 100%;
   }
+
   25% {
-    -ms-transform: rotate(-34deg); /* IE 9 */
+    -ms-transform: rotate(-34deg);
+    /* IE 9 */
     transform: rotate(-34deg);
     -moz-transform-origin: 100% 100%;
     -webkit-transform-origin: 100% 100%;
     -o-transform-origin: 100% 100%;
   }
+
   50% {
-    -ms-transform: rotate(-25deg); /* IE 9 */
+    -ms-transform: rotate(-25deg);
+    /* IE 9 */
     transform: rotate(-25deg);
     -moz-transform-origin: 100% 100%;
     -webkit-transform-origin: 100% 100%;
     -o-transform-origin: 100% 100%;
   }
+
   75% {
-    -ms-transform: rotate(-16deg); /* IE 9 */
+    -ms-transform: rotate(-16deg);
+    /* IE 9 */
     transform: rotate(-16deg);
     -moz-transform-origin: 100% 100%;
     -webkit-transform-origin: 100% 100%;
     -o-transform-origin: 100% 100%;
   }
+
   100% {
-    -ms-transform: rotate(0deg); /* IE 9 */
+    -ms-transform: rotate(0deg);
+    /* IE 9 */
     transform: rotate(0deg);
     -moz-transform-origin: 100% 100%;
     -webkit-transform-origin: 100% 100%;
@@ -455,20 +491,24 @@ export default {
 .MenuButtonSecondGoOpen {
   opacity: 0;
 }
+
 .MenuButtonSecondGoClose {
   -webkit-animation: MenutionGoCloseSeFloor 0.5s linear;
   -o-animation: MenutionGoCloseSeFloor 0.5s linear;
   animation: MenutionGoCloseSeFloor 0.5s linear;
   animation-fill-mode: forwards;
 }
+
 @keyframes MenutionGoCloseSeFloor {
   0% {
     /*background: white;*/
     opacity: 0;
   }
+
   50% {
     opacity: 0;
   }
+
   100% {
     opacity: 1;
   }
@@ -479,78 +519,99 @@ export default {
   animation: MenuButtonGoOpenThFloor 0.3s linear;
   animation-fill-mode: forwards;
 }
+
 .MenuButtonThirdGoClose {
   animation: MenuButtonGoCloseThFloor 0.3s linear;
   animation-fill-mode: forwards;
 }
+
 @keyframes MenuButtonGoOpenThFloor {
   0% {
-    -ms-transform: rotate(8deg); /* IE 9 */
+    -ms-transform: rotate(8deg);
+    /* IE 9 */
     transform: rotate(8deg);
     -moz-transform-origin: 100% 100%;
     -webkit-transform-origin: 100% 100%;
     -o-transform-origin: 100% 100%;
   }
+
   25% {
-    -ms-transform: rotate(16deg); /* IE 9 */
+    -ms-transform: rotate(16deg);
+    /* IE 9 */
     transform: rotate(16deg);
     -moz-transform-origin: 100% 100%;
     -webkit-transform-origin: 100% 100%;
     -o-transform-origin: 100% 100%;
   }
+
   50% {
-    -ms-transform: rotate(25deg); /* IE 9 */
+    -ms-transform: rotate(25deg);
+    /* IE 9 */
     transform: rotate(25deg);
     -moz-transform-origin: 100% 100%;
     -webkit-transform-origin: 100% 100%;
     -o-transform-origin: 100% 100%;
   }
+
   75% {
-    -ms-transform: rotate(34deg); /* IE 9 */
+    -ms-transform: rotate(34deg);
+    /* IE 9 */
     transform: rotate(34deg);
     -moz-transform-origin: 100% 100%;
     -webkit-transform-origin: 100% 100%;
     -o-transform-origin: 100% 100%;
   }
+
   100% {
-    -ms-transform: rotate(43deg); /* IE 9 */
+    -ms-transform: rotate(43deg);
+    /* IE 9 */
     transform: rotate(43deg);
     -moz-transform-origin: top right;
     -webkit-transform-origin: top right;
     -o-transform-origin: top right;
   }
 }
+
 @keyframes MenuButtonGoCloseThFloor {
   0% {
-    -ms-transform: rotate(43deg); /* IE 9 */
+    -ms-transform: rotate(43deg);
+    /* IE 9 */
     transform: rotate(43deg);
     -moz-transform-origin: 100% 100%;
     -webkit-transform-origin: 100% 100%;
     -o-transform-origin: 100% 100%;
   }
+
   25% {
-    -ms-transform: rotate(34deg); /* IE 9 */
+    -ms-transform: rotate(34deg);
+    /* IE 9 */
     transform: rotate(34deg);
     -moz-transform-origin: 100% 100%;
     -webkit-transform-origin: 100% 100%;
     -o-transform-origin: 100% 100%;
   }
+
   50% {
-    -ms-transform: rotate(25deg); /* IE 9 */
+    -ms-transform: rotate(25deg);
+    /* IE 9 */
     transform: rotate(25deg);
     -moz-transform-origin: 100% 100%;
     -webkit-transform-origin: 100% 100%;
     -o-transform-origin: 100% 100%;
   }
+
   75% {
-    -ms-transform: rotate(16deg); /* IE 9 */
+    -ms-transform: rotate(16deg);
+    /* IE 9 */
     transform: rotate(16deg);
     -moz-transform-origin: 100% 100%;
     -webkit-transform-origin: 100% 100%;
     -o-transform-origin: 100% 100%;
   }
+
   100% {
-    -ms-transform: rotate(0deg); /* IE 9 */
+    -ms-transform: rotate(0deg);
+    /* IE 9 */
     transform: rotate(0deg);
     -moz-transform-origin: top right;
     -webkit-transform-origin: top right;
