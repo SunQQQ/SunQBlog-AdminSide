@@ -363,6 +363,7 @@ export default {
   background-color: white;
   box-shadow: 0 2px 12px 0 #0000001a;
   cursor: pointer;
+  color: #303133;
 }
 
 .MobileMenuSwitch {
