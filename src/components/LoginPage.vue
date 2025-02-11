@@ -1,20 +1,31 @@
 <template>
-  <div class="LoginContent">
-    <el-form ref="form" :model="form" label-width="60px">
-      <div style="text-align: center"><h2>sunq's blog 管理后台</h2></div>
-      <div style="text-align: center;color:#409EFF"><h4>（后台对外开发，请直接登录）</h4></div>
-     <el-form-item label="账号">
-        <el-input v-model="form.CnName" @keydown.enter.native="OnLogin()"></el-input>
-      </el-form-item>
-     <el-form-item label="密码">
-        <el-input v-model="form.PassWord" type="password" show-password=true @keydown.enter.native="OnLogin()"></el-input>
-      </el-form-item>
-      <div style="text-align: center">
-        <el-button type="primary" @click="OnLogin()">登录</el-button>
-        <!--<el-button type="primary" @click="OnRegist()">注册</el-button>-->
-      </div>
-    </el-form>
+  <div>
+    <div class="loginBac">
+      <img src="../assets/img/lognBac.jpg">
+    </div>
+    <div class="LoginContent">
+      <el-form ref="form" :model="form" label-width="60px">
+        <div label-class="white-label" style="text-align: center;color: #14213e;">
+          <h2>sunq's blog 管理后台</h2>
+        </div>
+        <div style="text-align: center;color:#409EFF">
+          <h4>（后台对外开发，可直接登录）</h4>
+        </div>
+        <el-form-item label="账号">
+          <el-input v-model="form.CnName" @keydown.enter.native="OnLogin()"></el-input>
+        </el-form-item>
+        <el-form-item label="密码">
+          <el-input v-model="form.PassWord" type="password" show-password=true
+            @keydown.enter.native="OnLogin()"></el-input>
+        </el-form-item>
+        <div style="text-align: center">
+          <el-button type="primary" @click="OnLogin()">登录</el-button>
+          <!--<el-button type="primary" @click="OnRegist()">注册</el-button>-->
+        </div>
+      </el-form>
+    </div>
   </div>
+
 </template>
 
 <script>
@@ -36,8 +47,8 @@ export default {
       var That = this;
       var AjaxLoading = Loading.service({ fullscreen: true });
       axios.post('/api/login', {
-        username: this.form.CnName.replace(/\s/g,""),
-        password: this.form.PassWord.replace(/\s/g,"")
+        username: this.form.CnName.replace(/\s/g, ""),
+        password: this.form.PassWord.replace(/\s/g, "")
       }).then(function (response) {
         AjaxLoading.close();
         if (response.data.statusCode == 200) {
@@ -46,7 +57,7 @@ export default {
             type: 'success',
             duration: 800
           });
-          if(response.data.data.userInfo){
+          if (response.data.data.userInfo) {
             window.localStorage.setItem("sqBlogUserInfo", JSON.stringify(response.data.data.userInfo));
             window.localStorage.setItem("sqBlogToken", response.data.data.token);
           }
@@ -104,10 +115,31 @@ export default {
   }
 }
 
+// /deep/ .el-form-item__label {
+//   color: #fff !important;
+// }
+
 @media only screen and (min-device-width: 768px) {
+  .loginBac {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+  }
+
+  .loginBac img {
+    width: 100%;
+    height: 100%;
+  }
+
   .LoginContent {
-    width: 600px;
+    width: 400px;
     margin: 12rem auto 0;
+    background-color: white;
+    padding: 30px 30px 20px 10px;
+    border-radius: 5px;
   }
 }
 </style>

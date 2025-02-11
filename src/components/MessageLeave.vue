@@ -8,13 +8,13 @@
               <el-input v-model="form.MessageLeaveName"></el-input>
             </el-form-item>
             <el-form-item label="留言内容" :label-width="formLabelWidth">
-              <el-input v-model="form.MessageText"></el-input>
+              <el-input v-model="form.leave_person"></el-input>
             </el-form-item>
             <el-form-item label="城市" :label-width="formLabelWidth">
-              <el-input v-model="form.LocationCityName"></el-input>
+              <el-input v-model="form.city"></el-input>
             </el-form-item>
             <el-form-item label="头像编号(0-4)" :label-width="formLabelWidth">
-              <el-input v-model="form.iconNo"></el-input>
+              <el-input v-model="form.avatar"></el-input>
             </el-form-item>
           </el-form>
           <div slot="footer" class="dialog-footer">
@@ -25,15 +25,15 @@
 
         <!--表格操作栏-->
         <el-table :data="MessageLeaveList" style="width: 100%" border :header-cell-style="{background:'#f7f7f7'}">
-          <el-table-column prop="MessageLeaveName" label="留言者"></el-table-column>
-          <el-table-column prop="MessageText" label="留言内容">
+          <el-table-column prop="leave_person" label="留言者"></el-table-column>
+          <el-table-column prop="leave_person" label="留言内容">
             <template slot-scope="scope">
-              <div v-html="scope.row.MessageText"></div>
+              <div v-html="scope.row.leave_person"></div>
             </template>
           </el-table-column>
-          <el-table-column prop="LocationCityName" label="城市"></el-table-column>
-          <el-table-column prop="iconNo" label="头像"></el-table-column>
-          <el-table-column prop="MessageLeaveDate" label="创建时间"></el-table-column>
+          <el-table-column prop="city" label="城市"></el-table-column>
+          <el-table-column prop="avatar" label="头像"></el-table-column>
+          <el-table-column prop="create_time" label="创建时间"></el-table-column>
           <el-table-column fixed="right" label="操作" width="130">
             <template slot-scope="scope">
               <el-button @click="EditMessageLeave(scope.row)" type="text" size="small" class="warning-color">编辑</el-button>
@@ -67,9 +67,9 @@
         dialogFormVisible: false,
         form: {
           MessageLeaveName: '',
-          MessageText: '',
+          leave_person: '',
           delivery: false,
-          LocationCityName: ''
+          city: ''
         },
         formLabelWidth: '80px',
         MyCurPage: 1
@@ -79,7 +79,7 @@
       /*监听弹框提交*/
       OnDialogSubmit:function(){
         var That = this;
-        if(this.form.MessageLeaveName && this.form.MessageText){
+        if(this.form.MessageLeaveName && this.form.leave_person){
           this.SQAjax({
             Url:'/api/MessageLeaveEdit/backend',
             RequestData:this.form,
@@ -122,7 +122,7 @@
             }
 
             // data.forEach(function (Item,I) {
-            //   Item.MessageLeaveDate = Item.MessageLeaveDate.slice(0,10);
+            //   Item.create_time = Item.create_time.slice(0,10);
             // });
 
             That.MessageLeaveList = data;
@@ -170,10 +170,10 @@
       /*编辑标签*/
       EditMessageLeave:function (Row) {
         this.form.MessageLeaveName = Row.MessageLeaveName;
-        this.form.MessageText = Row.MessageText;
-        this.form.LocationCityName = Row.LocationCityName;
+        this.form.leave_person = Row.leave_person;
+        this.form.city = Row.city;
         this.form._id = Row._id;
-        this.form.iconNo = Row.iconNo;
+        this.form.avatar = Row.avatar;
         this.dialogFormVisible = true;
       },
     },
