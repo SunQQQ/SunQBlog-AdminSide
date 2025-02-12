@@ -45,7 +45,7 @@
             <template slot-scope="scope">
               <el-button @click="EditMessageLeave(scope.row)" type="text" size="small"
                 class="warning-color">编辑</el-button>
-              <el-button @click="DeleteTag(scope.row._id)" type="text" size="small" class="danger-color">删除</el-button>
+              <el-button @click="DeleteTag(scope.row.id)" type="text" size="small" class="danger-color">删除</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -163,14 +163,17 @@ export default {
     SkipTo: function (CurPage) {
       var That = this;
       That.SQAjax({
-        Url: '/api/MessageRead/foreend',
+        Url: '/api/leaveMessageList',
         RequestData: {
           PagnationData: {
             Skip: (CurPage - 1) * 10,
             Limit: 10
           }
         },
-        Success: function (data) {
+        Success: function (data) { 
+          data.forEach(function (Item, I) {
+            Item.createTime = Item.createTime.slice(0, 10);
+          });     
           That.MessageLeaveList = data;
         }
       });
@@ -180,9 +183,9 @@ export default {
       var That = this;
 
       That.SQAjax({
-        Url: '/api/MessageLeaveDelete/backend',
+        Url: '/api/deleteLeaveMessage',
         RequestData: {
-          _id: Id
+          id: Id
         },
         Success: function () {
           That.SkipTo(That.MyCurPage);
