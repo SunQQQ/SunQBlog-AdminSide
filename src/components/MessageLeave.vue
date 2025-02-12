@@ -5,10 +5,10 @@
         <el-dialog title="管理分类" :visible.sync="dialogFormVisible">
           <el-form :model="form">
             <el-form-item label="留言者" :label-width="formLabelWidth">
-              <el-input v-model="form.MessageLeaveName"></el-input>
+              <el-input v-model="form.leaveName"></el-input>
             </el-form-item>
             <el-form-item label="留言内容" :label-width="formLabelWidth">
-              <el-input v-model="form.leave_person"></el-input>
+              <el-input v-model="form.messageContent"></el-input>
             </el-form-item>
             <el-form-item label="城市" :label-width="formLabelWidth">
               <el-input v-model="form.city"></el-input>
@@ -25,15 +25,15 @@
 
         <!--表格操作栏-->
         <el-table :data="MessageLeaveList" style="width: 100%" border :header-cell-style="{background:'#f7f7f7'}">
-          <el-table-column prop="leave_person" label="留言者"></el-table-column>
-          <el-table-column prop="leave_person" label="留言内容">
+          <el-table-column prop="leaveName" label="留言者"></el-table-column>
+          <el-table-column prop="messageContent" label="留言内容">
             <template slot-scope="scope">
-              <div v-html="scope.row.leave_person"></div>
+              <div v-html="scope.row.messageContent"></div>
             </template>
           </el-table-column>
           <el-table-column prop="city" label="城市"></el-table-column>
           <el-table-column prop="avatar" label="头像"></el-table-column>
-          <el-table-column prop="create_time" label="创建时间"></el-table-column>
+          <el-table-column prop="createTime" label="创建时间"></el-table-column>
           <el-table-column fixed="right" label="操作" width="130">
             <template slot-scope="scope">
               <el-button @click="EditMessageLeave(scope.row)" type="text" size="small" class="warning-color">编辑</el-button>
@@ -66,8 +66,8 @@
         PagiSize:15,
         dialogFormVisible: false,
         form: {
-          MessageLeaveName: '',
-          leave_person: '',
+          leaveName: '',
+          messageContent: '',
           delivery: false,
           city: ''
         },
@@ -79,7 +79,7 @@
       /*监听弹框提交*/
       OnDialogSubmit:function(){
         var That = this;
-        if(this.form.MessageLeaveName && this.form.leave_person){
+        if(this.form.leaveName && this.form.messageContent){
           this.SQAjax({
             Url:'/api/MessageLeaveEdit/backend',
             RequestData:this.form,
@@ -121,9 +121,9 @@
               });
             }
 
-            // data.forEach(function (Item,I) {
-            //   Item.create_time = Item.create_time.slice(0,10);
-            // });
+            data.forEach(function (Item,I) {
+              Item.createTime = Item.createTime.slice(0,10);
+            });
 
             That.MessageLeaveList = data;
           }
@@ -169,8 +169,8 @@
       },
       /*编辑标签*/
       EditMessageLeave:function (Row) {
-        this.form.MessageLeaveName = Row.MessageLeaveName;
-        this.form.leave_person = Row.leave_person;
+        this.form.leaveName = Row.leaveName;
+        this.form.messageContent = Row.messageContent;
         this.form.city = Row.city;
         this.form._id = Row._id;
         this.form.avatar = Row.avatar;
