@@ -72,10 +72,10 @@ export default {
       form: {
         leaveName: '',
         messageContent: '',
-        delivery: false,
+        // delivery: false,
         city: '',
         avator: '',
-        parentId: '',
+        parentId: 0,
         id: ''
       },
       formLabelWidth: '80px',
@@ -90,7 +90,7 @@ export default {
       this.form.messageContent = '';
       this.form.city = '';
       this.form.avator = '';
-      this.form.parentId = '';
+      this.form.parentId = 0;
 
       this.dialogFormVisible = true;
     },
@@ -101,14 +101,27 @@ export default {
     /*监听弹框提交*/
     OnDialogSubmit: function () {
       var That = this;
+      That.form.parentId = Number(this.form.parentId);
+
       if (this.form.leaveName && this.form.messageContent) {
-        this.SQAjax({
-          Url: '/api/createLeaveMessage',
-          RequestData: this.form,
-          Success: function () {
-            That.SkipTo(That.MyCurPage);
-          }
-        });
+        if (this.form.id == '') {
+          this.SQAjax({
+            Url: '/api/createLeaveMessage',
+            RequestData: this.form,
+            Success: function () {
+              That.SkipTo(That.MyCurPage);
+            }
+          });
+        }else{
+          this.SQAjax({
+            Url: '/api/updateLeaveMessage',
+            RequestData: this.form,
+            Success: function () {
+              That.SkipTo(That.MyCurPage);
+            }
+          });
+        }
+
 
         this.dialogFormVisible = false;
       }
@@ -123,7 +136,6 @@ export default {
     GetData: function () {
       var That = this;
       this.SQAjax({
-        // Url:'/api/MessageRead/foreend',
         Url: 'api/leaveMessageList',
         RequestData: {
           PagnationData: {
@@ -170,10 +182,10 @@ export default {
             Limit: 10
           }
         },
-        Success: function (data) { 
+        Success: function (data) {
           data.forEach(function (Item, I) {
             Item.createTime = Item.createTime.slice(0, 10);
-          });     
+          });
           That.MessageLeaveList = data;
         }
       });
@@ -197,8 +209,9 @@ export default {
       this.form.leaveName = Row.leaveName;
       this.form.messageContent = Row.messageContent;
       this.form.city = Row.city;
-      this.form._id = Row._id;
+      this.form.id = Row.id;
       this.form.avator = Row.avator;
+      this.form.parentId = Number(Row.parentId);
       this.dialogFormVisible = true;
     },
   },
