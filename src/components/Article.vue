@@ -6,12 +6,12 @@
       </div>
 
       <el-table border :data="ArticleList" style="width: 100%" :header-cell-style="{background:'#f7f7f7'}">
-        <el-table-column prop="Title" label="标题"></el-table-column>
-        <el-table-column prop="Summary" label="简介"></el-table-column>
-        <el-table-column prop="ArticleTag" label="分类标签"></el-table-column>
-        <el-table-column prop="order" label="优先级"></el-table-column>
-        <el-table-column prop="CommentNum" label="评论数"></el-table-column>
-        <el-table-column prop="CreateDate" label="创建时间"></el-table-column>
+        <el-table-column prop="title" label="标题"></el-table-column>
+        <el-table-column prop="summary" label="简介"></el-table-column>
+        <el-table-column prop="articleTag" label="分类标签"></el-table-column>
+        <!-- <el-table-column prop="order" label="优先级"></el-table-column> -->
+        <el-table-column prop="commentNum" label="评论数"></el-table-column>
+        <el-table-column prop="createTime" label="创建时间"></el-table-column>
         <el-table-column fixed="right" label="操作" width="130">
           <template slot-scope="scope">
             <el-button @click="ReadArticle(scope.row._id)" type="text" size="small" class="success-color">查看</el-button>
@@ -94,7 +94,7 @@
               }
 
               data.forEach(function (Item,I) {
-                // Item.CreateDate = Item.CreateDate.slice(0,10);
+                // Item.createTime = Item.createTime.slice(0,10);
               });
               That.ArticleList = data;
             }
