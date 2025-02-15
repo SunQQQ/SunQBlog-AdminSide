@@ -171,16 +171,16 @@
 
       if(this.$route.params.ID){
         That.SQAjax({
-          Url:'/api/ArticleReadOne/foreend',
-          RequestData:{_id:this.$route.params.ID},
+          Url:'/api/getBlogDetail',
+          RequestData:{id:this.$route.params.ID},
           Success:function (data) {
-            That.title = data[0].title;
+            That.title = data.title;
             // That.order = data[0].order;
-            That.content = data[0].content;
-            That.summary = data[0].summary;
-            That.articleTag = data[0].articleTag;
-            That.articleCover = data[0].articleCover;
-            That.commentNum = data[0].commentNum;
+            That.content = data.content;
+            That.summary = data.summary;
+            That.articleTag = data.articleTag;
+            That.articleCover = data.articleCover;
+            That.commentNum = data.commentNum;
           }
         });
       }else{

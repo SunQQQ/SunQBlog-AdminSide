@@ -3,8 +3,8 @@
     <div class="RightContent">
       <div class="ArticleDetail">
         <h1>{{　Article.Title　}}</h1>
-        <div v-html="Article.Content">
-          {{ Article.Content }}
+        <div v-html="Article.content">
+          {{ Article.content }}
         </div>
       </div>
     </div>
@@ -25,12 +25,12 @@
       var that = this;
 
       this.SQAjax({
-        Url:'/api/ArticleReadOne/foreend',
+        Url:'/api/getBlogDetail',
         RequestData:{
-          _id:this.$route.params.ID
+          id:this.$route.params.ID
         },
         Success:function (data) {
-          that.Article = data[0];
+          that.Article = data;
         }
       });
     },
