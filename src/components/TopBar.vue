@@ -4,7 +4,7 @@
       <div class="topbac">
         <img src="../assets/img/topbar.png">
       </div>
-      <div class="Logo">Sunq's Blog Admin</div>
+      <div class="Logo">Happy Coding</div>
       <div class="TopBarRight">
         <div class="home-link">
           <a href="http://39.104.22.73:67" target="_blank">
