@@ -89,9 +89,9 @@
         if(this.$route.params.ID){
           if(this.title && this.content){
             this.SQAjax({
-              Url:'/api/ArticleUpdate/backend',
+              Url:'/api/updateBlog',
               RequestData:{
-                _id:this.$route.params.ID,
+                id:this.$route.params.ID,
                 title: this.title,
                 // order:this.order,
                 summary:this.summary,
