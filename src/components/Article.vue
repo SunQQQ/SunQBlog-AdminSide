@@ -74,7 +74,7 @@
         GetData:function (that) {
           var That = this;
           this.SQAjax({
-            Url:'/api/ArticleRead/foreend',
+            Url:'/api/getBlogList',
             RequestData: {
               PagnationData: {
                 Skip:0,
@@ -94,7 +94,7 @@
               }
 
               data.forEach(function (Item,I) {
-                Item.CreateDate = Item.CreateDate.slice(0,10);
+                // Item.CreateDate = Item.CreateDate.slice(0,10);
               });
               That.ArticleList = data;
             }
@@ -127,7 +127,7 @@
       },
 
       mounted:function () {
-        // this.GetData(this);
+        this.GetData(this);
         // this.bus.$emit('Topbar',{
         //   MenuHighLight:'1'
         // });
