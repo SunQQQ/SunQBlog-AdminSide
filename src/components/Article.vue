@@ -95,7 +95,7 @@
               }
 
               data.forEach(function (Item,I) {
-                // Item.createTime = Item.createTime.slice(0,10);
+                Item.createTime = Item.createTime.slice(0,10);
               });
               That.ArticleList = data;
             }

@@ -16,6 +16,10 @@
             <input @change="SetArticleCover" type="file" multiple="multiple" ref='selectfile' style="flex:1">
             <img :src="articleCover" v-show="articleCover" style="width: 70px;height: 40px"/>
           </div>
+          <div class="ArticleTitle">
+            封面地址：
+            <input placeholder="封面地址可不填" v-model="articleCover">
+          </div>
         </div>
 
         <div class="SimpleFlex">
@@ -23,26 +27,18 @@
             文章简介：
             <input placeholder="请输入文章简介" v-model="summary">
           </div>
-          <div class="ArticleTitle">
-            封面地址：
-            <input placeholder="封面地址可不填" v-model="articleCover">
-          </div>
+          
           <div class="ArticleTitle">
             文章标签：
             <el-select v-model="articleTag" placeholder="选择文章标签" style="flex:1">
-              <!-- <el-option v-for="item in ArticleTagOptions" :key="item.value" :label="item.TagName" :value="item.TagName"></el-option> -->
-              <el-option label="技术" value="技术"></el-option>
-              <el-option label="生活" value="生活"></el-option>
+              <el-option 
+                v-for="item in ArticleTagOptions" :key="item.id" :label="item.name" :value="item.id">
+              </el-option>
             </el-select>
           </div>
-        </div>
-
-        <div class="SimpleFlex">
           <div class="ArticleTitle" style="justify-content:start;">
             <el-button type="primary" @click="SubmitArticle()">提交</el-button>
           </div>
-          <div class="ArticleTitle"></div>
-          <div class="ArticleTitle"></div>
         </div>
 
         <div class="ArticleDetail" id="ArticleDetail">
@@ -161,13 +157,16 @@
       var That = this;
       //判断是否传参,是为修改文章、否为新增文章。初始化这个页面
 
-      // That.SQAjax({
-      //   Url:'/api/TagRead/foreend',
-      //   RequestData:{},
-      //   Success:function (data) {
-      //     That.ArticleTagOptions = data;
-      //   }
-      // });
+      That.SQAjax({
+        Url:'/api/getDictionaryList',
+        RequestData:{
+          parentId: 1
+        },
+        Success:function (data) {
+          That.ArticleTagOptions = data;
+          That.articleTag = data[0].id;
+        }
+      });
 
       if(this.$route.params.ID){
         That.SQAjax({
