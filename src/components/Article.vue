@@ -9,6 +9,7 @@
         <el-table-column prop="title" label="标题"></el-table-column>
         <el-table-column prop="summary" label="简介"></el-table-column>
         <el-table-column prop="articleTag" label="分类标签"></el-table-column>
+        <el-table-column prop="createName" label="创建人"></el-table-column>
         <!-- <el-table-column prop="order" label="优先级"></el-table-column> -->
         <el-table-column prop="commentNum" label="评论数"></el-table-column>
         <el-table-column prop="createTime" label="创建时间"></el-table-column>
@@ -112,7 +113,7 @@
         SkipTo:function (CurPage) {
           var That = this;
           That.SQAjax({
-            Url:'/api/ArticleRead/foreend',
+            Url:'/api/getBlogList',
             RequestData: {
               PagnationData: {
                 Skip:(CurPage-1) * 10,
