@@ -58,10 +58,10 @@
         <i class="iconfont icon-shujutongji"></i>
         <span slot="title">账号管理</span>
       </el-menu-item>
-      <el-menu-item index="0" @click="ChangeHighLight('index')">
+      <!-- <el-menu-item index="0" @click="ChangeHighLight('index')">
         <i class="iconfont icon-shujutongji"></i>
         <span slot="title">访问数据</span>
-      </el-menu-item>
+      </el-menu-item> -->
       <el-menu-item index="1" @click="ChangeHighLight('Article')">
         <i class="iconfont icon-16"></i>
         <span slot="title">文章管理</span>
