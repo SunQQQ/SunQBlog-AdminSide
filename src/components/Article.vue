@@ -8,7 +8,7 @@
       <el-table border :data="ArticleList" style="width: 100%" :header-cell-style="{background:'#f7f7f7'}">
         <el-table-column prop="title" label="标题"></el-table-column>
         <el-table-column prop="summary" label="简介"></el-table-column>
-        <el-table-column prop="articleTag" label="分类标签"></el-table-column>
+        <el-table-column prop="articleTagName" label="分类标签"></el-table-column>
         <el-table-column prop="createName" label="创建人"></el-table-column>
         <!-- <el-table-column prop="order" label="优先级"></el-table-column> -->
         <el-table-column prop="commentNum" label="评论数"></el-table-column>
