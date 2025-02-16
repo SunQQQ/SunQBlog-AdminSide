@@ -72,20 +72,20 @@
         <span slot="title">留言管理</span>
       </el-menu-item>
 
-      <el-menu-item index="7" @click="ChangeHighLight('Comment')">
+      <!-- <el-menu-item index="7" @click="ChangeHighLight('Comment')">
         <i class="iconfont icon-pinglun"></i>
         <span slot="title">评论管理</span>
-      </el-menu-item>
+      </el-menu-item> -->
 
       <el-menu-item index="2" @click="ChangeHighLight('TagIndex')">
         <i class="iconfont icon-biaoqian_o"></i>
         <span slot="title">分类管理</span>
       </el-menu-item>
 
-      <el-menu-item index="3" @click="ChangeHighLight('TimeLine')">
+      <!-- <el-menu-item index="3" @click="ChangeHighLight('TimeLine')">
         <i class="iconfont icon-fuhao-shijianzhou"></i>
         <span slot="title">时间轴管理</span>
-      </el-menu-item>
+      </el-menu-item> -->
 
       <el-menu-item index="4" @click="ChangeHighLight('Heartfelt')">
         <i class="iconfont icon-heart"></i>
@@ -97,10 +97,10 @@
         <span slot="title">友链管理</span>
       </el-menu-item> -->
 
-      <el-menu-item index="8" @click="ChangeHighLight('SnakeScores')">
+      <!-- <el-menu-item index="8" @click="ChangeHighLight('SnakeScores')">
         <i class="iconfont icon-she"></i>
         <span slot="title">贪吃蛇榜单</span>
-      </el-menu-item>
+      </el-menu-item> -->
 
       <div class="mobileExit">
         <el-menu-item index="9" @click="switchPage('gitHub')">
