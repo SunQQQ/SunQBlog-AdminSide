@@ -25,9 +25,9 @@
         <el-pagination layout="prev, pager, next"
                        :total=ArticleTotal
                        :page-size=PagiSize
-                       @current-change="ChangeCurPage"
-                       @next-click="NextPage"
-                       @prev-click="NextPage">
+                       @current-change="SkipTo"
+                       @next-click="SkipTo"
+                       @prev-click="SkipTo">
         </el-pagination>
       </div>
     </div>
@@ -43,7 +43,7 @@
 
           ArticleTotal:0,
           PagiSize:10,
-          MyCurPage: 1
+          commonPage: 1
         }
       },
       methods:{
@@ -68,67 +68,44 @@
                 type: 'success',
                 duration: 900
               });
-              That.SkipTo(That.MyCurPage);
+              That.SkipTo(That.commonPage);
             }
           });
         },
-        GetData:function (that) {
-          var That = this;
-          this.SQAjax({
-            Url:'/api/getBlogList',
-            RequestData: {
-              PagnationData: {
-                Skip:0,
-                Limit:11
-              }
-            },
-            Success:function (data) {
-              if (data.length > 10) {
-                data.pop();
-
-                That.SQAjax({
-                  Url: '/api/getarticlenum/foreend',
-                  Success: function (data) {
-                    That.ArticleTotal = data;
-                  }
-                });
-              }
-
-              data.forEach(function (Item,I) {
-                Item.createTime = Item.createTime.slice(0,10);
-              });
-              That.ArticleList = data;
-            }
-          });
-        },
-        // 翻页方法
-        ChangeCurPage:function(CurPage){
-          this.SkipTo(CurPage);
-          this.MyCurPage = CurPage;
-        },
-        NextPage:function (CurPage) {
-          this.SkipTo(CurPage);
-          this.MyCurPage = CurPage;
-        },
+        /**
+         * 此方法兼容左右按钮翻页，和直接选中某一页翻页
+         * @param CurPage 此参数由elementUI自动维护、传入
+         */
         SkipTo:function (CurPage) {
           var That = this;
+          
+          // 此变量用于删除功能等，记录当前页面状态
+          That.commonPage = CurPage;
+
           That.SQAjax({
             Url:'/api/getBlogList',
             RequestData: {
-              PagnationData: {
-                Skip:(CurPage-1) * 10,
-                Limit:10
-              }
+              start:(CurPage-1) * That.PagiSize,
+              size:That.PagiSize,
+              tag: 0
             },
             Success:function (data) {
-              That.ArticleList = data;
+              if (data.total > 10) {
+                That.ArticleTotal = data.total;
+              }
+
+              data.list.forEach(function (Item,I) {
+                Item.createTime = Item.createTime.slice(0,10);
+              });
+
+              That.ArticleList = data.list;
             }
           });
         }
       },
 
       mounted:function () {
-        this.GetData(this);
+        this.SkipTo(this.commonPage);
         this.bus.$emit('Topbar',{
           MenuHighLight:'1'
         });
