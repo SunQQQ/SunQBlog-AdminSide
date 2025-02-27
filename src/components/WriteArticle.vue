@@ -165,7 +165,7 @@ export default {
   /*初始化富文本插件*/
   mounted: function () {
     this.bus.$emit('Topbar', {
-      MenuHighLight: '1'
+      MenuHighLight: '1-2'
     });
   },
   /*初始化页面*/

@@ -119,7 +119,7 @@ export default {
     this.SkipTo(this.commonPage);
     this.getTags();
     this.bus.$emit('Topbar', {
-      MenuHighLight: '1'
+      MenuHighLight: '1-1'
     });
   },
   watch: {
