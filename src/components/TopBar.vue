@@ -73,7 +73,7 @@
         </el-menu-item>
         <el-menu-item index="1-2" @click="ChangeHighLight('WriteArticle')">
           <i class="iconfont icon-16"></i>
-          <span slot="title">创建文章</span>
+          <span slot="title">新增/编辑文章</span>
         </el-menu-item>
       </el-submenu>
 

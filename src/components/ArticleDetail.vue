@@ -36,7 +36,7 @@
     },
     mounted:function(){
       this.bus.$emit('Topbar',{
-        MenuHighLight:'1'
+        MenuHighLight:'1-1'
       });
     },
     components:{
