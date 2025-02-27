@@ -8,9 +8,6 @@
             </el-option>
           </el-select>
         </el-form-item>
-        <div style="margin-bottom:10px;text-align: right;">
-          <el-button type="primary" @click="WriteArticle()" plain>创建文章</el-button>
-        </div>
       </el-form>
 
       <el-table border :data="ArticleList" style="width: 100%" :header-cell-style="{ background: '#f7f7f7' }">
@@ -55,9 +52,6 @@ export default {
   methods: {
     ReadArticle: function (Id) {
       this.$router.push({ name: 'ArticleDetail', params: { ID: Id } });
-    },
-    WriteArticle: function () {
-      this.$router.push({ name: 'WriteArticle' });
     },
     EditArticle: function (Id) {
       this.$router.push({ name: 'WriteArticle', params: { ID: Id } });

@@ -62,10 +62,20 @@
         <i class="iconfont icon-shujutongji"></i>
         <span slot="title">访问数据</span>
       </el-menu-item> -->
-      <el-menu-item index="1" @click="ChangeHighLight('Article')">
-        <i class="iconfont icon-16"></i>
-        <span slot="title">文章管理</span>
-      </el-menu-item>
+      <el-submenu>
+        <template slot="title">
+          <i class="iconfont icon-16"></i>
+          <span>文章管理</span>
+        </template>
+        <el-menu-item index="1" @click="ChangeHighLight('Article')">
+          <i class="iconfont icon-16"></i>
+          <span slot="title">文章列表</span>
+        </el-menu-item>
+        <el-menu-item index="12" @click="ChangeHighLight('WriteArticle')">
+          <i class="iconfont icon-16"></i>
+          <span slot="title">创建文章</span>
+        </el-menu-item>
+      </el-submenu>
 
       <el-menu-item index="6" @click="ChangeHighLight('MessageLeave')">
         <i class="iconfont icon-liuyan"></i>
