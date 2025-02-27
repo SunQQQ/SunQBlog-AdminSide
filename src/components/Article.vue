@@ -1,11 +1,19 @@
 <template>
   <div>
     <div class="RightContent">
-      <div style="margin-bottom:10px">
-        <el-button type="primary" @click="WriteArticle()" plain>创建文章</el-button>
-      </div>
+      <el-form>
+        <el-form-item label="文章分类">
+          <el-select v-model="select_val" placeholder="请选择">
+            <el-option v-for="item in ArticleTagOptions" :key="item.id" :label="item.name" :value="item.id">
+            </el-option>
+          </el-select>
+        </el-form-item>
+        <div style="margin-bottom:10px;text-align: right;">
+          <el-button type="primary" @click="WriteArticle()" plain>创建文章</el-button>
+        </div>
+      </el-form>
 
-      <el-table border :data="ArticleList" style="width: 100%" :header-cell-style="{background:'#f7f7f7'}">
+      <el-table border :data="ArticleList" style="width: 100%" :header-cell-style="{ background: '#f7f7f7' }">
         <el-table-column prop="title" label="标题"></el-table-column>
         <el-table-column prop="summary" label="简介"></el-table-column>
         <el-table-column prop="articleTagName" label="分类标签"></el-table-column>
@@ -21,99 +29,111 @@
           </template>
         </el-table-column>
       </el-table>
-      <div v-if="ArticleTotal>10">
-        <el-pagination layout="prev, pager, next"
-                       :total=ArticleTotal
-                       :page-size=PagiSize
-                       @current-change="SkipTo"
-                       @next-click="SkipTo"
-                       @prev-click="SkipTo">
-        </el-pagination>
-      </div>
+      <el-pagination 
+        layout="total,prev, pager, next" 
+        :total=ArticleTotal :page-size=PagiSize @current-change="SkipTo"
+        @next-click="SkipTo" @prev-click="SkipTo">
+      </el-pagination>
     </div>
   </div>
 </template>
 
 <script>
-    export default {
-      name: "Article",
-      data:function(){
-        return {
-          ArticleList:[],
-
-          ArticleTotal:0,
-          PagiSize:10,
-          // 分页组件无需手动传入参数，自动传入。但删除列表时需要手动传入，此变量用于同步分页当前页
-          commonPage: 1
-        }
-      },
-      methods:{
-        ReadArticle:function (Id) {
-          this.$router.push({name:'ArticleDetail',params:{ID:Id}});
-        },
-        WriteArticle:function () {
-          this.$router.push({name:'WriteArticle'});
-        },
-        EditArticle:function (Id) {
-          this.$router.push({name:'WriteArticle',params:{ID:Id}});
-        },
-        DeleteArticle:function (Id) {
-          var That = this;
-
-          this.SQAjax({
-            Url:'/api/deleteBlog',
-            RequestData:{id:Id},
-            Success:function (data) {
-              That.$message({
-                message: '删除成功',
-                type: 'success',
-                duration: 900
-              });
-              That.SkipTo(That.commonPage);
-            }
-          });
-        },
-        /**
-         * 此方法兼容左右按钮翻页，和直接选中某一页翻页
-         * @param CurPage 此参数由elementUI自动维护、传入
-         */
-        SkipTo:function (CurPage) {
-          var That = this;
-          
-          // 此变量用于删除功能等，记录当前页面状态
-          That.commonPage = CurPage;
-
-          That.SQAjax({
-            Url:'/api/getBlogList',
-            RequestData: {
-              start:(CurPage-1) * That.PagiSize,
-              size:That.PagiSize,
-              tag: 0
-            },
-            Success:function (data) {
-              if (data.total > 10) {
-                That.ArticleTotal = data.total;
-              }
-
-              data.list.forEach(function (Item,I) {
-                Item.createTime = Item.createTime.slice(0,10);
-              });
-
-              That.ArticleList = data.list;
-            }
-          });
-        }
-      },
-
-      mounted:function () {
-        this.SkipTo(this.commonPage);
-        this.bus.$emit('Topbar',{
-          MenuHighLight:'1'
-        });
-      }
+export default {
+  name: "Article",
+  data: function () {
+    return {
+      ArticleList: [],
+      ArticleTotal: 0,
+      PagiSize: 10,
+      // 分页组件无需手动传入参数，自动传入。但删除列表时需要手动传入，此变量用于同步分页当前页
+      commonPage: 1,
+      select_val: 0,
+      ArticleTagOptions: []
     }
+  },
+  methods: {
+    ReadArticle: function (Id) {
+      this.$router.push({ name: 'ArticleDetail', params: { ID: Id } });
+    },
+    WriteArticle: function () {
+      this.$router.push({ name: 'WriteArticle' });
+    },
+    EditArticle: function (Id) {
+      this.$router.push({ name: 'WriteArticle', params: { ID: Id } });
+    },
+    DeleteArticle: function (Id) {
+      var That = this;
+
+      this.SQAjax({
+        Url: '/api/deleteBlog',
+        RequestData: { id: Id },
+        Success: function (data) {
+          That.$message({
+            message: '删除成功',
+            type: 'success',
+            duration: 900
+          });
+          That.SkipTo(That.commonPage);
+        }
+      });
+    },
+    /**
+     * 此方法兼容左右按钮翻页，和直接选中某一页翻页
+     * @param CurPage 此参数由elementUI自动维护、传入
+     */
+    SkipTo: function (CurPage) {
+      var That = this;
+
+      // 此变量用于删除功能等，记录当前页面状态
+      That.commonPage = CurPage;
+
+      That.SQAjax({
+        Url: '/api/getBlogList',
+        RequestData: {
+          start: (CurPage - 1) * That.PagiSize,
+          size: That.PagiSize,
+          tag: That.select_val
+        },
+        Success: function (data) {
+          That.ArticleTotal = data.total;
+
+          data.list.forEach(function (Item, I) {
+            Item.createTime = Item.createTime.slice(0, 10);
+          });
+
+          That.ArticleList = data.list;
+        }
+      });
+    },
+    getTags() {
+      var That = this;
+      That.SQAjax({
+        Url: '/api/getDictionaryList',
+        RequestData: {
+          parentId: 1
+        },
+        Success: function (data) {
+          data.push({ id: 0, name: '全部' });
+          That.ArticleTagOptions = data;
+        }
+      });
+    }
+  },
+
+  mounted: function () {
+    this.SkipTo(this.commonPage);
+    this.getTags();
+    this.bus.$emit('Topbar', {
+      MenuHighLight: '1'
+    });
+  },
+  watch: {
+    select_val: function () {
+      this.SkipTo(1);
+    }
+  }
+}
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
