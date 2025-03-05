@@ -132,7 +132,7 @@ export default {
       PicData.append('content', this.$refs.selectfile.files[0]);
       axios.post('/api/UploadImg', PicData
       ).then(function (response) {
-        That.articleCover = response.data.data[0];//头图图片预览
+        That.articleCover = "http://localhost:8080" + response.data.data;//头图图片预览
       }).catch(function (error) {
       });
     },
