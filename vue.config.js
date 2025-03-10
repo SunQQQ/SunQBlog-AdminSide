@@ -1,7 +1,7 @@
 module.exports = {
   baseUrl:'./',
   assertsDir:'static',
-  outputDir:'blog-admin',
+  outputDir:'admin',
   pwa:{
     iconPath:{
       favicon32:'./favicon.ico',

@@ -136,7 +136,7 @@ export default {
     GetData: function () {
       var That = this;
       this.SQAjax({
-        Url: 'api/leaveMessageList',
+        Url: '/api/leaveMessageList',
         RequestData: {
           PagnationData: {
             Skip: 0,
