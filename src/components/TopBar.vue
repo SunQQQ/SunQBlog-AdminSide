@@ -4,10 +4,10 @@
       <div class="topbac">
         <img src="../assets/img/topbar.png">
       </div>
-      <div class="Logo">Happy Coding</div>
+      <div class="Logo">CodingLife Admin</div>
       <div class="TopBarRight">
         <div class="home-link">
-          <a href="http://39.104.22.73:67" target="_blank">
+          <a href="http://www.codinglife.online" target="_blank">
             <i class="iconfont icon-shouye"></i> 用户端入口
           </a>
         </div>
@@ -16,11 +16,11 @@
             <i class="iconfont icon-github"></i> 管理端源码
           </a>
         </div>
-        <div class="home-link">
+        <!-- <div class="home-link">
           <a href="http://39.104.22.73:70" target="_blank">
             <i class="iconfont icon-she"></i> 贪吃蛇入口
           </a>
-        </div>
+        </div> -->
         <div class="placeHolder"></div>
         <div class="PersonCenter">
           <div class="PersonCenterName" @click="OpenUserCenter()">

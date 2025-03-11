@@ -7,7 +7,7 @@
       <div class="LoginContent">
         <el-form ref="form" :model="form" label-width="60px">
           <div label-class="white-label" style="text-align: center;color: #14213e;">
-            <h2>sunq's blog 管理后台</h2>
+            <h2>Coding Life Admin</h2>
           </div>
           <div style="text-align: center;color:#409EFF">
             <h4>（后台对外开发，可直接登录）</h4>
