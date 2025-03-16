@@ -73,7 +73,8 @@ export default {
       articleTag: '',
       articleCover: '',
       commentNum: 0,
-      editorHeight: 0
+      editorHeight: 0,
+      apiBaseUrl: process.env.VUE_APP_API_BASE_URL
     }
   },
   methods: {
@@ -132,7 +133,9 @@ export default {
       PicData.append('content', this.$refs.selectfile.files[0]);
       axios.post('/api/UploadImg', PicData
       ).then(function (response) {
-        That.articleCover = "http://localhost:8080" + response.data.data;//头图图片预览
+        console.log(That.apiBaseUrl);
+        console.log(process.env.VUE_APP_API_BASE_URL);
+        That.articleCover = That.apiBaseUrl + response.data.data;//头图图片预览
       }).catch(function (error) {
       });
     },
