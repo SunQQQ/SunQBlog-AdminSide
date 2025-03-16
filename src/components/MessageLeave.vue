@@ -147,12 +147,7 @@ export default {
           if (data.length > 10) {
             data.pop();
 
-            That.SQAjax({
-              Url: '/api/getmessagenum',
-              Success: function (data) {
-                That.MessageLeaveTotal = data;
-              }
-            });
+            That.MessageLeaveTotal = data.length;
           }
 
           data.forEach(function (Item, I) {
