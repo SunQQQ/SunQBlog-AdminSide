@@ -7,7 +7,7 @@
       <div class="Logo">CodingLife Admin</div>
       <div class="TopBarRight">
         <div class="home-link">
-          <a href="http://www.codinglife.online" target="_blank">
+          <a href="http://39.107.193.226/" target="_blank">
             <i class="iconfont icon-shouye"></i> 用户端入口
           </a>
         </div>
@@ -178,7 +178,7 @@ export default {
     // 打开新的页面
     switchPage: function (page) {
       if (page == 'userClient') {
-        window.open("http://39.104.22.73:67");
+        window.open("http://39.107.193.226/");
       } else if (page == 'gitHub') {
         window.open("https://github.com/SunQQQ/SunQBlog-AdminSide");
       }

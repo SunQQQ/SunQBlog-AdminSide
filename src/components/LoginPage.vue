@@ -21,7 +21,7 @@
           </el-form-item>
           <div style="text-align: center">
             <el-button type="primary" @click="OnLogin()">登录</el-button>
-            <!--<el-button type="primary" @click="OnRegist()">注册</el-button>-->
+            <el-button type="danger" @click="OnRegist()">注册</el-button>
           </div>
         </el-form>
       </div>
@@ -89,19 +89,22 @@ export default {
     },
     OnRegist: function () {
       var That = this;
-      axios.post('/api/UserCreate', {
-        CnName: this.form.CnName,
-        PassWord: this.form.PassWord,
-        UserType: 'Admin'
-      }).then(function (response) {
-        if (response.data.statusCode == '200') {
-          That.$message({
-            message: '注册成功',
-            type: 'success'
-          });
-        }
-      }).catch(function (error) {
-      });
+
+      window.open("http://39.107.193.226/#/MessageBoard?login");
+      // window.open("http://localhost:8082/#/MessageBoard?login");
+      // axios.post('/api/UserCreate', {
+      //   CnName: this.form.CnName,
+      //   PassWord: this.form.PassWord,
+      //   UserType: 'Admin'
+      // }).then(function (response) {
+      //   if (response.data.statusCode == '200') {
+      //     That.$message({
+      //       message: '注册成功',
+      //       type: 'success'
+      //     });
+      //   }
+      // }).catch(function (error) {
+      // });
     }
   }
 }
