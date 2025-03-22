@@ -18,8 +18,7 @@ CommonFunction.install = function (Vue) {
       fullscreen: true
      });
 
-    var Token = localStorage.getItem('sqBlogToken') ? localStorage.getItem('sqBlogToken') : '';
-
+    var Token = that.GetLocalStorage('SunqBlog') && that.GetLocalStorage('SunqBlog').token;
     if (!Token) {
       AjaxLoading.close(); // 中断代码前，注意关闭loading
       this.$router.push({ name: 'LoginPage' });
@@ -318,7 +317,44 @@ CommonFunction.install = function (Vue) {
     console.log('進入記錄日志方法');
   };
 
-  
+  /**
+   * 获取本地数据
+   * @param StorageName
+   * @constructor
+   * 返回对象类型
+   */
+  Vue.prototype.GetLocalStorage = function (StorageName) {
+    var Storage = localStorage.getItem(StorageName);
+    if (Storage) {
+      return JSON.parse(Storage);
+    } else {
+      return {};
+    }
+  };
+
+  /**
+   * 修改/存储 本地数据
+   * @param StorageName Storage表名字
+   * @param Value Object类型，需要Key，Value两个字段。
+   * @constructor
+   */
+  Vue.prototype.SetLocalStorage = function (StorageName, Data) {
+    var Storage = localStorage.getItem(StorageName);
+    // 如果表存在，修改表中字段名
+    if (Storage) {
+      // 将表的值转为对象，并装入传入的字段
+      var StorageObject = JSON.parse(Storage);
+      StorageObject[Data.Key] = Data.Value;
+      // 重新将存储
+      localStorage.setItem(StorageName, JSON.stringify(StorageObject));
+    }
+    //如果表不存在直接存储
+    else {
+      var Object = {};
+      Object[Data.Key] = Data.Value;
+      localStorage.setItem(StorageName, JSON.stringify(Object));
+    }
+  };
 }
 
 export default CommonFunction

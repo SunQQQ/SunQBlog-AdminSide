@@ -54,7 +54,7 @@ export default {
         content: '',
         writer: ''
       },
-      role: JSON.parse(window.localStorage.getItem("sqBlogUserInfo")).role
+      role: this.GetLocalStorage('SunqBlog')?.userInfo?.role ?? ''
     }
   },
   methods: {

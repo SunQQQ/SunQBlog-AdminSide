@@ -193,8 +193,8 @@ export default {
     });
 
     // 初始化菜单时，从localstorage中获取用户名
-    if (window.localStorage.getItem("sqBlogUserInfo")) {
-      That.userName = JSON.parse(window.localStorage.getItem("sqBlogUserInfo")).name;
+    if (That.GetLocalStorage('SunqBlog')?.userInfo) {
+      That.userName = That.GetLocalStorage('SunqBlog')?.userInfo?.name ?? ''
     }
 
     // 注册修改用户名方法，登录成功时登录组件会通过这个方法修改用户名

@@ -60,8 +60,15 @@ export default {
             duration: 800
           });
           if (response.data.data.userInfo) {
-            window.localStorage.setItem("sqBlogUserInfo", JSON.stringify(response.data.data.userInfo));
-            window.localStorage.setItem("sqBlogToken", response.data.data.token);
+            // 存储token
+            That.SetLocalStorage('SunqBlog', {
+              Key: 'token',
+              Value: response.data.data.token
+            });
+            That.SetLocalStorage('SunqBlog', {
+              Key: 'userInfo',
+              Value: response.data.data.userInfo
+            });
           }
           That.$router.push({ name: 'userManage' });
 

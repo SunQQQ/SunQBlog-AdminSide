@@ -71,7 +71,7 @@ export default {
         role: '',
         email: ''
       },
-      userRole: JSON.parse(window.localStorage.getItem("sqBlogUserInfo")).role,
+      userRole: this.GetLocalStorage('SunqBlog')?.userInfo?.role ?? '',
       dailogTitle: '新增账号' // 弹框标题
     }
   },
