@@ -109,6 +109,10 @@ export default {
         }).then(function (response) {
           AjaxLoading.close();
           if (response.data.statusCode == 200) {
+            That.$router.push({ name: 'userManage' });
+            // 登录成功后，调用菜单组件注册的方法，修改菜单组件的用户名
+            That.bus.$emit('changeUser', That.username);
+
             That.$message({
               message: '登录成功！用户端也是登录状态啦，可以直接去玩~',
               type: 'success',
@@ -125,7 +129,6 @@ export default {
                 Value: response.data.data.userInfo
               });
             }
-            That.$router.push({ name: 'userManage' });
           } else {
             That.$message.error(response.data.message);
 
@@ -145,19 +148,22 @@ export default {
     // 注册
     regist() {
       let That = this;
-      
+
       if (this.username && this.password) {
         axios.post('/api/regist', {
           username: this.username.replace(/\s/g, ""),
           password: this.password.replace(/\s/g, "")
         }).then(function (data) {
           That.$router.push({ name: 'userManage' });
+
+          // 登录成功后，调用菜单组件注册的方法，修改菜单组件的用户名
+          That.bus.$emit('changeUser', That.username);
+
           That.$message({
             message: '注册并登录成功！用户端也是登录状态啦，可以直接去玩~',
             type: 'success',
             duration: 4000
           });
-          debugger
           // 存储token
           That.SetLocalStorage('SunqBlog', {
             Key: 'token',

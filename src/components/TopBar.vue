@@ -191,7 +191,7 @@ export default {
     this.bus.$on("Topbar", function (data) {
       That.MenuHighLight = data.MenuHighLight;
     });
-
+    debugger
     // 初始化菜单时，从localstorage中获取用户名
     if (That.GetLocalStorage('SunqBlog')?.userInfo) {
       That.userName = That.GetLocalStorage('SunqBlog')?.userInfo?.name ?? ''
