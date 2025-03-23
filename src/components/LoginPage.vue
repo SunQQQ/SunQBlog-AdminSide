@@ -22,9 +22,6 @@
             <div class="button-content">
               <button type="submit" class="login-button">登录</button>
             </div>
-            <!-- <button type="button" class="login-button register-color" @click="switchToRegister">
-              去注册
-          </button> -->
             <div style="text-align: center;margin-top: 20px;">
               还没有账号？
               <span @click="switchToRegister" style="color:blue;cursor: pointer;">
@@ -50,10 +47,9 @@
               </button>
             </div>
             <div class="button-content">
-              <button type="submit" class="login-button regist-button">注册</button>
-              <!-- <button type="button" class="login-button register-color" @click="switchToLogin">
-              去登录
-            </button> -->
+              <button type="submit" class="login-button regist-button" @click="generatePassword">
+                注册
+              </button>
             </div>
             <div style="text-align: center;margin-top: 20px;">
               <span @click="switchToLogin" style="color:blue;cursor: pointer;">
@@ -114,9 +110,9 @@ export default {
           AjaxLoading.close();
           if (response.data.statusCode == 200) {
             That.$message({
-              message: '登录成功',
+              message: '登录成功！用户端也是登录状态啦，可以直接去玩~',
               type: 'success',
-              duration: 800
+              duration: 4000
             });
             if (response.data.data.userInfo) {
               // 存储token
@@ -130,16 +126,6 @@ export default {
               });
             }
             That.$router.push({ name: 'userManage' });
-
-            // 记录日志
-            // That.createLog({
-            //   moduleType: 'button',
-            //   operateType: '登录后台',
-            //   operateContent: '成功'
-            // });
-
-            // 登录成功后，调用菜单组件注册的方法，修改菜单组件的用户名
-            That.bus.$emit('changeUser', That.username);
           } else {
             That.$message.error(response.data.message);
 
@@ -159,38 +145,42 @@ export default {
     // 注册
     regist() {
       let That = this;
+      
       if (this.username && this.password) {
-        That.SQFrontAjax({
-          Url: "/api/regist",
-          UploadData: {
-            username: That.username,
-            password: That.password
-          },
-          Success: function (data) {
+        axios.post('/api/regist', {
+          username: this.username.replace(/\s/g, ""),
+          password: this.password.replace(/\s/g, "")
+        }).then(function (data) {
+          That.$router.push({ name: 'userManage' });
+          That.$message({
+            message: '注册并登录成功！用户端也是登录状态啦，可以直接去玩~',
+            type: 'success',
+            duration: 4000
+          });
+          debugger
+          // 存储token
+          That.SetLocalStorage('SunqBlog', {
+            Key: 'token',
+            Value: data?.data?.data?.token
+          });
+          That.SetLocalStorage('SunqBlog', {
+            Key: 'userInfo',
+            Value: data?.data?.data?.userInfo
+          });
 
-            // 存储token
-            That.SetLocalStorage('SunqBlog', {
-              Key: 'token',
-              Value: data.token
+          if (That.nameId > 0) {
+            // 删除已经使用的随机用户名
+            That.SQFrontAjax({
+              Url: "/api/markNameAsUsed",
+              UploadData: {
+                id: That.nameId
+              },
+              Success: function (data) {
+                console.log('删除已经使用的随机用户名');
+              }
             });
-            That.SetLocalStorage('SunqBlog', {
-              Key: 'userInfo',
-              Value: data.userInfo
-            });
-
-            if (That.nameId > 0) {
-              // 删除已经使用的随机用户名
-              That.SQFrontAjax({
-                Url: "/api/markNameAsUsed",
-                UploadData: {
-                  id: That.nameId
-                },
-                Success: function (data) {
-                  console.log('删除已经使用的随机用户名');
-                }
-              });
-            }
           }
+        }).catch(function (error) {
         });
       } else {
         alert("请输入账号和密码");
@@ -217,10 +207,6 @@ export default {
     margin: 12rem auto 0;
   }
 }
-
-// /deep/ .el-form-item__label {
-//   color: #fff !important;
-// }
 
 @media only screen and (min-device-width: 768px) {
   .loginBac {
