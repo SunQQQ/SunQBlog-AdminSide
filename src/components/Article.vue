@@ -10,7 +10,9 @@
         </el-form-item>
       </el-form>
 
-      <el-table border :data="ArticleList" style="width: 100%" :header-cell-style="{ background: '#f7f7f7' }">
+      <el-table border :data="ArticleList" style="width: 100%"
+       :header-cell-style="{ background: '#f7f7f7' }"
+       empty-text="暂无数据，快发布一篇文章体验下吧~">
         <el-table-column prop="title" label="标题"></el-table-column>
         <el-table-column prop="summary" label="简介"></el-table-column>
         <el-table-column prop="articleTagName" label="分类标签"></el-table-column>
@@ -26,11 +28,15 @@
           </template>
         </el-table-column>
       </el-table>
+      
       <el-pagination 
         layout="total,prev, pager, next" 
         :total=ArticleTotal :page-size=PagiSize @current-change="SkipTo"
-        @next-click="SkipTo" @prev-click="SkipTo">
+        @next-click="SkipTo" @prev-click="SkipTo" v-if="ArticleTotal > 0">
       </el-pagination>
+      <div class="guide-text">
+        <i class="el-icon-info" style="margin-right: 4px; color: #9196a1;"></i>每位小伙伴都可以发布文章，这里将是专属你的一方空间，分享自己的心得或生活~
+      </div>
     </div>
   </div>
 </template>
@@ -130,4 +136,12 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+  .guide-text{
+    color: var(--GBK06A);
+    font-size: 12px;
+    line-height: 19px;
+    padding: 12px 0px 0px;
+    color:#9196a1;
+  }
+</style>
