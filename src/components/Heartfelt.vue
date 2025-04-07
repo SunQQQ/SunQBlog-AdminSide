@@ -29,13 +29,16 @@
           <el-table-column prop="create_time" label="创建时间"></el-table-column>
           <el-table-column fixed="right" label="操作" width="130">
             <template slot-scope="scope">
-              <el-button @click="UpdateHeartfelt(scope.row.id, scope.row.content, scope.row.writer)"
-                type="text" size="small" class="warning-color">编辑</el-button>
+              <el-button @click="UpdateHeartfelt(scope.row.id, scope.row.content, scope.row.writer)" type="text"
+                size="small" class="warning-color">编辑</el-button>
               <el-button @click="DeleteHeartfelt(scope.row.id)" type="text" size="small"
                 class="danger-color">删除</el-button>
             </template>
           </el-table-column>
         </el-table>
+        <div class="guide-text">
+          <i class="el-icon-info" style="margin-right: 4px; color: #9196a1;"></i>生活中总有一些语句触动你我，新增的心声将在用户端【首页】、【关于】页的右侧分享给所有人~
+        </div>
       </div>
     </div>
   </div>
@@ -141,4 +144,12 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+  .guide-text{
+    color: var(--GBK06A);
+    font-size: 12px;
+    line-height: 19px;
+    padding: 12px 0px 0px;
+    color:#9196a1;
+  }
+</style>

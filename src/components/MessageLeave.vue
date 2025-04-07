@@ -55,6 +55,10 @@
             @current-change="ChangeCurPage" @next-click="NextPage" @prev-click="NextPage">
           </el-pagination>
         </div>
+        <div class="guide-text">
+          <i class="el-icon-info"
+            style="margin-right: 4px; color: #9196a1;"></i>留言将在用户端留言页展示。留个言吧，让全网站的人都听到你的声音~
+        </div>
       </div>
     </div>
   </div>
@@ -219,4 +223,12 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+  .guide-text{
+    color: var(--GBK06A);
+    font-size: 12px;
+    line-height: 19px;
+    padding: 12px 0px 0px;
+    color:#9196a1;
+  }
+</style>

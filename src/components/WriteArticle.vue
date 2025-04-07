@@ -44,6 +44,10 @@
           <mavon-editor v-model="content" :isHljs="true" @imgAdd="$imgAdd" ref=md
             :style="{ height: editorHeight }"></mavon-editor>
         </div>
+        <div class="guide-text">
+          <i class="el-icon-info"
+            style="margin-right: 4px; color: #9196a1;"></i>每位小伙伴都可以发布文章，文章将在用户端首页头条展示~
+        </div>
       </div>
     </div>
   </div>
@@ -186,11 +190,11 @@ export default {
 
         if (!That.$route.params.ID) {
           That.articleTag = data[0].id;
-        }else{
+        } else {
           That.getArticleDetail(That.$route.params.ID);
         }
       }
-    }); 
+    });
 
     // 根据分辨率，动态设置编辑器高度
     // That.editorHeight = window.screen.height - 318 + 'px';
@@ -262,5 +266,13 @@ export default {
 .editorbody {
   border: 1px solid #ccc;
   height: 500px;
+}
+
+.guide-text {
+  color: var(--GBK06A);
+  font-size: 12px;
+  line-height: 19px;
+  padding: 12px 0px 0px;
+  color: #9196a1;
 }
 </style>

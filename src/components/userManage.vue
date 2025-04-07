@@ -51,6 +51,10 @@
             </template>
           </el-table-column>
         </el-table>
+        <div class="guide-text">
+          <i class="el-icon-info"
+            style="margin-right: 4px; color: #9196a1;"></i>此页面可以编辑自己的账号、密码，给自己设一个好听的名字吧~
+        </div>
       </div>
     </div>
   </div>
@@ -164,4 +168,12 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+  .guide-text{
+    color: var(--GBK06A);
+    font-size: 12px;
+    line-height: 19px;
+    padding: 12px 0px 0px;
+    color:#9196a1;
+  }
+</style>
