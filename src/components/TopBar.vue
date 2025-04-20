@@ -113,14 +113,14 @@
       </el-menu-item> -->
 
       <div class="mobileExit">
-        <el-menu-item index="9" @click="switchPage('gitHub')">
+        <el-menu-item index="10" @click="switchPage('gitHub')">
           <i class="iconfont icon-github"></i>
           <span slot="title">源码入口</span>
         </el-menu-item>
       </div>
 
       <div class="mobileExit">
-        <el-menu-item index="10" @click="switchPage('userClient')">
+        <el-menu-item index="11" @click="switchPage('userClient')">
           <i class="iconfont icon-shouye"></i>
           <span slot="title">用户端入口</span>
         </el-menu-item>
