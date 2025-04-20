@@ -1,13 +1,18 @@
 <template>
   <div class="RightContent">
     <div class="ArticleList">
+      <div class="partTitle">欢迎你来</div>
+      <div>1、这里是CodingLif博客的管理后台首页；</div>
+      <div>2、用户端和管理后台使用单点登录，登录状态通用。可移步用户端免登录体验；</div>
+      <div>3、欢迎体验文章发布功能，你的文章将在用户端首页分享给大家；</div>
+      <div>4、心声管理为用户端右侧展示的名言警句模块，你也可添加所有人可见；</div>
+      <div>5、博客代码开源，将持续优化。请开始你的体验吧！</div>
+    </div>
+    <!-- <div class="ArticleList">
       <div class="partTitle">本周博客访问量趋势图</div>
       <div id="lineChart" class="lineChart"></div>
-      <!--<div id="mapChart" class="lineChart"></div>-->
-      <!--表格操作栏-->
       <div class="partTitle">博客访问数据明细</div>
       <el-table :data="blogVisitList" border style="width: 100%;" :header-cell-style="{background:'#eef1f6'}">
-        <!--        <el-table-column prop="fromUrl" label="来源URL"></el-table-column>-->
         <el-table-column prop="clientIp" label="访客ip" width="130"></el-table-column>
         <el-table-column prop="operateType" label="操作类型" width="130"></el-table-column>
         <el-table-column prop="operateContent" label="操作内容" width="130"></el-table-column>
@@ -34,7 +39,7 @@
                        @prev-click="NextPage">
         </el-pagination>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -190,8 +195,8 @@
       }
     },
     mounted: function () {
-      this.getBlogVisitList();
-      this.setLineChart();
+      // this.getBlogVisitList();
+      // this.setLineChart();
 
       this.bus.$emit('Topbar', {
         MenuHighLight: '0'
@@ -201,6 +206,9 @@
 </script>
 
 <style scoped>
+  .ArticleList{
+    min-height: 500px;
+  }
   .lineChart {
     width: 100%;
     height: 400px;
@@ -210,6 +218,6 @@
     padding: 1rem 0 1rem 0;
     color: rgb(18, 18, 18);
     font-weight: 500;
-    font-size: 15px;
+    font-size: 18px;
   }
 </style>
