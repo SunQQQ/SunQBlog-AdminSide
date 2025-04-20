@@ -329,6 +329,18 @@ export default {
     padding: 0 20px;
   }
 
+  .topbac{
+    position: absolute;
+    z-index: -1;
+    height: 61px;
+    width: 100%;
+  }
+
+  .topbac img{
+    width: 100%;
+    height: 100%;
+  }
+
   .TopBarRight {
     display: none;
   }

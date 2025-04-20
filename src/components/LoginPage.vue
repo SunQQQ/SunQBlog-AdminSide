@@ -266,6 +266,7 @@ export default {
   width: 100%;
   position: relative;
   max-width: 400px;
+  margin: 0 2rem;
 }
 
 /* 登录框 */
