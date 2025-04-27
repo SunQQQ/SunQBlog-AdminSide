@@ -129,6 +129,13 @@ export default {
                 Value: response.data.data.userInfo
               });
             }
+
+            That.createLog({
+              page: "登录注册页",
+              action: "登录",
+              actionObject: "管理后台",
+              actionDesc: "：尊贵的【" + That.username + "】"
+            });
           } else {
             That.$message.error(response.data.message);
 
@@ -186,6 +193,13 @@ export default {
               }
             });
           }
+
+          That.createLog({
+            page: "登录注册页",
+            action: "注册",
+            actionObject: "管理后台",
+            actionDesc: "：获得账号【" + That.username + "】"
+          });
         }).catch(function (error) {
         });
       } else {
@@ -199,6 +213,15 @@ export default {
     // 切换到登录表单
     switchToLogin() {
       this.isLoginForm = true;
+    },
+    createLog(log) {
+      axios.post('/api/createLog', {
+        platformType: "管理后台",
+        page: log.page,
+        action: log.action,
+        actionObject: log.actionObject,
+        actionDesc: log.actionDesc
+      }).then(function (data) { }).catch(function (error) { });
     },
   }
 }
