@@ -51,6 +51,11 @@
             </template>
           </el-table-column>
         </el-table>
+        <el-pagination 
+            layout="total,prev, pager, next" 
+            :total=userTotal :page-size=PagiSize @current-change="getList"
+            @next-click="getList" @prev-click="getList" v-if="userTotal > 0">
+      </el-pagination>
         <div class="guide-text">
           <i class="el-icon-info"
             style="margin-right: 4px; color: #9196a1;"></i>此页面可以编辑自己的账号、密码，给自己设一个好听的名字吧~
@@ -76,7 +81,10 @@ export default {
         email: ''
       },
       userRole: this.GetLocalStorage('SunqBlog')?.userInfo?.role ?? '',
-      dailogTitle: '新增账号' // 弹框标题
+      dailogTitle: '新增账号', // 弹框标题
+      userTotal: 0,
+      PagiSize: 10,
+      commonPage: 1, // 此变量用于删除功能等，记录当前页面状态
     }
   },
   methods: {
@@ -115,7 +123,7 @@ export default {
           Url: '/api/updateUser',
           RequestData: this.form,
           Success: function () {
-            That.GetHeartfeltList();
+            That.getList(That.commonPage);
             That.CloseCreateDialog();
           }
         });
@@ -125,22 +133,32 @@ export default {
           Url: '/api/register',
           RequestData: this.form,
           Success: function () {
-            That.GetHeartfeltList();
+            That.getList(That.commonPage);
             That.CloseCreateDialog();
           }
         });
       }
     },
     // 获取时间轴列表数据
-    GetHeartfeltList: function () {
+    getList: function (CurPage) {
       var That = this;
+
+      // 此变量用于删除功能等，记录当前页面状态
+      That.commonPage = CurPage;
+
       That.SQAjax({
         Url: '/api/userList',
+        RequestData: {
+          start: (CurPage - 1) * That.PagiSize,
+          size: That.PagiSize
+        },
         Success: function (data) {
-          data.forEach(function (Item, I) {
+          That.userTotal = data.total;
+
+          data.list.forEach(function (Item, I) {
             Item.createdAt = Item.createdAt ? Item.createdAt.slice(0, 10) : "";
           });
-          That.userList = data;
+          That.userList = data.list;
         }
       });
     },
@@ -154,13 +172,13 @@ export default {
           username: name
         },
         Success: function (data) {
-          That.GetHeartfeltList();
+          That.getList(That.commonPage);
         }
       });
     }
   },
   mounted: function () {
-    this.GetHeartfeltList();
+    this.getList(this.commonPage);
     this.bus.$emit('Topbar', {
       MenuHighLight: '9'
     });
