@@ -50,14 +50,13 @@
           </el-table-column>
         </el-table>
 
-        <div v-if="MessageLeaveTotal > 10">
-          <el-pagination layout="prev, pager, next" :total=MessageLeaveTotal :page-size=PagiSize
-            @current-change="ChangeCurPage" @next-click="NextPage" @prev-click="NextPage">
-          </el-pagination>
-        </div>
+
+        <el-pagination layout="total,prev, pager, next" :total=MessageLeaveTotal :page-size=PagiSize @current-change="GetData"
+          @next-click="GetData" @prev-click="GetData" v-if="MessageLeaveTotal > 0">
+        </el-pagination>
+
         <div class="guide-text">
-          <i class="el-icon-info"
-            style="margin-right: 4px; color: #9196a1;"></i>留言将在用户端留言页展示。留个言吧，让全网站的人都听到你的声音~
+          <i class="el-icon-info" style="margin-right: 4px; color: #9196a1;"></i>留言将在用户端留言页展示。留个言吧，让全网站的人都听到你的声音~
         </div>
       </div>
     </div>
@@ -71,7 +70,7 @@ export default {
     return {
       MessageLeaveList: [],
       MessageLeaveTotal: 0,
-      PagiSize: 15,
+      PagiSize: 10,
       dialogFormVisible: false,
       form: {
         leaveName: '',
@@ -113,15 +112,15 @@ export default {
             Url: '/api/createLeaveMessage',
             RequestData: this.form,
             Success: function () {
-              That.SkipTo(That.MyCurPage);
+              That.GetData(That.MyCurPage);
             }
           });
-        }else{
+        } else {
           this.SQAjax({
             Url: '/api/updateLeaveMessage',
             RequestData: this.form,
             Success: function () {
-              That.SkipTo(That.MyCurPage);
+              That.GetData(That.MyCurPage);
             }
           });
         }
@@ -137,55 +136,19 @@ export default {
       this.dialogFormVisible = false;
     },
     /*渲染标签列表*/
-    GetData: function () {
+    GetData: function (CurPage) {
       var That = this;
+      That.MyCurPage = CurPage;
       this.SQAjax({
         Url: '/api/leaveMessageList',
         RequestData: {
-          PagnationData: {
-            Skip: 0,
-            Limit: 16
-          }
+          start: (CurPage - 1) * That.PagiSize,
+          size: That.PagiSize
         },
         Success: function (data) {
-          if (data.length > 10) {
-            data.pop();
+          That.MessageLeaveTotal = data.total;
 
-            That.MessageLeaveTotal = data.length;
-          }
-
-          data.forEach(function (Item, I) {
-            Item.createTime = Item.createTime.slice(0, 10);
-          });
-
-          That.MessageLeaveList = data;
-        }
-      });
-    },
-    // 翻页方法
-    ChangeCurPage: function (CurPage) {
-      this.SkipTo(CurPage);
-      this.MyCurPage = CurPage;
-    },
-    NextPage: function (CurPage) {
-      this.SkipTo(CurPage);
-      this.MyCurPage = CurPage;
-    },
-    SkipTo: function (CurPage) {
-      var That = this;
-      That.SQAjax({
-        Url: '/api/leaveMessageList',
-        RequestData: {
-          PagnationData: {
-            Skip: (CurPage - 1) * 10,
-            Limit: 10
-          }
-        },
-        Success: function (data) {
-          data.forEach(function (Item, I) {
-            Item.createTime = Item.createTime.slice(0, 10);
-          });
-          That.MessageLeaveList = data;
+          That.MessageLeaveList = data.list;
         }
       });
     },
@@ -199,7 +162,7 @@ export default {
           id: Id
         },
         Success: function () {
-          That.SkipTo(That.MyCurPage);
+          That.GetData(That.MyCurPage);
         }
       });
     },
@@ -215,7 +178,7 @@ export default {
     },
   },
   mounted: function () {
-    this.GetData();
+    this.GetData(this.MyCurPage);
     this.bus.$emit('Topbar', {
       MenuHighLight: '6'
     });
@@ -224,11 +187,11 @@ export default {
 </script>
 
 <style scoped>
-  .guide-text{
-    color: var(--GBK06A);
-    font-size: 12px;
-    line-height: 19px;
-    padding: 12px 0px 0px;
-    color:#9196a1;
-  }
+.guide-text {
+  color: var(--GBK06A);
+  font-size: 12px;
+  line-height: 19px;
+  padding: 12px 0px 0px;
+  color: #9196a1;
+}
 </style>
