@@ -82,10 +82,10 @@
         <span slot="title">留言管理</span>
       </el-menu-item>
 
-      <!-- <el-menu-item index="7" @click="ChangeHighLight('Comment')">
+      <el-menu-item index="7" @click="ChangeHighLight('Comment')">
         <i class="iconfont icon-pinglun"></i>
         <span slot="title">评论管理</span>
-      </el-menu-item> -->
+      </el-menu-item>
 
       <el-menu-item index="2" @click="ChangeHighLight('TagIndex')">
         <i class="iconfont icon-biaoqian_o"></i>
