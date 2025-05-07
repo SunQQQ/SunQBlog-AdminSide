@@ -1,10 +1,10 @@
 # SunQBlog-AdminSide
 
 > 此项目为Coding Life博客项目的管理端源码，
-管理端体验地址：http://www.codinglife.online/admin/#/userManage
-，用户端体验地址：http://www.codinglife.online
+管理端体验地址：http://codinglife.online/admin/#/userManage
+，用户端体验地址：http://codinglife.online
 
-管理端基于Vue Cli 3.0，使用UI框架Element。主要对客户端各个功能进行管理，如有兴趣可在博客留言，我发送本管理后台地址及账号密码
+管理端基于Vue Cli 3.0，使用UI框架Element。主要对客户端各个功能进行管理。
 
 ## Build Setup
 

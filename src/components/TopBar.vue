@@ -16,11 +16,11 @@
             <i class="iconfont icon-github"></i> 管理端源码
           </a>
         </div>
-        <!-- <div class="home-link">
-          <a href="http://39.104.22.73:70" target="_blank">
+        <div class="home-link">
+          <a href="https://codinglife.online/snake/" target="_blank">
             <i class="iconfont icon-she"></i> 贪吃蛇入口
           </a>
-        </div> -->
+        </div>
         <div class="placeHolder"></div>
         <div class="PersonCenter">
           <div class="PersonCenterName" @click="OpenUserCenter()">
