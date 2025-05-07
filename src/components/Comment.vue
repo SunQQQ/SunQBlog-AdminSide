@@ -8,14 +8,11 @@
         <!-- <el-button type="primary" >批量删除</el-button> -->
         <el-dialog title="修改评论" :visible.sync="dialogEdit">
           <el-form :model="form">
-            <el-form-item label="评论人" :label-width="formLabelWidth">
-              <el-input v-model="form.ArticleCommentNickName"></el-input>
-            </el-form-item>
             <el-form-item label="评论内容" :label-width="formLabelWidth">
-              <el-input v-model="form.ArticleCommentText"></el-input>
+              <el-input v-model="form.commentContent"></el-input>
             </el-form-item>
             <el-form-item label="评论来源" :label-width="formLabelWidth">
-              <el-input v-model="form.LocationCityName"></el-input>
+              <el-input v-model="form.city"></el-input>
             </el-form-item>
           </el-form>
           <div slot="footer" class="dialog-footer">
@@ -38,14 +35,14 @@
           <el-table-column fixed="right" label="操作" width="130">
             <template slot-scope="scope">
               <el-button @click="edit(scope.row)" type="text" size="small" class="warning-color">修改</el-button>
-              <el-button @click="DeleteComment(scope.row._id, scope.row.ArticleId)" type="text" size="small"
+              <el-button @click="DeleteComment(scope.row.id)" type="text" size="small"
                 class="danger-color">删除</el-button>
             </template>
           </el-table-column>
         </el-table>
 
         <!--分页器-->
-        <el-pagination layout="prev, pager, next" :total=CommentTotal :page-size=PageSize
+        <el-pagination layout="total,prev, pager, next" :total=CommentTotal :page-size=PageSize
           @current-change="GetData" @next-click="GetData" @prev-click="GetData"
           v-if="CommentTotal > 0">
         </el-pagination>
@@ -62,9 +59,8 @@ export default {
       CommentList: [],
       dialogEdit: false,
       form: {
-        LocationCityName: '',
-        ArticleCommentNickName: '',
-        ArticleCommentText: ''
+        city: '',
+        commentContent: ''
       },
       formLabelWidth: '80px',
       CommentTotal: 0,
@@ -96,36 +92,31 @@ export default {
      * @param ArticleId 文章id
      * @constructor
      */
-    DeleteComment: function (CommentId, ArticleId) {
+    DeleteComment: function (CommentId) {
       var That = this;
 
       That.SQAjax({
-        Url: '/api/CommentDelete/backend',
+        Url: '/api/deleteComment',
         RequestData: {
-          _id: CommentId
+          id: CommentId
         },
-        Success: function (data) {
-          That.SkipTo(That.MyCurPage);
-
-          That.UpdateArticleCommentNum(ArticleId, 'delete');
+        Success: function () {
+          That.GetData(That.MyCurPage);
         }
       });
     },
     OnDialogCancel: function () {
-      if (this.form.TagId) {
-        delete this.form.TagId;
-      }
       this.dialogEdit = false;
     },
     /*监听弹框提交*/
     OnDialogSubmit: function () {
       var That = this;
-      if (this.form.ArticleCommentNickName && this.form.ArticleCommentText) {
+      if (this.form.commentContent && this.form.city) {
         this.SQAjax({
-          Url: '/api/ArticleCommentUpdate/backend',
+          Url: '/api/updateComment',
           RequestData: this.form,
           Success: function () {
-            That.SkipTo(That.MyCurPage);
+            That.GetData(That.MyCurPage);
             That.dialogEdit = false;
           }
         });
@@ -135,23 +126,10 @@ export default {
     * 修改评论
     */
     edit: function (Row) {
-      this.form.ArticleCommentNickName = Row.ArticleCommentNickName;
-      this.form.ArticleCommentText = Row.ArticleCommentText;
-      this.form.LocationCityName = Row.LocationCityName;
-      this.form._id = Row._id;
+      this.form.commentContent = Row.commentContent;
+      this.form.city = Row.city;
+      this.form.id = Row.id;
       this.dialogEdit = true;
-    },
-
-    // 传入文章id，给对应文章评论数减1
-    UpdateArticleCommentNum: function (id, type) {
-      this.SQAjax({
-        Url: '/api/ArticleCommentNumUpdate/backend',
-        RequestData: {
-          _id: id,
-          type: type
-        },
-        Success: function (data) { }
-      });
     }
   },
   mounted() {
