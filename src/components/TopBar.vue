@@ -92,10 +92,10 @@
         <span slot="title">分类管理</span>
       </el-menu-item>
 
-      <!-- <el-menu-item index="3" @click="ChangeHighLight('TimeLine')">
+      <el-menu-item index="3" @click="ChangeHighLight('TimeLine')">
         <i class="iconfont icon-fuhao-shijianzhou"></i>
         <span slot="title">时间轴管理</span>
-      </el-menu-item> -->
+      </el-menu-item>
 
       <el-menu-item index="4" @click="ChangeHighLight('Heartfelt')">
         <i class="iconfont icon-heart"></i>
