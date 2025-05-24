@@ -13,7 +13,7 @@
             </el-form-item>
             <el-form-item label="事件日期" :label-width="formLabelWidth">
               <el-date-picker v-model="form.contentDate" 
-                format="yyyy-MM-dd" value-format="yyyy-MM-dd" 
+                type="date" format="yyyy-MM-dd" value-format="yyyy-MM-dd" 
                 placeholder="事件日期" style="width: 100%">
               </el-date-picker>
             </el-form-item>
@@ -52,7 +52,7 @@
         formLabelWidth: '80px',
         form:{
           content:'',
-          contentDate: new Date(),
+          contentDate: "",
         },
       }
     },
@@ -63,7 +63,7 @@
         this.dialogTitle = '新增时间轴';
 
         this.form.content = "";
-        this.form.contentDate = new Date();
+        this.form.contentDate = "";
         this.form.id = "";
       },
       // 关闭新增弹框
