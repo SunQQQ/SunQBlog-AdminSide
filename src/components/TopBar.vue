@@ -206,6 +206,9 @@ export default {
       if (
         !document
           .getElementsByClassName("PersonCenterName")[0]
+          && 
+        !document
+          .getElementsByClassName("PersonCenterName")[0]
           .contains(e.target)
       ) {
         That.ShowExit = -1;
