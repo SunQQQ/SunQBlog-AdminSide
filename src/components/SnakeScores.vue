@@ -62,23 +62,14 @@
       GetData:function () {
         var That = this;
         this.SQAjax({
-          Url:'/snake/scoreReadByDate/foreend',
+          Url:'/api/getSnakeScoreList',
           RequestData: {
             PagnationData: {
               Skip:0,
-              Limit:15
+              Limit:10
             }
           },
           Success:function (data) {
-            That.SQAjax({
-              Url: '/snake/ScoreRead/foreend',
-              Success: function (data) {
-                if(data.num > 15){
-                  That.MessageLeaveTotal = data.num;
-                }
-              }
-            });
-
             That.MessageLeaveList = data;
           }
         });
@@ -134,23 +125,19 @@
 
         // 整理选中项的id数组
         that.$refs.multipleTable.selection.forEach(item =>  {
-          that.multipleSelection.push(item._id);
+          that.multipleSelection.push(item.id);
         });
 
-        if(window.localStorage.getItem("SQBlogUser") == 'sunq'){
-          that.SQAjax({
-            Url:'/snake/scoreMulDelete/backend',
-            RequestData:{
-              idArray: that.multipleSelection
-            },
-            Success:function () {
-              that.$message('批量删除成功');
-              that.SkipTo(that.MyCurPage);
-            }
-          });
-        }else{
-          that.$message.error('权限不足，无法操作数据');
-        }
+        that.SQAjax({
+          Url:'/api/scoreMulDelete',
+          RequestData:{
+            ids: that.multipleSelection
+          },
+          Success:function () {
+            that.$message('批量删除成功');
+            that.GetData();
+          }
+        });
       },
       jumpPage:function(){
         window.open('https://github.com/SunQQQ/snake');

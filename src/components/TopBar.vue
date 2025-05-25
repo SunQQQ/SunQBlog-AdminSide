@@ -107,10 +107,10 @@
         <span slot="title">友链管理</span>
       </el-menu-item> -->
 
-      <!-- <el-menu-item index="8" @click="ChangeHighLight('SnakeScores')">
+      <el-menu-item index="8" @click="ChangeHighLight('SnakeScores')">
         <i class="iconfont icon-she"></i>
         <span slot="title">贪吃蛇榜单</span>
-      </el-menu-item> -->
+      </el-menu-item>
 
       <div class="mobileExit">
         <el-menu-item index="10" @click="switchPage('gitHub')">
