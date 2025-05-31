@@ -36,7 +36,7 @@
       return {
         MessageLeaveList: [],
         total:0,
-        PagiSize:5,
+        PagiSize:10,
         dialogFormVisible: false,
         form: {
           MessageLeaveName: '',
