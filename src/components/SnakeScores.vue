@@ -4,35 +4,26 @@
       <div class="ArticleList">
         <div style="margin-bottom:10px">
           <el-button @click="mulDelete()" type="primary" plain>批量删除</el-button>
-          <el-button @click="jumpPage()" type="success" plain>游戏源码</el-button>
+          <el-button @click="jumpPage('game')" plain>体验游戏</el-button>
+          <el-button @click="jumpPage('code')" type="success" plain>游戏源码</el-button>
         </div>
 
         <!--表格操作栏-->
-        <el-table :data="MessageLeaveList" style="width: 100%" ref="multipleTable" border :header-cell-style="{background:'#f7f7f7'}">
-          <el-table-column
-            type="selection"
-            width="55">
+        <el-table :data="MessageLeaveList" style="width: 100%" ref="multipleTable" border
+          :header-cell-style="{background:'#f7f7f7'}">
+          <el-table-column type="selection" width="55">
           </el-table-column>
           <el-table-column prop="userName" label="用户名"></el-table-column>
           <el-table-column prop="score" label="成绩"></el-table-column>
           <el-table-column prop="gameTime" label="时长"></el-table-column>
           <el-table-column prop="createTime" label="创建时间"></el-table-column>
-          <el-table-column fixed="right" label="操作" width="130">
-            <template slot-scope="scope">
-              <el-button @click="DeleteTag(scope.row._id)" type="text" size="small" class="danger-color">删除</el-button>
-            </template>
-          </el-table-column>
         </el-table>
 
-        <div v-if="MessageLeaveTotal>10">
-          <el-pagination layout="prev, pager, next"
-                         :total=MessageLeaveTotal
-                         :page-size=PagiSize
-                         @current-change="ChangeCurPage"
-                         @next-click="NextPage"
-                         @prev-click="NextPage">
-          </el-pagination>
-        </div>
+        <el-pagination layout="total, prev, pager, next" 
+          :total=total 
+          :page-size=PagiSize
+          @current-change="GetData">
+        </el-pagination>
       </div>
     </div>
   </div>
@@ -44,8 +35,8 @@
     data: function () {
       return {
         MessageLeaveList: [],
-        MessageLeaveTotal:0,
-        PagiSize:15,
+        total:0,
+        PagiSize:5,
         dialogFormVisible: false,
         form: {
           MessageLeaveName: '',
@@ -59,66 +50,21 @@
     },
     methods: {
       /*渲染标签列表*/
-      GetData:function () {
+      GetData:function (CurPage) {
         var That = this;
+        That.MyCurPage = CurPage;
         this.SQAjax({
           Url:'/api/getSnakeScoreList',
           RequestData: {
-            PagnationData: {
-              Skip:0,
-              Limit:10
-            }
+            start: (CurPage - 1) * That.PagiSize,
+            size: That.PagiSize
           },
           Success:function (data) {
-            That.MessageLeaveList = data;
+            That.MessageLeaveList = data.list;
+            That.total = data.total;
           }
         });
       },
-      // 跳转到选中页
-      ChangeCurPage:function(CurPage){
-        this.SkipTo(CurPage);
-        this.MyCurPage = CurPage;
-      },
-      // 点击下一页
-      NextPage:function (CurPage) {
-        this.SkipTo(CurPage);
-        this.MyCurPage = CurPage;
-      },
-      // 跳转分页的具体方法
-      SkipTo:function (CurPage) {
-        var That = this;
-        That.SQAjax({
-          Url:'/snake/scoreReadByDate/foreend',
-          RequestData: {
-            PagnationData: {
-              Skip:(CurPage-1) * 15,
-              Limit:15
-            }
-          },
-          Success:function (data) {
-            That.MessageLeaveList = data;
-          }
-        });
-      },
-      // 删除标签
-      DeleteTag:function (Id) {
-        var That = this;
-
-        if(window.localStorage.getItem("SQBlogUser") == 'sunq'){
-          That.SQAjax({
-            Url:'/snake/scoreDelete/backend',
-            RequestData:{
-              _id:Id
-            },
-            Success:function () {
-              That.SkipTo(That.MyCurPage);
-            }
-          });
-        }else{
-          That.$message.error('权限不足，无法操作数据');
-        }
-      },
-
       // 批量删除
       mulDelete:function () {
         var that = this;
@@ -128,6 +74,14 @@
           that.multipleSelection.push(item.id);
         });
 
+        if (that.multipleSelection.length === 0) {
+          that.$message({
+            type: 'warning',
+            message: '请选择要删除的记录'
+          });
+          return;
+        }
+
         that.SQAjax({
           Url:'/api/scoreMulDelete',
           RequestData:{
@@ -135,16 +89,16 @@
           },
           Success:function () {
             that.$message('批量删除成功');
-            that.GetData();
+            that.GetData(that.MyCurPage);
           }
         });
       },
-      jumpPage:function(){
-        window.open('https://github.com/SunQQQ/snake');
+      jumpPage:function(type){
+        window.open(type=='code'? 'https://github.com/SunQQQ/snake' : 'https://codinglife.online/snake');
       }
     },
     mounted: function () {
-      this.GetData();
+      this.GetData(this.MyCurPage);
       this.bus.$emit('Topbar',{
         MenuHighLight:'8'
       });
