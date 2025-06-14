@@ -178,7 +178,7 @@ export default {
     // 打开新的页面
     switchPage: function (page) {
       if (page == 'userClient') {
-        window.open("http://www.codinglife.online/");
+        window.open("https://codinglife.online/");
       } else if (page == 'gitHub') {
         window.open("https://github.com/SunQQQ/SunQBlog-AdminSide");
       }
