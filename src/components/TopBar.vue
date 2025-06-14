@@ -7,7 +7,7 @@
       <div class="Logo">CodingLife Admin</div>
       <div class="TopBarRight">
         <div class="home-link">
-          <a href="http://www.codinglife.online/" target="_blank">
+          <a href="https://codinglife.online" target="_blank">
             <i class="iconfont icon-shouye"></i> 用户端入口
           </a>
         </div>
