@@ -155,9 +155,6 @@ export default {
         Success: function (data) {
           That.userTotal = data.total;
 
-          data.list.forEach(function (Item, I) {
-            Item.createdAt = Item.createdAt ? Item.createdAt.slice(0, 10) : "";
-          });
           That.userList = data.list;
         }
       });
