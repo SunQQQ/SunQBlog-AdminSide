@@ -31,7 +31,7 @@
         </el-dialog>
 
         <!--表格操作栏-->
-        <el-table :data="siteList" style="width: 100%" border :header-cell-style="{background:'#f7f7f7'}">
+        <el-table :data="siteList" style="width: 100%" border :header-cell-style="{ background: '#f7f7f7' }">
           <el-table-column prop="siteName" label="友链名称"></el-table-column>
           <el-table-column prop="siteUrl" label="友链地址"></el-table-column>
           <el-table-column prop="siteLogo" label="图标地址" width="300" :show-overflow-tooltip="true"></el-table-column>
@@ -40,19 +40,16 @@
           <el-table-column fixed="right" label="操作" width="130">
             <template slot-scope="scope">
               <el-button @click="EditFriendUrl(scope.row)" type="text" size="small" class="warning-color">编辑</el-button>
-              <el-button @click="DeleteFriendUrl(scope.row.id)" type="text" size="small" class="danger-color">删除</el-button>
+              <el-button @click="DeleteFriendUrl(scope.row.id)" type="text" size="small"
+                class="danger-color">删除</el-button>
             </template>
           </el-table-column>
         </el-table>
 
         <!--分页器-->
-          <el-pagination layout="total,prev, pager, next"
-                         :total=FriendUrlTotal
-                         :page-size=PagiSize
-                         @current-change="GetData"
-                         @next-click="GetData"
-                         @prev-click="GetData">
-          </el-pagination>
+        <el-pagination layout="total,prev, pager, next" :total=FriendUrlTotal :page-size=PagiSize
+          @current-change="GetData" @next-click="GetData" @prev-click="GetData">
+        </el-pagination>
 
       </div>
     </div>
@@ -116,7 +113,7 @@ export default {
       That.SQAjax({
         Url: '/api/getAdminSiteList',
         RequestData: {
-          start: (start-1) * That.PagiSize,
+          start: (start - 1) * That.PagiSize,
           size: That.PagiSize
         },
         Success: function (data) {
@@ -156,6 +153,4 @@ export default {
 }
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
