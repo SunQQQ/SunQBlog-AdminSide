@@ -20,9 +20,9 @@
             <el-form-item label="个人描述" :label-width="formLabelWidth">
               <el-input v-model="form.siteDesc"></el-input>
             </el-form-item>
-            <el-form-item label="优先级" :label-width="formLabelWidth">
+            <!-- <el-form-item label="优先级" :label-width="formLabelWidth">
               <el-input v-model="form.order"></el-input>
-            </el-form-item>
+            </el-form-item> -->
           </el-form>
           <div slot="footer" class="dialog-footer">
             <el-button @click="OnDialogCancel()">取 消</el-button>
@@ -39,7 +39,7 @@
           <!-- <el-table-column prop="order" label="优先级（从0开始）"></el-table-column> -->
           <el-table-column fixed="right" label="操作" width="130">
             <template slot-scope="scope">
-              <el-button @click="EditFriendUrl(scope.row)" type="text" size="small" class="warning-color">编辑</el-button>
+              <el-button @click="OnOpenDialog(scope.row)" type="text" size="small" class="warning-color">编辑</el-button>
               <el-button @click="DeleteFriendUrl(scope.row.id)" type="text" size="small"
                 class="danger-color">删除</el-button>
             </template>
@@ -77,34 +77,48 @@ export default {
     }
   },
   methods: {
-    /*监听新增弹框*/
-    OnOpenDialog: function () {
-      // 清空表单数据
-      this.form = {};
+    OnOpenDialog: function (rowData) {
+      if (rowData) {
+        this.form = rowData;
+      } else {
+        this.form = {};
+      }
+
       this.dialogFormVisible = true;
     },
     /*监听弹框提交*/
     OnDialogSubmit: function () {
       var That = this;
-      if (this.form.siteDesc) {
-        this.SQAjax({
-          Url: '/api/FriendUrlEditor/backend',
-          RequestData: That.form,
-          Success: function (data) {
-            if (That.form._id) {
-              delete That.form._id;
+      if (this.form.siteName && this.form.siteUrl && this.form.siteLogo && this.form.siteDesc) {
+
+        if (this.form.id) {
+          this.SQAjax({
+            Url: '/api/editSite',
+            RequestData: That.form,
+            Success: function (data) {
+              That.GetData(That.MyCurPage);
             }
-            That.SkipTo(That.MyCurPage);
-          }
-        });
+          });
+        } else {
+          this.SQAjax({
+            Url: '/api/addSite',
+            RequestData: That.form,
+            Success: function (data) {
+              That.GetData(That.MyCurPage);
+            }
+          });
+        }
+
 
         this.dialogFormVisible = false;
+      } else {
+        this.$message({
+          type: 'warning',
+          message: '请填写完整信息'
+        });
       }
     },
     OnDialogCancel: function () {
-      if (this.form._id) {
-        delete this.form._id;
-      }
       this.dialogFormVisible = false;
     },
     /*渲染标签列表*/
@@ -137,11 +151,6 @@ export default {
           That.GetData(That.MyCurPage);
         }
       });
-    },
-    /*编辑标签*/
-    EditFriendUrl: function (RowData) {
-      this.OnOpenDialog();
-      this.form = RowData;
     }
   },
   mounted: function () {
