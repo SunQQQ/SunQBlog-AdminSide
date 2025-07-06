@@ -40,7 +40,7 @@
           <el-table-column fixed="right" label="操作" width="130">
             <template slot-scope="scope">
               <el-button @click="EditFriendUrl(scope.row)" type="text" size="small" class="warning-color">编辑</el-button>
-              <el-button @click="DeleteFriendUrl(scope.row._id)" type="text" size="small" class="danger-color">删除</el-button>
+              <el-button @click="DeleteFriendUrl(scope.row.id)" type="text" size="small" class="danger-color">删除</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -120,6 +120,7 @@ export default {
           size: That.PagiSize
         },
         Success: function (data) {
+          That.MyCurPage = start;
           That.FriendUrlTotal = data.total;
           That.siteList = data.list;
         }
@@ -130,13 +131,13 @@ export default {
       var That = this;
 
       That.SQAjax({
-        Url: '/api/FriendUrlDelete/backend',
+        Url: '/api/deleteSite',
         RequestData: {
-          _id: Id
+          id: Id
         },
         Success: function (data) {
           That.$message('删除成功');
-          That.SkipTo(That.MyCurPage);
+          That.GetData(That.MyCurPage);
         }
       });
     },
