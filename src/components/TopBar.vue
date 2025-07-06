@@ -56,7 +56,7 @@
       active-text-color="#004eef" active-background-color="#d9e1f1" v-if="menuStatus">
       <el-menu-item index="9" @click="ChangeHighLight('userManage')">
         <i class="iconfont icon-shujutongji"></i>
-        <span slot="title">账号管理</span>
+        <span slot="title">我的账号</span>
       </el-menu-item>
       <!-- <el-menu-item index="0" @click="ChangeHighLight('index')">
         <i class="iconfont icon-shujutongji"></i>
@@ -65,7 +65,7 @@
       <el-submenu index="1">
         <template slot="title">
           <i class="iconfont icon-16"></i>
-          <span>文章管理</span>
+          <span>我的文章</span>
         </template>
         <el-menu-item index="1-1" @click="ChangeHighLight('Article')">
           <i class="iconfont icon-16"></i>
@@ -79,12 +79,12 @@
 
       <el-menu-item index="6" @click="ChangeHighLight('MessageLeave')">
         <i class="iconfont icon-liuyan"></i>
-        <span slot="title">留言管理</span>
+        <span slot="title">我的留言</span>
       </el-menu-item>
 
       <el-menu-item index="7" @click="ChangeHighLight('Comment')">
         <i class="iconfont icon-pinglun"></i>
-        <span slot="title">评论管理</span>
+        <span slot="title">我的评论</span>
       </el-menu-item>
 
       <el-menu-item index="2" @click="ChangeHighLight('TagIndex')">
@@ -99,13 +99,13 @@
 
       <el-menu-item index="4" @click="ChangeHighLight('Heartfelt')">
         <i class="iconfont icon-heart"></i>
-        <span slot="title">心声管理</span>
+        <span slot="title">我的心声</span>
       </el-menu-item>
 
-      <!-- <el-menu-item index="5"  @click="ChangeHighLight('FriendUrlIndex')">
+      <el-menu-item index="5"  @click="ChangeHighLight('FriendUrlIndex')">
         <i class="iconfont icon-lianjie"></i>
         <span slot="title">友链管理</span>
-      </el-menu-item> -->
+      </el-menu-item>
 
       <el-menu-item index="8" @click="ChangeHighLight('SnakeScores')">
         <i class="iconfont icon-she"></i>

@@ -9,16 +9,16 @@
         <el-dialog title="管理友链" :visible.sync="dialogFormVisible">
           <el-form :model="form">
             <el-form-item label="网站名称" :label-width="formLabelWidth">
-              <el-input v-model="form.FriendUrlNickName"></el-input>
+              <el-input v-model="form.siteName"></el-input>
             </el-form-item>
             <el-form-item label="友链地址" :label-width="formLabelWidth">
-              <el-input v-model="form.FriendUrlAdress"></el-input>
+              <el-input v-model="form.siteUrl"></el-input>
             </el-form-item>
             <el-form-item label="图标地址" :label-width="formLabelWidth">
-              <el-input v-model="form.FriendUrlIcoUrl"></el-input>
+              <el-input v-model="form.siteLogo"></el-input>
             </el-form-item>
             <el-form-item label="个人描述" :label-width="formLabelWidth">
-              <el-input v-model="form.FriendUrlDescript"></el-input>
+              <el-input v-model="form.siteDesc"></el-input>
             </el-form-item>
             <el-form-item label="优先级" :label-width="formLabelWidth">
               <el-input v-model="form.order"></el-input>
@@ -31,12 +31,12 @@
         </el-dialog>
 
         <!--表格操作栏-->
-        <el-table :data="FriendUrlList" style="width: 100%" border :header-cell-style="{background:'#f7f7f7'}">
-          <el-table-column prop="FriendUrlNickName" label="友链名称"></el-table-column>
-          <el-table-column prop="FriendUrlAdress" label="友链地址"></el-table-column>
-          <el-table-column prop="FriendUrlIcoUrl" label="图标地址" width="300" :show-overflow-tooltip="true"></el-table-column>
-          <el-table-column prop="FriendUrlDescript" label="个人描述"></el-table-column>
-          <el-table-column prop="order" label="优先级（从0开始）"></el-table-column>
+        <el-table :data="siteList" style="width: 100%" border :header-cell-style="{background:'#f7f7f7'}">
+          <el-table-column prop="siteName" label="友链名称"></el-table-column>
+          <el-table-column prop="siteUrl" label="友链地址"></el-table-column>
+          <el-table-column prop="siteLogo" label="图标地址" width="300" :show-overflow-tooltip="true"></el-table-column>
+          <el-table-column prop="siteDesc" label="个人描述"></el-table-column>
+          <!-- <el-table-column prop="order" label="优先级（从0开始）"></el-table-column> -->
           <el-table-column fixed="right" label="操作" width="130">
             <template slot-scope="scope">
               <el-button @click="EditFriendUrl(scope.row)" type="text" size="small" class="warning-color">编辑</el-button>
@@ -46,15 +46,14 @@
         </el-table>
 
         <!--分页器-->
-        <div v-if="FriendUrlTotal>10">
-          <el-pagination layout="prev, pager, next"
+          <el-pagination layout="total,prev, pager, next"
                          :total=FriendUrlTotal
                          :page-size=PagiSize
-                         @current-change="ChangeCurPage"
-                         @next-click="NextPage"
-                         @prev-click="NextPage">
+                         @current-change="GetData"
+                         @next-click="GetData"
+                         @prev-click="GetData">
           </el-pagination>
-        </div>
+
       </div>
     </div>
   </div>
@@ -65,13 +64,13 @@ export default {
   name: "TagIndex",
   data: function () {
     return {
-      FriendUrlList: [],
+      siteList: [],
       dialogFormVisible: false,
       form: {
-        FriendUrlNickName: '',
-        FriendUrlAdress: '',
-        FriendUrlIcoUrl: '',
-        FriendUrlDescript: ''
+        siteName: '',
+        siteUrl: '',
+        siteLogo: '',
+        site: ''
       },
       formLabelWidth: '80px',
 
@@ -90,7 +89,7 @@ export default {
     /*监听弹框提交*/
     OnDialogSubmit: function () {
       var That = this;
-      if (this.form.FriendUrlDescript) {
+      if (this.form.siteDesc) {
         this.SQAjax({
           Url: '/api/FriendUrlEditor/backend',
           RequestData: That.form,
@@ -112,29 +111,17 @@ export default {
       this.dialogFormVisible = false;
     },
     /*渲染标签列表*/
-    GetData: function () {
+    GetData: function (start) {
       var That = this;
       That.SQAjax({
-        Url: '/api/FriendUrlRead/foreend',
+        Url: '/api/getAdminSiteList',
         RequestData: {
-          PagnationData: {
-            Skip: 0,
-            Limit: 11
-          }
+          start: (start-1) * That.PagiSize,
+          size: That.PagiSize
         },
         Success: function (data) {
-          if (data.length > 10) {
-            data.pop();
-
-            That.SQAjax({
-              Url: '/api/getfriendurlnum',
-              Success: function (data) {
-                That.FriendUrlTotal = data;
-              }
-            });
-          }
-
-          That.FriendUrlList = data;
+          That.FriendUrlTotal = data.total;
+          That.siteList = data.list;
         }
       });
     },
@@ -157,34 +144,10 @@ export default {
     EditFriendUrl: function (RowData) {
       this.OnOpenDialog();
       this.form = RowData;
-    },
-    // 翻页方法
-    ChangeCurPage: function (CurPage) {
-      this.SkipTo(CurPage);
-      this.MyCurPage = CurPage;
-    },
-    NextPage: function (CurPage) {
-      this.SkipTo(CurPage);
-      this.MyCurPage = CurPage;
-    },
-    SkipTo: function (CurPage) {
-      var That = this;
-      That.SQAjax({
-        Url: '/api/FriendUrlRead/foreend',
-        RequestData: {
-          PagnationData: {
-            Skip: (CurPage - 1) * 10,
-            Limit: 10
-          }
-        },
-        Success: function (data) {
-          That.FriendUrlList = data;
-        }
-      });
     }
   },
   mounted: function () {
-    this.GetData();
+    this.GetData(1);
     this.bus.$emit('Topbar', {
       MenuHighLight: '5'
     });
