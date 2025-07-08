@@ -19,6 +19,10 @@
         <el-table-column prop="createName" label="创建人"></el-table-column>
         <!-- <el-table-column prop="order" label="优先级"></el-table-column> -->
         <el-table-column prop="commentNum" label="评论数"></el-table-column>
+        <el-table-column prop="systemIsReview" :formatter="formatBoolean" label="是否经过审核"></el-table-column>
+        <el-table-column prop="systemReviewResult" :formatter="formatResult" label="审核结果"></el-table-column>
+        <el-table-column prop="systemReviewComment" label="审核意见"></el-table-column>
+        <el-table-column prop="systemReviewTime" label="审核时间"></el-table-column>
         <el-table-column prop="createTime" label="创建时间"></el-table-column>
         <el-table-column fixed="right" label="操作" width="130">
           <template slot-scope="scope">
@@ -118,7 +122,14 @@ export default {
           That.ArticleTagOptions = data;
         }
       });
-    }
+    },
+    formatBoolean(row, column, cellValue) {
+      return cellValue === 1 ? '是' : '否'; 
+    },
+    formatResult(row, column, cellValue) {
+      return cellValue === 1 ? '通过' : '未通过'; 
+    },
+    
   },
 
   mounted: function () {

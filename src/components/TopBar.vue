@@ -104,7 +104,7 @@
 
       <el-menu-item index="5"  @click="ChangeHighLight('FriendUrlIndex')">
         <i class="iconfont icon-lianjie"></i>
-        <span slot="title">友链管理</span>
+        <span slot="title">我的朋友圈</span>
       </el-menu-item>
 
       <el-menu-item index="8" @click="ChangeHighLight('SnakeScores')">
