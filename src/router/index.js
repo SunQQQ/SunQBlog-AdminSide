@@ -1,19 +1,34 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import index from '@/components/index'
-import Article from '@/components/Article'
-import ArticleDetail from '@/components/ArticleDetail'
-import WriteArticle from '@/components/WriteArticle'
-import TagIndex from '@/components/TagIndex'
-import TopBar from '@/components/TopBar'
-import LoginPage from '@/components/LoginPage'
-import TimeLine from '@/components/TimeLine'
-import Heartfelt from '@/components/Heartfelt'
-import FriendUrlIndex from '@/components/FriendUrlIndex'
-import MessageLeave from '@/components/MessageLeave'
-import Comment from '@/components/Comment'
-import SnakeScores from '@/components/SnakeScores'
-import userManage from '@/components/userManage'
+
+const index = () =>
+  import(/* webpackChunkName:"index" */ '@/components/index');
+const Article = () =>
+  import(/* webpackChunkName:"index" */ '@/components/Article');
+const ArticleDetail = () =>
+  import(/* webpackChunkName:"index" */ '@/components/ArticleDetail');
+const WriteArticle = () =>
+  import(/* webpackChunkName:"WriteArticle" */ '@/components/WriteArticle');
+const TagIndex = () =>
+  import(/* webpackChunkName:"index" */ '@/components/TagIndex');
+const TopBar = () =>
+  import(/* webpackChunkName:"index" */ '@/components/TopBar');
+const LoginPage = () =>
+  import(/* webpackChunkName:"index" */ '@/components/LoginPage');
+const TimeLine = () =>
+  import(/* webpackChunkName:"index" */ '@/components/TimeLine');
+const Heartfelt = () =>
+  import(/* webpackChunkName:"index" */ '@/components/Heartfelt');
+const FriendUrlIndex = () =>
+  import(/* webpackChunkName:"index" */ '@/components/FriendUrlIndex');
+const MessageLeave = () =>
+  import(/* webpackChunkName:"index" */ '@/components/MessageLeave');
+const Comment = () =>
+  import(/* webpackChunkName:"index" */ '@/components/Comment');
+const SnakeScores = () =>
+  import(/* webpackChunkName:"index" */ '@/components/SnakeScores');
+const userManage = () =>
+  import(/* webpackChunkName:"index" */ '@/components/userManage');
 
 Vue.use(Router)
 

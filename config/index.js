@@ -62,10 +62,9 @@ module.exports = {
     assetsPublicPath: './',
 
     /**
-     * Source Maps
+     * Map文件用来调试压缩后的代码，暂不需要调试先关闭，后期可打开
      */
-
-    productionSourceMap: true,
+    productionSourceMap: false,
     // https://webpack.js.org/configuration/devtool/#production
     devtool: '#source-map',
 
