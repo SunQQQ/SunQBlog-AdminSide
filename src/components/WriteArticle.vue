@@ -14,7 +14,7 @@
           <div class="ArticleTitle">
             文章封面：
             <input @change="SetArticleCover" type="file" multiple="multiple" ref='selectfile' style="flex:1">
-            <img :src="articleCover" v-show="articleCover" style="width: 70px;height: 40px" />
+            <img :src="articleCover" v-show="articleCover" style="width: 70px;height: 40px" alt="文章缩略图"/>
           </div>
           <div class="ArticleTitle">
             封面地址：

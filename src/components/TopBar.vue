@@ -2,7 +2,7 @@
   <div v-if="TopbarShow == true">
     <div class="TopBar" >
       <div class="topbac">
-        <img src="../assets/img/topbar.png">
+        <img src="../assets/img/topbar.png" alt="topbar background">
       </div>
       <div class="Logo">CodingLife Admin</div>
       <div class="TopBarRight">

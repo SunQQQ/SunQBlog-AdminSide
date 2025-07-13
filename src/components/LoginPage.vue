@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="loginBac">
-      <img src="../assets/img/lognBac.jpg">
+      <img src="../assets/img/lognBac.jpg" alt="登录页面背景图">
     </div>
     <div class="modal-mask">
       <div class="modal-container container-width" @click.stop>
