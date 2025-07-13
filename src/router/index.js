@@ -8,7 +8,7 @@ const Article = () =>
 const ArticleDetail = () =>
   import(/* webpackChunkName:"index" */ '@/components/ArticleDetail');
 const WriteArticle = () =>
-  import(/* webpackChunkName:"WriteArticle" */ '@/components/WriteArticle');
+  import(/* webpackChunkName:"index" */ '@/components/WriteArticle');
 const TagIndex = () =>
   import(/* webpackChunkName:"index" */ '@/components/TagIndex');
 const TopBar = () =>
@@ -40,51 +40,51 @@ export default new Router({
       name: 'index',
       component: index
     }, {
-      path: '/Article',
+      path: '/article',
       name: 'Article',
       component: Article
     }, {
-      path: '/ArticleDetail',
+      path: '/articleDetail',
       name: 'ArticleDetail',
       component: ArticleDetail
     }, {
-      path:'/WriteArticle',
+      path:'/writeArticle',
       name:'WriteArticle',
       component:WriteArticle
     }, {
-      path:'/TagIndex',
+      path:'/tagIndex',
       name:'TagIndex',
       component:TagIndex
     }, {
-      path:'/TopBar',
+      path:'/topBar',
       name:'TopBar',
       component:TopBar
     }, {
-      path:'/LoginPage',
+      path:'/loginPage',
       name:'LoginPage',
       component:LoginPage
     }, {
-      path:'/TimeLine',
+      path:'/timeLine',
       name:'TimeLine',
       component:TimeLine
     }, {
-      path:'/Heartfelt',
+      path:'/heartfelt',
       name:'Heartfelt',
       component:Heartfelt
     }, {
-      path:'/FriendUrlIndex',
+      path:'/friendUrlIndex',
       name:'FriendUrlIndex',
       component:FriendUrlIndex
     }, {
-      path:'/MessageLeave',
+      path:'/messageLeave',
       name:'MessageLeave',
       component:MessageLeave
     },{
-      path:'/Comment',
+      path:'/comment',
       name:'Comment',
       component:Comment
     },{
-      path:'/SnakeScores',
+      path:'/snakeScores',
       name:'SnakeScores',
       component:SnakeScores
     },
