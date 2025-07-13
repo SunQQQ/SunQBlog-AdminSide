@@ -1,48 +1,43 @@
 <template>
-  <div>
-    <div class="RightContent">
-      <el-form>
-        <el-form-item label="文章分类">
-          <el-select v-model="select_val" placeholder="请选择">
-            <el-option v-for="item in ArticleTagOptions" :key="item.id" :label="item.name" :value="item.id">
-            </el-option>
-          </el-select>
-        </el-form-item>
-      </el-form>
+  <main class="RightContent">
+    <el-form>
+      <el-form-item label="文章分类">
+        <el-select v-model="select_val" placeholder="请选择">
+          <el-option v-for="item in ArticleTagOptions" :key="item.id" :label="item.name" :value="item.id">
+          </el-option>
+        </el-select>
+      </el-form-item>
+    </el-form>
 
-      <el-table border :data="ArticleList" style="width: 100%"
-       :header-cell-style="{ background: '#f7f7f7' }"
-       empty-text="暂无数据，快发布一篇文章体验下吧~">
-        <el-table-column prop="title" label="标题"></el-table-column>
-        <el-table-column prop="summary" label="简介"></el-table-column>
-        <el-table-column prop="articleTagName" label="分类标签"></el-table-column>
-        <el-table-column prop="createName" label="创建人"></el-table-column>
-        <!-- <el-table-column prop="order" label="优先级"></el-table-column> -->
-        <el-table-column prop="commentNum" label="评论数"></el-table-column>
-        <el-table-column prop="systemIsReview" :formatter="formatBoolean" label="是否经过审核"></el-table-column>
-        <el-table-column prop="systemReviewResult" :formatter="formatResult" label="审核结果"></el-table-column>
-        <el-table-column prop="systemReviewComment" label="审核意见"></el-table-column>
-        <el-table-column prop="systemReviewTime" label="审核时间"></el-table-column>
-        <el-table-column prop="createTime" label="创建时间"></el-table-column>
-        <el-table-column fixed="right" label="操作" width="130">
-          <template slot-scope="scope">
-            <el-button @click="ReadArticle(scope.row.id)" type="text" size="small" class="success-color">查看</el-button>
-            <el-button @click="EditArticle(scope.row.id)" type="text" size="small" class="warning-color">编辑</el-button>
-            <el-button @click="DeleteArticle(scope.row.id)" type="text" size="small" class="danger-color">删除</el-button>
-          </template>
-        </el-table-column>
-      </el-table>
-      
-      <el-pagination 
-        layout="total,prev, pager, next" 
-        :total=ArticleTotal :page-size=PagiSize @current-change="SkipTo"
-        @next-click="SkipTo" @prev-click="SkipTo" v-if="ArticleTotal > 0">
-      </el-pagination>
-      <div class="guide-text">
-        <i class="el-icon-info" style="margin-right: 4px; color: #9196a1;"></i>每位小伙伴都可以发布文章，这里将是专属你的一方空间，分享自己的心得或生活~
-      </div>
+    <el-table border :data="ArticleList" style="width: 100%" :header-cell-style="{ background: '#f7f7f7' }"
+      empty-text="暂无数据，快发布一篇文章体验下吧~">
+      <el-table-column prop="title" label="标题"></el-table-column>
+      <el-table-column prop="summary" label="简介"></el-table-column>
+      <el-table-column prop="articleTagName" label="分类标签"></el-table-column>
+      <el-table-column prop="createName" label="创建人"></el-table-column>
+      <!-- <el-table-column prop="order" label="优先级"></el-table-column> -->
+      <el-table-column prop="commentNum" label="评论数"></el-table-column>
+      <el-table-column prop="systemIsReview" :formatter="formatBoolean" label="是否经过审核"></el-table-column>
+      <el-table-column prop="systemReviewResult" :formatter="formatResult" label="审核结果"></el-table-column>
+      <el-table-column prop="systemReviewComment" label="审核意见"></el-table-column>
+      <el-table-column prop="systemReviewTime" label="审核时间"></el-table-column>
+      <el-table-column prop="createTime" label="创建时间"></el-table-column>
+      <el-table-column fixed="right" label="操作" width="130">
+        <template slot-scope="scope">
+          <el-button @click="ReadArticle(scope.row.id)" type="text" size="small" class="success-color">查看</el-button>
+          <el-button @click="EditArticle(scope.row.id)" type="text" size="small" class="warning-color">编辑</el-button>
+          <el-button @click="DeleteArticle(scope.row.id)" type="text" size="small" class="danger-color">删除</el-button>
+        </template>
+      </el-table-column>
+    </el-table>
+
+    <el-pagination layout="total,prev, pager, next" :total=ArticleTotal :page-size=PagiSize @current-change="SkipTo"
+      @next-click="SkipTo" @prev-click="SkipTo" v-if="ArticleTotal > 0">
+    </el-pagination>
+    <div class="guide-text">
+      <i class="el-icon-info" style="margin-right: 4px; color: #9196a1;"></i>每位小伙伴都可以发布文章，这里将是专属你的一方空间，分享自己的心得或生活~
     </div>
-  </div>
+  </main>
 </template>
 
 <script>
@@ -124,12 +119,12 @@ export default {
       });
     },
     formatBoolean(row, column, cellValue) {
-      return cellValue === 1 ? '是' : '否'; 
+      return cellValue === 1 ? '是' : '否';
     },
     formatResult(row, column, cellValue) {
-      return cellValue === 1 ? '通过' : '未通过'; 
+      return cellValue === 1 ? '通过' : '未通过';
     },
-    
+
   },
 
   mounted: function () {
@@ -148,11 +143,11 @@ export default {
 </script>
 
 <style scoped>
-  .guide-text{
-    color: var(--GBK06A);
-    font-size: 12px;
-    line-height: 19px;
-    padding: 12px 0px 0px;
-    color:#9196a1;
-  }
+.guide-text {
+  color: var(--GBK06A);
+  font-size: 12px;
+  line-height: 19px;
+  padding: 12px 0px 0px;
+  color: #9196a1;
+}
 </style>

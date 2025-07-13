@@ -1,66 +1,64 @@
 <template>
-  <div>
-    <div class="RightContent">
-      <div class="ArticleList">
-        <div style="margin-bottom:10px">
-          <el-button type="primary" @click="OpenCreateDialog()" plain>创建留言</el-button>
+  <main class="RightContent">
+    <div class="ArticleList">
+      <div style="margin-bottom:10px">
+        <el-button type="primary" @click="OpenCreateDialog()" plain>创建留言</el-button>
+      </div>
+
+      <el-dialog title="管理分类" :visible.sync="dialogFormVisible">
+        <el-form :model="form">
+          <el-form-item label="留言者" :label-width="formLabelWidth">
+            <el-input v-model="form.leaveName"></el-input>
+          </el-form-item>
+          <el-form-item label="留言内容" :label-width="formLabelWidth">
+            <el-input v-model="form.messageContent"></el-input>
+          </el-form-item>
+          <el-form-item label="城市" :label-width="formLabelWidth">
+            <el-input v-model="form.city"></el-input>
+          </el-form-item>
+          <el-form-item label="头像编号(0-4)" :label-width="formLabelWidth">
+            <el-input v-model="form.avator"></el-input>
+          </el-form-item>
+          <el-form-item label="父级留言" :label-width="formLabelWidth">
+            <el-input v-model="form.parentId"></el-input>
+          </el-form-item>
+        </el-form>
+        <div slot="footer" class="dialog-footer">
+          <el-button @click="OnDialogCancel()">取 消</el-button>
+          <el-button type="primary" @click="OnDialogSubmit()">确 定</el-button>
         </div>
+      </el-dialog>
 
-        <el-dialog title="管理分类" :visible.sync="dialogFormVisible">
-          <el-form :model="form">
-            <el-form-item label="留言者" :label-width="formLabelWidth">
-              <el-input v-model="form.leaveName"></el-input>
-            </el-form-item>
-            <el-form-item label="留言内容" :label-width="formLabelWidth">
-              <el-input v-model="form.messageContent"></el-input>
-            </el-form-item>
-            <el-form-item label="城市" :label-width="formLabelWidth">
-              <el-input v-model="form.city"></el-input>
-            </el-form-item>
-            <el-form-item label="头像编号(0-4)" :label-width="formLabelWidth">
-              <el-input v-model="form.avator"></el-input>
-            </el-form-item>
-            <el-form-item label="父级留言" :label-width="formLabelWidth">
-              <el-input v-model="form.parentId"></el-input>
-            </el-form-item>
-          </el-form>
-          <div slot="footer" class="dialog-footer">
-            <el-button @click="OnDialogCancel()">取 消</el-button>
-            <el-button type="primary" @click="OnDialogSubmit()">确 定</el-button>
-          </div>
-        </el-dialog>
-
-        <!--表格操作栏-->
-        <el-table :data="MessageLeaveList" style="width: 100%" border :header-cell-style="{ background: '#f7f7f7' }">
-          <el-table-column prop="leaveName" label="留言者"></el-table-column>
-          <el-table-column prop="messageContent" label="留言内容">
-            <template slot-scope="scope">
-              <div v-html="scope.row.messageContent"></div>
-            </template>
-          </el-table-column>
-          <el-table-column prop="city" label="城市"></el-table-column>
-          <el-table-column prop="avator" label="头像"></el-table-column>
-          <el-table-column prop="createTime" label="创建时间"></el-table-column>
-          <el-table-column fixed="right" label="操作" width="130">
-            <template slot-scope="scope">
-              <el-button @click="EditMessageLeave(scope.row)" type="text" size="small"
-                class="warning-color">编辑</el-button>
-              <el-button @click="DeleteTag(scope.row.id)" type="text" size="small" class="danger-color">删除</el-button>
-            </template>
-          </el-table-column>
-        </el-table>
+      <!--表格操作栏-->
+      <el-table :data="MessageLeaveList" style="width: 100%" border :header-cell-style="{ background: '#f7f7f7' }">
+        <el-table-column prop="leaveName" label="留言者"></el-table-column>
+        <el-table-column prop="messageContent" label="留言内容">
+          <template slot-scope="scope">
+            <div v-html="scope.row.messageContent"></div>
+          </template>
+        </el-table-column>
+        <el-table-column prop="city" label="城市"></el-table-column>
+        <el-table-column prop="avator" label="头像"></el-table-column>
+        <el-table-column prop="createTime" label="创建时间"></el-table-column>
+        <el-table-column fixed="right" label="操作" width="130">
+          <template slot-scope="scope">
+            <el-button @click="EditMessageLeave(scope.row)" type="text" size="small"
+              class="warning-color">编辑</el-button>
+            <el-button @click="DeleteTag(scope.row.id)" type="text" size="small" class="danger-color">删除</el-button>
+          </template>
+        </el-table-column>
+      </el-table>
 
 
-        <el-pagination layout="total,prev, pager, next" :total=MessageLeaveTotal :page-size=PagiSize @current-change="GetData"
-          @next-click="GetData" @prev-click="GetData" v-if="MessageLeaveTotal > 0">
-        </el-pagination>
+      <el-pagination layout="total,prev, pager, next" :total=MessageLeaveTotal :page-size=PagiSize
+        @current-change="GetData" @next-click="GetData" @prev-click="GetData" v-if="MessageLeaveTotal > 0">
+      </el-pagination>
 
-        <div class="guide-text">
-          <i class="el-icon-info" style="margin-right: 4px; color: #9196a1;"></i>留言将在用户端留言页展示。留个言吧，让全网站的人都听到你的声音~
-        </div>
+      <div class="guide-text">
+        <i class="el-icon-info" style="margin-right: 4px; color: #9196a1;"></i>留言将在用户端留言页展示。留个言吧，让全网站的人都听到你的声音~
       </div>
     </div>
-  </div>
+  </main>
 </template>
 
 <script>

@@ -1,47 +1,46 @@
 <template>
-  <div>
-    <div class="RightContent">
-      <div class="ArticleList">
-        <div style="margin-bottom:10px">
-          <el-button type="primary" @click="OpenCreateDialog()" plain>新增心声</el-button>
-        </div>
+  <main class="RightContent">
+    <div class="ArticleList">
+      <div style="margin-bottom:10px">
+        <el-button type="primary" @click="OpenCreateDialog()" plain>新增心声</el-button>
+      </div>
 
-        <el-dialog title="新增心声" :visible.sync="dialogFormVisible">
-          <el-form :model="form">
-            <el-form-item label="心声内容" :label-width="formLabelWidth">
-              <el-input v-model="form.content"></el-input>
-            </el-form-item>
-            <el-form-item label="心声作者" :label-width="formLabelWidth">
-              <el-input v-model="form.writer"></el-input>
-            </el-form-item>
-          </el-form>
-          <div slot="footer" class="dialog-footer">
-            <el-button @click="CloseCreateDialog()">取 消</el-button>
-            <el-button type="primary" @click="PostHeartfelt()">确 定</el-button>
-          </div>
-        </el-dialog>
-
-        <!--表格操作栏-->
-        <el-table :data="TimeLineList" style="width: 100%" border :header-cell-style="{ background: '#f7f7f7' }">
-          <el-table-column prop="content" label="心声内容"></el-table-column>
-          <el-table-column prop="writer" label="心声作者"></el-table-column>
-          <el-table-column prop="creater" label="创建人" v-if="role == 'master'"></el-table-column>
-          <el-table-column prop="create_time" label="创建时间"></el-table-column>
-          <el-table-column fixed="right" label="操作" width="130">
-            <template slot-scope="scope">
-              <el-button @click="UpdateHeartfelt(scope.row.id, scope.row.content, scope.row.writer)" type="text"
-                size="small" class="warning-color">编辑</el-button>
-              <el-button @click="DeleteHeartfelt(scope.row.id)" type="text" size="small"
-                class="danger-color">删除</el-button>
-            </template>
-          </el-table-column>
-        </el-table>
-        <div class="guide-text">
-          <i class="el-icon-info" style="margin-right: 4px; color: #9196a1;"></i>生活中总有一些语句触动你我，新增的心声将在用户端【首页】、【关于】页的右侧分享给所有人~
+      <el-dialog title="新增心声" :visible.sync="dialogFormVisible">
+        <el-form :model="form">
+          <el-form-item label="心声内容" :label-width="formLabelWidth">
+            <el-input v-model="form.content"></el-input>
+          </el-form-item>
+          <el-form-item label="心声作者" :label-width="formLabelWidth">
+            <el-input v-model="form.writer"></el-input>
+          </el-form-item>
+        </el-form>
+        <div slot="footer" class="dialog-footer">
+          <el-button @click="CloseCreateDialog()">取 消</el-button>
+          <el-button type="primary" @click="PostHeartfelt()">确 定</el-button>
         </div>
+      </el-dialog>
+
+      <!--表格操作栏-->
+      <el-table :data="TimeLineList" style="width: 100%" border :header-cell-style="{ background: '#f7f7f7' }">
+        <el-table-column prop="content" label="心声内容"></el-table-column>
+        <el-table-column prop="writer" label="心声作者"></el-table-column>
+        <el-table-column prop="creater" label="创建人" v-if="role == 'master'"></el-table-column>
+        <el-table-column prop="create_time" label="创建时间"></el-table-column>
+        <el-table-column fixed="right" label="操作" width="130">
+          <template slot-scope="scope">
+            <el-button @click="UpdateHeartfelt(scope.row.id, scope.row.content, scope.row.writer)" type="text"
+              size="small" class="warning-color">编辑</el-button>
+            <el-button @click="DeleteHeartfelt(scope.row.id)" type="text" size="small"
+              class="danger-color">删除</el-button>
+          </template>
+        </el-table-column>
+      </el-table>
+      <div class="guide-text">
+        <i class="el-icon-info"
+          style="margin-right: 4px; color: #9196a1;"></i>生活中总有一些语句触动你我，新增的心声将在用户端【首页】、【关于】页的右侧分享给所有人~
       </div>
     </div>
-  </div>
+  </main>
 </template>
 
 <script>
@@ -145,11 +144,11 @@ export default {
 </script>
 
 <style scoped>
-  .guide-text{
-    color: var(--GBK06A);
-    font-size: 12px;
-    line-height: 19px;
-    padding: 12px 0px 0px;
-    color:#9196a1;
-  }
+.guide-text {
+  color: var(--GBK06A);
+  font-size: 12px;
+  line-height: 19px;
+  padding: 12px 0px 0px;
+  color: #9196a1;
+}
 </style>

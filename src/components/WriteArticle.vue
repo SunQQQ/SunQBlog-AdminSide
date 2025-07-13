@@ -1,56 +1,53 @@
 <template>
-  <div>
-    <div class="RightContent" style="margin-bottom:0;margin-right: 0;">
-      <div class="WriteArticleContent">
-        <div class="SimpleFlex">
-          <div class="ArticleTitle">
-            <span>文章标题：</span>
-            <input placeholder="请输入标题" v-model="title">
-          </div>
-          <!-- <div class="ArticleTitle">
+  <main class="RightContent" style="margin-bottom:0;margin-right: 0;">
+    <div class="WriteArticleContent">
+      <div class="SimpleFlex">
+        <div class="ArticleTitle">
+          <span>文章标题：</span>
+          <input placeholder="请输入标题" v-model="title">
+        </div>
+        <!-- <div class="ArticleTitle">
             <span>优先级别：</span>
             <input placeholder="(试验田使用)" v-model="order">
           </div> -->
-          <div class="ArticleTitle">
-            文章封面：
-            <input @change="SetArticleCover" type="file" multiple="multiple" ref='selectfile' style="flex:1">
-            <img :src="articleCover" v-show="articleCover" style="width: 70px;height: 40px" alt="文章缩略图"/>
-          </div>
-          <div class="ArticleTitle">
-            封面地址：
-            <input placeholder="封面地址可不填" v-model="articleCover">
-          </div>
+        <div class="ArticleTitle">
+          文章封面：
+          <input @change="SetArticleCover" type="file" multiple="multiple" ref='selectfile' style="flex:1">
+          <img :src="articleCover" v-show="articleCover" style="width: 70px;height: 40px" alt="文章缩略图" />
         </div>
-
-        <div class="SimpleFlex">
-          <div class="ArticleTitle">
-            文章简介：
-            <input placeholder="请输入文章简介" v-model="summary">
-          </div>
-
-          <div class="ArticleTitle">
-            文章标签：
-            <el-select v-model="articleTag" placeholder="选择文章标签" style="flex:1">
-              <el-option v-for="item in ArticleTagOptions" :key="item.id" :label="item.name" :value="item.id">
-              </el-option>
-            </el-select>
-          </div>
-          <div class="ArticleTitle" style="justify-content:start;">
-            <el-button type="primary" @click="SubmitArticle()">提交</el-button>
-          </div>
-        </div>
-
-        <div class="ArticleDetail" id="ArticleDetail">
-          <mavon-editor v-model="content" :isHljs="true" @imgAdd="$imgAdd" ref=md
-            :style="{ height: editorHeight }"></mavon-editor>
-        </div>
-        <div class="guide-text">
-          <i class="el-icon-info"
-            style="margin-right: 4px; color: #9196a1;"></i>每位小伙伴都可以发布文章，文章将在用户端首页头条展示~
+        <div class="ArticleTitle">
+          封面地址：
+          <input placeholder="封面地址可不填" v-model="articleCover">
         </div>
       </div>
+
+      <div class="SimpleFlex">
+        <div class="ArticleTitle">
+          文章简介：
+          <input placeholder="请输入文章简介" v-model="summary">
+        </div>
+
+        <div class="ArticleTitle">
+          文章标签：
+          <el-select v-model="articleTag" placeholder="选择文章标签" style="flex:1">
+            <el-option v-for="item in ArticleTagOptions" :key="item.id" :label="item.name" :value="item.id">
+            </el-option>
+          </el-select>
+        </div>
+        <div class="ArticleTitle" style="justify-content:start;">
+          <el-button type="primary" @click="SubmitArticle()">提交</el-button>
+        </div>
+      </div>
+
+      <div class="ArticleDetail" id="ArticleDetail">
+        <mavon-editor v-model="content" :isHljs="true" @imgAdd="$imgAdd" ref=md
+          :style="{ height: editorHeight }"></mavon-editor>
+      </div>
+      <div class="guide-text">
+        <i class="el-icon-info" style="margin-right: 4px; color: #9196a1;"></i>每位小伙伴都可以发布文章，文章将在用户端首页头条展示~
+      </div>
     </div>
-  </div>
+  </main>
 </template>
 
 <script>

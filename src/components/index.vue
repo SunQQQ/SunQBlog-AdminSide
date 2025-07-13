@@ -1,5 +1,5 @@
 <template>
-  <div class="RightContent">
+  <main class="RightContent">
     <div class="ArticleList">
       <div class="partTitle">欢迎你来</div>
       <div>1、这里是CodingLif博客的管理后台首页；</div>
@@ -40,7 +40,7 @@
         </el-pagination>
       </div>
     </div> -->
-  </div>
+  </main>
 </template>
 
 <script>

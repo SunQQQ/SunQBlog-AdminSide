@@ -1,5 +1,5 @@
 <template>
-  <div id="apps" class="PageContainer">
+  <div role="document" id="apps" class="PageContainer">
     <TopBar :TopbarShow='TopbarShow'></TopBar>
     <router-view></router-view>
   </div>

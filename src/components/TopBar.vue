@@ -1,6 +1,6 @@
 <template>
-  <div v-if="TopbarShow == true">
-    <div class="TopBar" >
+  <header v-if="TopbarShow == true">
+    <nav class="TopBar" aria-label="顶部导航栏">
       <div class="topbac">
         <img src="../assets/img/topbar.png" alt="topbar background">
       </div>
@@ -35,106 +35,108 @@
       <div class="MenuTopBarIcon" @click="OpenMenu()">
         <div class="MobileMenuSwitch">
           <span :class="menuStatus
-              ? 'MenuButtonFirstGoOpen'
-              : 'MenuButtonFirstGoClose'
+            ? 'MenuButtonFirstGoOpen'
+            : 'MenuButtonFirstGoClose'
             "></span>
           <span :class="menuStatus
-              ? 'MenuButtonSecondGoOpen'
-              : 'MenuButtonSecondGoClose'
+            ? 'MenuButtonSecondGoOpen'
+            : 'MenuButtonSecondGoClose'
             "></span>
           <span :class="menuStatus
-              ? 'MenuButtonThirdGoOpen'
-              : 'MenuButtonThirdGoClose'
+            ? 'MenuButtonThirdGoOpen'
+            : 'MenuButtonThirdGoClose'
             "></span>
         </div>
       </div>
-    </div>
+    </nav>
 
     <div style="height: 61px"></div>
 
-    <el-menu :default-active="MenuHighLight" class="LeftBar" background-color="#f6f8fc" text-color="#303133"
-      active-text-color="#004eef" active-background-color="#d9e1f1" v-if="menuStatus">
-      <el-menu-item index="9" @click="ChangeHighLight('userManage')">
-        <i class="iconfont icon-shujutongji"></i>
-        <span slot="title">我的账号</span>
-      </el-menu-item>
-      <!-- <el-menu-item index="0" @click="ChangeHighLight('index')">
+    <nav aria-label="左侧导航栏">
+      <el-menu :default-active="MenuHighLight" class="LeftBar" background-color="#f6f8fc" text-color="#303133"
+        active-text-color="#004eef" active-background-color="#d9e1f1" v-if="menuStatus">
+        <el-menu-item index="9" @click="ChangeHighLight('userManage')">
+          <i class="iconfont icon-shujutongji"></i>
+          <span slot="title">我的账号</span>
+        </el-menu-item>
+        <!-- <el-menu-item index="0" @click="ChangeHighLight('index')">
         <i class="iconfont icon-shujutongji"></i>
         <span slot="title">访问数据</span>
       </el-menu-item> -->
-      <el-submenu index="1">
-        <template slot="title">
-          <i class="iconfont icon-16"></i>
-          <span>我的文章</span>
-        </template>
-        <el-menu-item index="1-1" @click="ChangeHighLight('Article')">
-          <i class="iconfont icon-16"></i>
-          <span slot="title">文章列表</span>
+        <el-submenu index="1">
+          <template slot="title">
+            <i class="iconfont icon-16"></i>
+            <span>我的文章</span>
+          </template>
+          <el-menu-item index="1-1" @click="ChangeHighLight('Article')">
+            <i class="iconfont icon-16"></i>
+            <span slot="title">文章列表</span>
+          </el-menu-item>
+          <el-menu-item index="1-2" @click="ChangeHighLight('WriteArticle')">
+            <i class="iconfont icon-16"></i>
+            <span slot="title">新增/编辑文章</span>
+          </el-menu-item>
+        </el-submenu>
+
+        <el-menu-item index="6" @click="ChangeHighLight('MessageLeave')">
+          <i class="iconfont icon-liuyan"></i>
+          <span slot="title">我的留言</span>
         </el-menu-item>
-        <el-menu-item index="1-2" @click="ChangeHighLight('WriteArticle')">
-          <i class="iconfont icon-16"></i>
-          <span slot="title">新增/编辑文章</span>
+
+        <el-menu-item index="7" @click="ChangeHighLight('Comment')">
+          <i class="iconfont icon-pinglun"></i>
+          <span slot="title">我的评论</span>
         </el-menu-item>
-      </el-submenu>
 
-      <el-menu-item index="6" @click="ChangeHighLight('MessageLeave')">
-        <i class="iconfont icon-liuyan"></i>
-        <span slot="title">我的留言</span>
-      </el-menu-item>
-
-      <el-menu-item index="7" @click="ChangeHighLight('Comment')">
-        <i class="iconfont icon-pinglun"></i>
-        <span slot="title">我的评论</span>
-      </el-menu-item>
-
-      <el-menu-item index="2" @click="ChangeHighLight('TagIndex')">
-        <i class="iconfont icon-biaoqian_o"></i>
-        <span slot="title">分类管理</span>
-      </el-menu-item>
-
-      <el-menu-item index="3" @click="ChangeHighLight('TimeLine')">
-        <i class="iconfont icon-fuhao-shijianzhou"></i>
-        <span slot="title">时间轴管理</span>
-      </el-menu-item>
-
-      <el-menu-item index="4" @click="ChangeHighLight('Heartfelt')">
-        <i class="iconfont icon-heart"></i>
-        <span slot="title">我的心声</span>
-      </el-menu-item>
-
-      <el-menu-item index="5"  @click="ChangeHighLight('FriendUrlIndex')">
-        <i class="iconfont icon-lianjie"></i>
-        <span slot="title">我的朋友圈</span>
-      </el-menu-item>
-
-      <el-menu-item index="8" @click="ChangeHighLight('SnakeScores')">
-        <i class="iconfont icon-she"></i>
-        <span slot="title">贪吃蛇榜单</span>
-      </el-menu-item>
-
-      <div class="mobileExit">
-        <el-menu-item index="10" @click="switchPage('gitHub')">
-          <i class="iconfont icon-github"></i>
-          <span slot="title">源码入口</span>
+        <el-menu-item index="2" @click="ChangeHighLight('TagIndex')">
+          <i class="iconfont icon-biaoqian_o"></i>
+          <span slot="title">分类管理</span>
         </el-menu-item>
-      </div>
 
-      <div class="mobileExit">
-        <el-menu-item index="11" @click="switchPage('userClient')">
-          <i class="iconfont icon-shouye"></i>
-          <span slot="title">用户端入口</span>
+        <el-menu-item index="3" @click="ChangeHighLight('TimeLine')">
+          <i class="iconfont icon-fuhao-shijianzhou"></i>
+          <span slot="title">时间轴管理</span>
         </el-menu-item>
-      </div>
 
-      <div class="mobileExit">
-        <el-menu-item index="11" @click="Exit()">
+        <el-menu-item index="4" @click="ChangeHighLight('Heartfelt')">
           <i class="iconfont icon-heart"></i>
-          <span slot="title">切换账号</span>
+          <span slot="title">我的心声</span>
         </el-menu-item>
-      </div>
 
-    </el-menu>
-  </div>
+        <el-menu-item index="5" @click="ChangeHighLight('FriendUrlIndex')">
+          <i class="iconfont icon-lianjie"></i>
+          <span slot="title">我的朋友圈</span>
+        </el-menu-item>
+
+        <el-menu-item index="8" @click="ChangeHighLight('SnakeScores')">
+          <i class="iconfont icon-she"></i>
+          <span slot="title">贪吃蛇榜单</span>
+        </el-menu-item>
+
+        <div class="mobileExit">
+          <el-menu-item index="10" @click="switchPage('gitHub')">
+            <i class="iconfont icon-github"></i>
+            <span slot="title">源码入口</span>
+          </el-menu-item>
+        </div>
+
+        <div class="mobileExit">
+          <el-menu-item index="11" @click="switchPage('userClient')">
+            <i class="iconfont icon-shouye"></i>
+            <span slot="title">用户端入口</span>
+          </el-menu-item>
+        </div>
+
+        <div class="mobileExit">
+          <el-menu-item index="11" @click="Exit()">
+            <i class="iconfont icon-heart"></i>
+            <span slot="title">切换账号</span>
+          </el-menu-item>
+        </div>
+
+      </el-menu>
+    </nav>
+  </header>
 </template>
 
 <script>
@@ -206,7 +208,7 @@ export default {
       if (
         !document
           .getElementsByClassName("PersonCenterName")[0]
-          && 
+        &&
         !document
           .getElementsByClassName("PersonCenterName")[0]
           .contains(e.target)
@@ -259,19 +261,19 @@ export default {
     width: 100%;
     z-index: 1000;
   }
-  
-  .is-active{
-    background-color: #d9e1f1!important;
+
+  .is-active {
+    background-color: #d9e1f1 !important;
   }
 
-  .topbac{
+  .topbac {
     position: absolute;
     z-index: -1;
     height: 61px;
     width: 100%;
   }
 
-  .topbac img{
+  .topbac img {
     width: 100%;
     height: 100%;
   }
@@ -332,14 +334,14 @@ export default {
     padding: 0 20px;
   }
 
-  .topbac{
+  .topbac {
     position: absolute;
     z-index: -1;
     height: 61px;
     width: 100%;
   }
 
-  .topbac img{
+  .topbac img {
     width: 100%;
     height: 100%;
   }
