@@ -1,5 +1,6 @@
 <template>
   <main class="RightContent" style="margin-bottom:0;margin-right: 0;">
+    <h1 class="mainTitle">{{ $route.meta.h1 }}</h1>
     <div class="WriteArticleContent">
       <div class="SimpleFlex">
         <div class="ArticleTitle">

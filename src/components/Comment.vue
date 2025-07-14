@@ -3,6 +3,7 @@
 */
 <template>
   <main class="RightContent">
+    <h1 class="mainTitle">{{ $route.meta.h1 }}</h1>
     <div class="ArticleList">
       <!-- <el-button type="primary" >批量删除</el-button> -->
       <el-dialog title="修改评论" :visible.sync="dialogEdit">

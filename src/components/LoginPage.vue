@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h1 class="mainTitle">{{ $route.meta.h1 }}</h1>
     <div class="loginBac">
       <img src="../assets/img/lognBac.jpg" alt="登录页面背景图">
     </div>

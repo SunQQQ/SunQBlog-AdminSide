@@ -1,5 +1,6 @@
 <template>
   <main class="RightContent">
+    <h1 class="mainTitle">{{ $route.meta.h1 }}</h1>
     <div class="ArticleDetail">
       <h1>{{ Article.Title }}</h1>
       <div v-html="Article.content"></div>

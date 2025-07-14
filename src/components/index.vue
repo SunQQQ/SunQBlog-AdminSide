@@ -1,5 +1,6 @@
 <template>
   <main class="RightContent">
+    <h1 class="mainTitle">{{ $route.meta.h1 }}</h1>
     <div class="ArticleList">
       <div class="partTitle">欢迎你来</div>
       <div>1、这里是CodingLif博客的管理后台首页；</div>

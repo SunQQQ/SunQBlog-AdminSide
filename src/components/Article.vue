@@ -1,5 +1,6 @@
 <template>
   <main class="RightContent">
+    <h1 class="mainTitle">{{ $route.meta.h1 }}</h1>
     <el-form>
       <el-form-item label="文章分类">
         <el-select v-model="select_val" placeholder="请选择">

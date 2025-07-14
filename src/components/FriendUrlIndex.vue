@@ -1,5 +1,6 @@
 <template>
   <main class="RightContent">
+    <h1 class="mainTitle">{{ $route.meta.h1 }}</h1>
     <div class="ArticleList">
       <div style="margin-bottom:10px">
         <el-button type="primary" @click="OnOpenDialog()" plain>新增友链</el-button>
