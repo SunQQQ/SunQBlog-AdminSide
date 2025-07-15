@@ -36,6 +36,7 @@
         <el-table-column prop="siteUrl" label="友链地址"></el-table-column>
         <el-table-column prop="siteLogo" label="图标地址" width="300" :show-overflow-tooltip="true"></el-table-column>
         <el-table-column prop="siteDesc" label="个人描述"></el-table-column>
+        <el-table-column prop="createTime" label="创建时间"></el-table-column>
         <!-- <el-table-column prop="order" label="优先级（从0开始）"></el-table-column> -->
         <el-table-column fixed="right" label="操作" width="130">
           <template slot-scope="scope">
