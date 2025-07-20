@@ -4,7 +4,7 @@
       <div class="topbac">
         <img src="../assets/img/topbar.png" alt="topbar background">
       </div>
-      <div class="Logo">CodingLife Admin</div>
+      <div class="Logo">码语人生</div>
       <div class="TopBarRight">
         <div class="home-link">
           <a href="https://codinglife.online" target="_blank">
